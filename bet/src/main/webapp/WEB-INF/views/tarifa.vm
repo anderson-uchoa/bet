@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Gerenciamento de tarifas</title>
+</head>
+<body>
+	<form action="http://localhost:8080/bet/acessoweb/gerenciaTarifa" method="GET">
+		<fieldset>
+			<legend>Nova tarifa</legend>
+			<label>Nome: <input type="text" name="nomeTarifa"/></label>
+			<!--label>Identificador: <input type="text" name="tarifaID"/></label-->
+			<!--label>Data: <input type="text" name="dtAtualizacao"/></label-->
+			<label>Valor: <input type="text" name="valorTarifa"/></label>
+			<input type="hidden" name="operacao" value="criar"/>
+			<input type="submit" value="Criar"/>
+		</fieldset>
+	</form>
+	
+	<form action="http://localhost:8080/bet/acessoweb/gerenciaTarifa" method="GET">
+		<fieldset>
+			<legend>Tarifas</legend>
+			<!--label>Nome: <input type="text" name="nomeTarifa"/></label-->
+			<!--label>Identificador: <input type="text" name="tarifaID"/></label-->
+			<!--label>Data: <input type="text" name="dtAtualizacao"/></label-->
+			<!--label>Valor: <input type="text" name="valorTarifa"/></label-->
+			<input type="hidden" name="operacao" value="buscartudo"/>
+			<input type="submit" value="Buscar"/>
+		</fieldset>
+	</form>	
+
+	<form action="http://localhost:8080/bet/acessoweb/gerenciaTarifa" method="GET">
+		<fieldset>
+			<legend>Busca tarifa</legend>
+			<!--label>Nome: <input type="text" name="nomeTarifa"/></label-->
+			<label>Identificador: <input type="text" name="tarifaID"/></label>
+			<!--label>Data: <input type="text" name="dtAtualizacao"/></label-->
+			<!--label>Valor: <input type="text" name="valorTarifa"/></label-->
+			<input type="hidden" name="operacao" value="buscar"/>
+			<input type="submit" value="Buscar"/>
+		</fieldset>
+	</form>	
+	
+	<form action="http://localhost:8080/bet/acessoweb/gerenciaTarifa" method="GET">
+		<fieldset>
+			<legend>Alterar</legend>
+			<label>Nome: <input type="text" name="nomeTarifa"/></label>
+			<label>Identificador: <input type="text" name="tarifaID"/></label>
+			<label>Valor: <input type="text" name="valorTarifa"/></label>
+			<input type="hidden" name="operacao" value="alterar"/>
+			<input type="submit" value="Alterar"/>
+		</fieldset>
+	</form>
+</body>
+</html>

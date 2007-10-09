@@ -1,0 +1,46 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+			<form method="post">
+				<div class="search_form">
+				<p>Busca Por ID: <input type="text" name="cargoID" class="search_tiny" /> 
+				<input type="hidden" name="operacao" value="buscar"/>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="#">Avançada</a></p>
+				</div>
+			</form>	
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+		
+	<div class="left">
+	<h3>Lista de Cargos</h3>
+	
+		<div class="left_box">	
+			<form id="formListaCargos">
+			<table id="tabelaListaCargos">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Cargo</th></tr>
+				</thead>
+				<tbody>
+					#foreach($cargo in $cargos)
+					<tr id="linha$cargo.CargoID">
+						<td><input type="checkbox" name="chkCargoID" value="$cargo.CargoID"/></td>
+						<td>$cargo.CargoID</td>
+						<td>$cargo.NomeCargo</td>
+						<td><a href="formCargo.html?cargoID=$cargo.CargoID">Alterar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			#if ($mensagem) <label>$mensagem</label/><br/><br/>#end
+			<input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaListaCargos', 'formListaCargos')"/>
+			</form>
+			<a href="formCargo.html">Inserir Novo Cargo</a>
+		</div>
+	</div>
+			
+	<div class="right">
+	</div>	
+
+#parse("rodape.vm")

@@ -1,0 +1,55 @@
+#parse("cabecalho.vm")
+
+
+		<div class="search_field">
+			<form method="post">
+				<div class="search_form">
+				<p>Busca Por ID: <input type="text" name="onibusID" class="search_tiny" /> 
+				<input type="hidden" name="operacao" value="buscar"/>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="#">Avançada</a></p>
+				</div>
+			</form>	
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+		
+		<div class="left">
+			<h3>Ônibus</h3>
+			<div class="left_box">
+				<form id="formOnibus">
+					<input type="hidden" name="operacao" value="criar"/>
+					<input type="submit" class="submit" value="Criar"/>
+				</form>
+			</div>
+
+		<h3>Lista de Ônibus</h3>
+	
+		<div class="left_box">	
+			<form id="formListaOnibus">
+			<table id="tabelaListaOnibus">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Em Corrida</th></tr>
+				</thead>
+				<tbody>
+					#foreach($onibus in $todosOnibus)
+					<tr id="linha$onibus.OnibusID">
+						<td><input type="checkbox" name="chkOnibusID" value="$onibus.OnibusID"/></td>
+						<td>$onibus.OnibusID</td>
+						<td>$onibus.EmCorrida</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			#if ($mensagem) <label>$mensagem</label/><br/><br/>#end
+			<input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaListaOnibus', 'formListaOnibus')"/>
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	<div class="right">
+	</div>	
+	
+#parse("rodape.vm")

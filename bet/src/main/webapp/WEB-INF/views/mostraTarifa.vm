@@ -1,0 +1,10 @@
+<html>
+<body>
+	ID: $tarifa.TarifaID<br/>
+	Nome: $tarifa.NomeTarifa<br/>
+	Valor: $tarifa.ValorTarifa<br/>
+	Data: 
+	$sdf.format($tarifa.DtAtualizacao.Time)
+	<br/>
+</body>
+</html>

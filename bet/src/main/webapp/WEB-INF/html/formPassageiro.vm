@@ -1,0 +1,22 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+	<h3>$nomeOperacao Passageiro</h3>
+		<div class="left_box">
+			<form id="formPassageiro" action="gerenciaPassageiro.html">
+				#if ($passageiroID)<label>Identificador do Passageiro: <input type="text" name="passageiroID" value="$passageiroID" readonly="readonly" class="search_tiny"/></label><br/>#end 
+				<label>Nome: <input type="text" name="nomePassageiro" #if ($passageiro.NomePassageiro) value="$passageiro.NomePassageiro" #end class="search"/></label><br/>
+				<label>CPF: <input type="text" name="cpf" #if ($passageiro.Cpf) value="$passageiro.Cpf" #end class="search_small"/></label><br/>
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaPassageiro.html')"/>
+			</form>
+		</div>
+</div>
+	
+#parse("rodape.vm")

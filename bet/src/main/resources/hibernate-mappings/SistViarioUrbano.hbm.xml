@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="lps.bet.basico.tiposDados"
+>
+    <class name="SistViarioUrbano" table="SIST_VIARIO_URBANO" >
+
+        <id name="viacaoID" column="viacaoID" type="int" >
+            <generator class="increment"></generator>
+        </id>
+
+        <property name="nomeCidade" type="java.lang.String" update="true" insert="true" column="nomeCidade"/>
+
+        <one-to-one name="empresaViaria" class="EmpresaViaria" cascade="none" outer-join="auto" constrained="false"/>
+    
+		<set name="tarifas" lazy="false" cascade="none" sort="unsorted">
+
+            <key column="SISTVIARIOURBANO_FK"></key>
+            <one-to-many class="Tarifa"/>
+
+		</set>
+		
+		<set name="linhas" lazy="false" cascade="none" sort="unsorted">
+
+            <key column="SISTVIARIOURBANO_FK"></key>
+            <one-to-many class="Linha"/>
+
+		</set>
+		
+    </class>
+
+</hibernate-mapping>

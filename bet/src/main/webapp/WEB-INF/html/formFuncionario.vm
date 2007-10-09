@@ -1,0 +1,39 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+	<h3>$nomeOperacao Funcionário</h3>
+		<div class="left_box">
+			<form id="formFuncionario" action="gerenciaFuncionario.html">
+				#if ($usuarioID)<label>Identificador do Funcionário: <input type="text" name="funcionarioID" readonly="readonly" value="$usuarioID" class="search_tiny"/></label><br/>#end 
+				
+				<label>Nome: <input type="text" name="nomeFuncionario" #if ($funcionario.NomeFuncionario) value="$funcionario.NomeFuncionario" #end class="search"/></label><br/>
+				<label>Cargo:
+					<select name="nomeCargo">
+					#if ($usuarioID)
+						#foreach ($cargo in $cargos)
+							#if ($cargo.NomeCargo==$funcionario.Cargo.NomeCargo)
+							<option value="$cargo.NomeCargo" selected="selected">$cargo.NomeCargo</option>
+							#else <option value="$cargo.NomeCargo">$cargo.NomeCargo</option>
+							#end
+						#end
+					#else	
+						#foreach ($cargo in $cargos)
+							<option value="$cargo.NomeCargo">$cargo.NomeCargo</option>
+						#end
+					#end
+					</select>
+				</label><br/>				
+				<label>Data de Admissão: <input id="dtAdmissao" type="text" name="dtAdmissao" class="search_small" #if ($funcionario.DtAdmissao) value="$sdf.format($funcionario.DtAdmissao.Time)" #else value="$sdf.format($data.Time)" #end/></label><br/>
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="button" class="submit" value="$nomeOperacao" onclick="validaDataHora('formFuncionario')"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaFuncionario.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")
