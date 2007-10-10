@@ -34,7 +34,7 @@ public class GerenciaPassageiro extends MultiActionController {
 		Passageiro passageiro;
 		
 		//Operação de Criação
-		if (request.getParameter("passageiroID")==null){
+		if (request.getParameter("usuarioID")==null){
 			passageiro = new Passageiro();
 		}
 		//Senão precisa buscar
@@ -44,7 +44,9 @@ public class GerenciaPassageiro extends MultiActionController {
 		String strCPF = request.getParameter("cpf");
 		passageiro.setCpf(Long.parseLong(strCPF.trim()));
 		passageiro.setNomePassageiro(request.getParameter("nomePassageiro").trim());
-				
+		passageiro.setLogin(request.getParameter("login").trim());
+		passageiro.setSenha(request.getParameter("senha").trim());
+		
 		return passageiro;
 	}
 	
@@ -70,7 +72,7 @@ public class GerenciaPassageiro extends MultiActionController {
 		return mav;
 	}
  
-	protected ModelAndView mostrarForm(String passageiroID, String forwardView){
+	protected ModelAndView mostrarForm(String usuarioID, String forwardView){
 		String view = "formPassageiro";
 		
 		if (forwardView != null){
@@ -78,18 +80,18 @@ public class GerenciaPassageiro extends MultiActionController {
 		}
 	
 		ModelAndView mav = new ModelAndView(view);
-		mav.addObject("passageiroID",passageiroID);
+		mav.addObject("usuarioID",usuarioID);
 		
 		Passageiro passageiro = null;
 		
-		if (passageiroID == null){
+		if (usuarioID == null){
 			mav.addObject("operacao", "criar");
 			mav.addObject("nomeOperacao", "Criar");						
 		}
 		else {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
-			passageiro = interfacePassageiroMgt.buscarPassageiroPorID(Integer.parseInt(passageiroID));
+			passageiro = interfacePassageiroMgt.buscarPassageiroPorID(Integer.parseInt(usuarioID));
 		}
 		mav.addObject("passageiro",passageiro);		
 		return mav;		
@@ -118,7 +120,7 @@ public class GerenciaPassageiro extends MultiActionController {
 			}
 			
 			if (operacao.equals("remover")){
-				String[] passageirosIDs = request.getParameterValues("chkPassageiroID");
+				String[] passageirosIDs = request.getParameterValues("chkUsuarioID");
 				for (int i = 0; i < passageirosIDs.length; i++) {
 					int passageiroID = Integer.parseInt(passageirosIDs[i]);
 					interfacePassageiroMgt.removerPassageiroPorID(passageiroID);
