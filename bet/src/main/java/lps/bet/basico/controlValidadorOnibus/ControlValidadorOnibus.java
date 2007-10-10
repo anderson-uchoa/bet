@@ -9,7 +9,7 @@ import lps.bet.basico.visor.IVisor;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 
@@ -25,7 +25,7 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 	}
 
 	public static void main(String[] args) {
-		Resource resource = new FileSystemResource("C:\\Documents and Settings\\Paula\\workspace\\bet\\src\\main\\resources\\onibus-context.xml");
+		Resource resource = new ClassPathResource("onibus-context.xml");
 		BeanFactory factory = new XmlBeanFactory(resource);
 		Catraca catraca = (Catraca) factory.getBean("Catraca");
 		
