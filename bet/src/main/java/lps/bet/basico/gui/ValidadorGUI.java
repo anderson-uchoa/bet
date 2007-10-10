@@ -10,7 +10,7 @@ import lps.bet.basico.visor.VisorListener;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 public class ValidadorGUI extends javax.swing.JFrame implements VisorListener, CatracaListener{
@@ -142,7 +142,7 @@ public class ValidadorGUI extends javax.swing.JFrame implements VisorListener, C
 	    public static void main(String args[]) {
 	        java.awt.EventQueue.invokeLater(new Runnable() {
 	            public void run() {
-	        		Resource resource = new FileSystemResource("C:\\Documents and Settings\\Paula\\workspace\\bet\\src\\main\\resources\\onibus-context.xml");
+	        		Resource resource = new ClassPathResource("onibus-context.xml");
 	        		BeanFactory factory = new XmlBeanFactory(resource);
 	        		ValidadorGUI validadorGUI = (ValidadorGUI) factory.getBean("Gui");
 	            	validadorGUI.setVisible(true);
