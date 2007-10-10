@@ -21,17 +21,18 @@
 			<form id="formListaFuncionarios">
 			<table id="tabelaListaFuncionarios">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th><th>Cargo</th><th>Data de Admissão</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th><th>Login</th><th>Cargo</th><th>Data de Admissão</th></tr>
 				</thead>
 				<tbody>
 					#foreach($funcionario in $funcionarios)
 					<tr id="linha$funcionario.UsuarioID">
-						<td><input type="checkbox" name="chkFuncionarioID" value="$funcionario.UsuarioID"/></td>
+						<td><input type="checkbox" name="chkUsuarioID" value="$funcionario.UsuarioID"/></td>
 						<td>$funcionario.UsuarioID</td>
 						<td>$funcionario.NomeFuncionario</td>
+						<td>$funcionario.Login</td>
 						<td>$funcionario.Cargo.NomeCargo</td>
 						<td>$sdf.format($funcionario.DtAdmissao.Time)</td>
-						<td><a href="formFuncionario.html?funcionarioID=$funcionario.UsuarioID">Alterar</a></td>
+						<td><a href="formFuncionario.html?usuarioID=$funcionario.UsuarioID">Alterar</a></td>
 					</tr>
 					#end
 				</tbody>
