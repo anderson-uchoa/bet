@@ -9,7 +9,7 @@
 	<h3>$nomeOperacao Funcionário</h3>
 		<div class="left_box">
 			<form id="formFuncionario" action="gerenciaFuncionario.html">
-				#if ($usuarioID)<label>Identificador do Funcionário: <input type="text" name="funcionarioID" readonly="readonly" value="$usuarioID" class="search_tiny"/></label><br/>#end 
+				#if ($usuarioID)<label>Identificador do Funcionário: <input type="text" name="usuarioID" readonly="readonly" value="$usuarioID" class="search_tiny"/></label><br/>#end 
 				
 				<label>Nome: <input type="text" name="nomeFuncionario" #if ($funcionario.NomeFuncionario) value="$funcionario.NomeFuncionario" #end class="search"/></label><br/>
 				<label>Cargo:
@@ -29,6 +29,8 @@
 					</select>
 				</label><br/>				
 				<label>Data de Admissão: <input id="dtAdmissao" type="text" name="dtAdmissao" class="search_small" #if ($funcionario.DtAdmissao) value="$sdf.format($funcionario.DtAdmissao.Time)" #else value="$sdf.format($data.Time)" #end/></label><br/>
+				<label>Login: <input type="text" name="login" #if ($funcionario.Login) value="$funcionario.Login" #end class="search_small"/></label><br/>
+				<label>Senha: <input type="text" name="senha" #if ($funcionario.Senha) value="$funcionario.Senha" #end class="search_small"/></label><br/>
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="button" class="submit" value="$nomeOperacao" onclick="validaDataHora('formFuncionario')"/>
 				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaFuncionario.html')"/>
