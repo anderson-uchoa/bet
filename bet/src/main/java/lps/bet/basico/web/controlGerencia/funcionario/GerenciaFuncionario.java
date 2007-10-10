@@ -90,14 +90,16 @@ public class GerenciaFuncionario extends MultiActionController{
 		funcionario.setNomeFuncionario(request.getParameter("nomeFuncionario").trim());
 		funcionario.setEmpresaViaria(empresa);
 		funcionario.setCargo(cargo);
+		funcionario.setLogin(request.getParameter("login").trim());
+		funcionario.setSenha(request.getParameter("senha").trim());
 		
 		return funcionario;
 	}
 	
-	protected ModelAndView mostrarForm(String funcionarioID){
+	protected ModelAndView mostrarForm(String usuarioID){
 
 		ModelAndView mav = new ModelAndView("formFuncionario");
-		mav.addObject("funcionarioID",funcionarioID);
+		mav.addObject("usuarioID",usuarioID);
 		
 		mav.addObject("sdf", sdf);
 		
@@ -106,7 +108,7 @@ public class GerenciaFuncionario extends MultiActionController{
 		List cargos = interfaceFuncionarioMgt.buscarCargos();
 		mav.addObject("cargos", cargos);
 		
-		if (funcionarioID == null){
+		if (usuarioID == null){
 			mav.addObject("operacao", "criar");
 			mav.addObject("nomeOperacao", "Criar");						
 			data = Calendar.getInstance();
@@ -114,7 +116,7 @@ public class GerenciaFuncionario extends MultiActionController{
 		else {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
-			funcionario = interfaceFuncionarioMgt.buscarFuncionario(Integer.parseInt(funcionarioID));
+			funcionario = interfaceFuncionarioMgt.buscarFuncionario(Integer.parseInt(usuarioID));
 			data = funcionario.getDtAdmissao();
 		}
 		mav.addObject("funcionario",funcionario);		
@@ -141,24 +143,24 @@ public class GerenciaFuncionario extends MultiActionController{
 
 			//Código do if a ser tirado posteriormente (não existe remover no Tarifa):
 			if (operacao.equals("remover")){
-				String[] funcionariosIDs = request.getParameterValues("chkFuncionarioID");
+				String[] usuariosIDs = request.getParameterValues("chkUsuarioID");
 
-				for (int i = 0; i < funcionariosIDs.length; i++) {
-					int funcionarioID = Integer.parseInt(funcionariosIDs[i]);
-					interfaceFuncionarioMgt.removerFuncionario(funcionarioID);
+				for (int i = 0; i < usuariosIDs.length; i++) {
+					int usuarioID = Integer.parseInt(usuariosIDs[i]);
+					interfaceFuncionarioMgt.removerFuncionario(usuarioID);
 				}
 			}
 
 			//Mostrando um funcionário ou todos, dependendo da operacao requisitada
 			if (operacao.equals("buscar")){
-				return buscarFuncionario(Integer.parseInt(request.getParameter("funcionarioID")));			
+				return buscarFuncionario(Integer.parseInt(request.getParameter("usuarioID")));			
 			}
 			else {
 				return buscarFuncionarios();
 			}		
 		}
 		else{
-			return mostrarForm(request.getParameter("funcionarioID"));
+			return mostrarForm(request.getParameter("usuarioID"));
 		}
 	}
 
