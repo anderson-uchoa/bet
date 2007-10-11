@@ -52,6 +52,7 @@ public class GerenciaFuncionario extends MultiActionController{
 	protected ModelAndView buscarFuncionario(int usuarioID){
 		Funcionario funcionario = interfaceFuncionarioMgt.buscarFuncionario(usuarioID);
 		ModelAndView mav = new ModelAndView("gerenciaFuncionario");
+
 		if (funcionario==null){
 			mav.addObject("mensagem", "Funcionário não encontrado.");
 		}
