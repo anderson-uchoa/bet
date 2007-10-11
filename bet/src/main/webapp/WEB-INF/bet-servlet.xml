@@ -52,6 +52,7 @@
 				<prop key="/cargaCartao.html">CargaCartao</prop>
 				
 				<prop key="/acessoBasico.html">AcessoBasico</prop>
+				<prop key="/login.html">GerenciaLogin</prop>
 				
 				<prop key="/formTarifa.html">GerenciaTarifa</prop>
 				<prop key="/formPassageiro.html">GerenciaPassageiro</prop>
@@ -87,6 +88,12 @@
 		</property> 
 	</bean>
 
+	<bean id="GerenciaLogin" class="lps.bet.basico.web.acessoBasico.GerenciaLogin">
+		<property name="interfaceAutenticacao">
+			<ref bean="AutenticacaoDAO"/>
+		</property>
+	</bean>
+	
 	<bean id="AquisicaoCartao" class="lps.bet.basico.web.aquisicaoCartao.AquisicaoCartao">
 		<property name="interfaceCartaoMgt">
 			<ref bean="CartaoMgr"/>
@@ -280,7 +287,7 @@
 			<ref bean="CargoDAO"/>
 		</property> 
 	</bean>
-	
+		
 	<!-- Beans relacionados ao Hibernate: dataSource e sessionFactory -->
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -317,6 +324,12 @@
 	
 	<!-- DAOs do Servidor do sistema BET -->
 	
+	<bean id="AutenticacaoDAO" class="lps.bet.basico.autenticacao.AutenticacaoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+
 	
 	<bean id="LinhaDAO" class="lps.bet.basico.linhaMgr.LinhaDAO">
 		<property name="sessionFactory">
