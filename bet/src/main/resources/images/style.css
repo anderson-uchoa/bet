@@ -273,6 +273,11 @@ input.login {
 	margin: 0 9px 3px 0;
 }
 
+.erro {
+	color: red;
+	font-weight:bold;
+}
+
 /* footer
    ------ */
 
