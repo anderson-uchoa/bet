@@ -1,11 +1,11 @@
-package lps.bet.basico.controlValidadorOnibus;
+package lps.bet.basico.onibus.controlValidadorOnibus;
 
-import lps.bet.basico.catraca.Catraca;
-import lps.bet.basico.catraca.ILiberarCatraca;
 import lps.bet.basico.controlValidadorServidor.IProcessarTransacao;
-import lps.bet.basico.leitoraCartao.ILeitora;
-import lps.bet.basico.validadorMgr.IValidadorMgt;
-import lps.bet.basico.visor.IVisor;
+import lps.bet.basico.onibus.catraca.Catraca;
+import lps.bet.basico.onibus.catraca.ILiberarCatraca;
+import lps.bet.basico.onibus.leitoraCartao.ILeitora;
+import lps.bet.basico.onibus.validadorMgr.IValidadorMgt;
+import lps.bet.basico.onibus.visor.IVisor;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 
 
 public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
+	
 	boolean leituraPermitida = true;
 	IValidadorMgt interfaceValidadorMgt;
 	IVisor interfaceVisor;
@@ -24,7 +25,7 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 	public ControlValidadorOnibus(){
 	}
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		Resource resource = new ClassPathResource("onibus-context.xml");
 		BeanFactory factory = new XmlBeanFactory(resource);
 		Catraca catraca = (Catraca) factory.getBean("Catraca");
@@ -50,7 +51,7 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 		catraca.girarCatraca();
 		controlValidadorOnibus.tratarCartao("0200000001");
 		catraca.girarCatraca();
-	}
+	}*/
 
 	public void tratarCartao(String dados){
 		if (!leituraPermitida){
@@ -124,6 +125,10 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 		}
 	}
 
+	public void permitirLeitura() {
+		leituraPermitida = true;
+	}
+	
 	public boolean isLeituraPermitida() {
 		return leituraPermitida;
 	}
@@ -172,7 +177,4 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 		this.interfaceProcessarTransacao = interfaceProcessarTransacao;
 	}
 
-	public void permitirLeitura() {
-		leituraPermitida = true;
-	}
 }
