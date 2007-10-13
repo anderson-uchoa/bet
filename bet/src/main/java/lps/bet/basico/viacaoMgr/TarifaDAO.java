@@ -32,13 +32,10 @@ public class TarifaDAO extends HibernateDaoSupport{
 	
 	public Tarifa buscarTarifa(){
 		List tarifas = buscarTarifas();
-		Tarifa tarifa = (Tarifa) tarifas.get(0);
-		System.out.println("TARIFA: " + tarifa.getNomeTarifa() + " Valor Tarifa: " + tarifa.getValorTarifa());
 		return (Tarifa) tarifas.get(0);
 	}
 	
 	public Tarifa buscarTarifa(int tarifaID){
 		return (Tarifa) getHibernateTemplate().get(Tarifa.class, new Integer(tarifaID));
 	}
-	
 }

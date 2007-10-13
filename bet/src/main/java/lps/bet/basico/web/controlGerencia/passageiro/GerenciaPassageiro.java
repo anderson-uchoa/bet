@@ -13,7 +13,7 @@ import lps.bet.basico.tiposDados.Passageiro;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaPassageiro extends MultiActionController {
+public class GerenciaPassageiro extends MultiActionController implements IGerenciaPassageiro{
 
 	IPassageiroMgt interfacePassageiroMgt;
 
@@ -103,7 +103,7 @@ public class GerenciaPassageiro extends MultiActionController {
 	}
 
 	
-	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String operacao = request.getParameter("operacao");
 		
 		if (request.getServletPath().equals("/gerenciaPassageiro.html")){

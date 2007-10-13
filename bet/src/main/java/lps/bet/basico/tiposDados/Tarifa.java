@@ -41,8 +41,9 @@ public class Tarifa {
 	public SistViarioUrbano getSistViarioUrbano() {
 		return this.sistViarioUrbano;
 	}
-
 	public void setSistViarioUrbano(SistViarioUrbano sistViarioUrbano) {
 		this.sistViarioUrbano = sistViarioUrbano;
 	}
 }
+
+

@@ -1,16 +1,6 @@
-/*
- * LinhaMgr.java
- *
- * Created on 17 de Junho de 2007, 11:16
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package lps.bet.basico.linhaMgr;
 
 import java.util.List;
-
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Onibus;
@@ -20,52 +10,11 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     LinhaDAO linhaDAO;
     CorridaDAO corridaDAO;
     OnibusDAO onibusDAO;
-    
-    
-    public LinhaMgr() {
-         
-    }
-    
-    //Método da interface IAtualizarCorrida
-    public String atualizarCorrida(int onibusID){
         
-        Onibus onibus = onibusDAO.buscarOnibus(onibusID);
-        System.out.println("Atualizar Corrida com onibusID " + onibusID + " e o emCorrida é " + onibus.isEmCorrida());
-        
-        if (onibus.isEmCorrida()){
-        	System.out.println("Onibus está em corrida");
-            Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);       
-            System.out.println("LinhaMgr: corrida em aberto" + corrida.getCorridaID());
-            onibusDAO.alterarEmCorrida(onibus);
-            String resposta = corridaDAO.encerrarCorrida(corrida);
-            System.out.println(corrida.getArrecadacao());
-            
-            return resposta;
-        }
-        else{
-        	System.out.println("Onibus vai começar uma corrida");
-        	List corridas = corridaDAO.buscarCorridasPrevistas(onibusID);
-            Corrida corrida = (Corrida) corridas.get(0);
-            System.out.println("LinhaMgr: corrida agendada " + corrida.getCorridaID());
-            onibusDAO.alterarEmCorrida(onibus);
-            String resposta = corridaDAO.iniciarCorrida(corrida);
-            System.out.println(corrida.getArrecadacao());
-            
-            return resposta;
-        }
+    public LinhaMgr() {         
     }
 
-    public Linha buscarLinhaAtualOnibus(int onibusID) {
-    	Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);
-    	return linhaDAO.buscarLinhaCorrida(corrida);
-    }
-    
-    //Método da interface IRegistrarArrencadacao
-    public void registrarArrecadacao(int onibusID, float valor){
-    	corridaDAO.registrarArrecadacao(onibusID, valor);
-    }
-
-    //Métodos delegados para o LinhaDAO
+    //Métodos da interface ILinhaMgt delegados para o LinhaDAO
     public List buscarLinhas(){
     	return linhaDAO.buscarLinhas();
     }
@@ -74,6 +23,10 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     }
     public Linha buscarLinha(String nomeLinha){
     	return linhaDAO.buscarLinha(nomeLinha);
+    }
+    public Linha buscarLinhaAtualOnibus(int onibusID) {
+    	Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);
+    	return linhaDAO.buscarLinhaCorrida(corrida);
     }
     public void criarLinha(Linha linha) {
         linhaDAO.criarLinha(linha);   
@@ -85,7 +38,7 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     	linhaDAO.removerLinha(linhaID);
     }
 
-    //Métodos delegados para o CorridaDAO
+    //Métodos da interface ILinhaMgt delegados para o CorridaDAO
     public List buscarCorridas(){
     	return corridaDAO.buscarCorridas();
     }    
@@ -123,6 +76,40 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     	onibusDAO.removerOnibus(onibusID);
     }
 
+    //Método da interface IAtualizarCorrida
+    public String atualizarCorrida(int onibusID){
+        
+        Onibus onibus = onibusDAO.buscarOnibus(onibusID);
+        System.out.println("Atualizar Corrida com onibusID " + onibusID + " e o emCorrida é " + onibus.isEmCorrida());
+        
+        if (onibus.isEmCorrida()){
+        	System.out.println("Onibus está em corrida");
+            Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);       
+            System.out.println("LinhaMgr: corrida em aberto" + corrida.getCorridaID());
+            onibusDAO.alterarEmCorrida(onibus);
+            String resposta = corridaDAO.encerrarCorrida(corrida);
+            System.out.println(corrida.getArrecadacao());
+            
+            return resposta;
+        }
+        else{
+        	System.out.println("Onibus vai começar uma corrida");
+        	List corridas = corridaDAO.buscarCorridasPrevistas(onibusID);
+            Corrida corrida = (Corrida) corridas.get(0);
+            System.out.println("LinhaMgr: corrida agendada " + corrida.getCorridaID());
+            onibusDAO.alterarEmCorrida(onibus);
+            String resposta = corridaDAO.iniciarCorrida(corrida);
+            System.out.println(corrida.getArrecadacao());
+            
+            return resposta;
+        }
+    }
+    
+    //Método da interface IRegistrarArrencadacao
+    public void registrarArrecadacao(int onibusID, float valor){
+    	corridaDAO.registrarArrecadacao(onibusID, valor);
+    }
+    
     //Getters e Setters    
 	public CorridaDAO getCorridaDAO() {
 		return corridaDAO;
