@@ -1,8 +1,8 @@
-package lps.bet.basico.leitoraCartao;
+package lps.bet.basico.onibus.leitoraCartao;
 
 import java.util.List;
 
-import lps.bet.basico.controlValidadorOnibus.ITratarCartao;
+import lps.bet.basico.onibus.controlValidadorOnibus.ITratarCartao;
 
 public class LeitoraCartao implements ILeitora{
 	
