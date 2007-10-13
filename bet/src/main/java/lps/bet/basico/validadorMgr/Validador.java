@@ -1,4 +1,4 @@
-package lps.bet.basico.validadorMgr;
+package lps.bet.basico.onibus.validadorMgr;
 
 public class Validador implements IValidadorMgt{
 	int validadorID=0, onibusID=0;

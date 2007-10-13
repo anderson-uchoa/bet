@@ -1,4 +1,4 @@
-package lps.bet.basico.validadorMgr;
+package lps.bet.basico.onibus.validadorMgr;
 
 public interface IValidadorMgt {
 	public int getValidadorID();
