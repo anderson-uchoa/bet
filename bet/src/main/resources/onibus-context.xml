@@ -11,13 +11,13 @@
 	  </property> 
 	</bean>
 	
-	<bean id="LeitoraCartao" class="lps.bet.basico.leitoraCartao.LeitoraCartao">
+	<bean id="LeitoraCartao" class="lps.bet.basico.onibus.leitoraCartao.LeitoraCartao">
 		<property name="interfaceTratarCartao">
 			<ref bean="ControlValidadorOnibus"/>
 		</property> 
 	</bean>
 
-	<bean id="ControlValidadorOnibus" class="lps.bet.basico.controlValidadorOnibus.ControlValidadorOnibus">
+	<bean id="ControlValidadorOnibus" class="lps.bet.basico.onibus.controlValidadorOnibus.ControlValidadorOnibus">
 		<property name="interfaceProcessarTransacao">
 			<ref bean="ControlValidadorServidor"/>
 		</property> 
@@ -32,17 +32,17 @@
 		</property> 
 	</bean>
 
-	<bean id="Catraca" class="lps.bet.basico.catraca.Catraca">
+	<bean id="Catraca" class="lps.bet.basico.onibus.catraca.Catraca">
 		<property name="interfacePermitirLeitura">
 			<ref bean="ControlValidadorOnibus"/>
 		</property> 
 	</bean>
 
-	<bean id="Visor" class="lps.bet.basico.visor.Visor"/>
+	<bean id="Visor" class="lps.bet.basico.onibus.visor.Visor"/>
 
-	<bean id="ValidadorMgr" class="lps.bet.basico.validadorMgr.Validador"/>
+	<bean id="ValidadorMgr" class="lps.bet.basico.onibus.validadorMgr.Validador"/>
 	
-	<bean id="Gui" class="lps.bet.basico.gui.ValidadorGUI">
+	<bean id="Gui" class="lps.bet.basico.onibus.gui.ValidadorGUI">
 		<constructor-arg><ref bean="Catraca"/></constructor-arg>
 		<constructor-arg><ref bean="Visor"/></constructor-arg>
 		<property name="interfaceLeitora">

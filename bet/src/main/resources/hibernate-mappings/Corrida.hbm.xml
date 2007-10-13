@@ -20,7 +20,7 @@
         <property name="arrecadacao" type="float" update="true" insert="true" column="arrecadacao"/>
         <property name="encerrado" type="boolean" update="true" insert="true" column="encerrado"/>
 
-        <many-to-one
+        <many-to-one 
             name="linha"
             class="Linha"
             cascade="none"

@@ -4,7 +4,7 @@
 
 <beans>
 	
-	<!-- Exposicao das interfaces do servidor para invocacao remota -->
+	<!-- Exposicao da interface do servidor para invocacao remota -->
 	<bean name="TratarCartao" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 	  <property name="service">
 		<ref bean="ControlValidadorServidor"/>
@@ -324,7 +324,7 @@
 	
 	<!-- DAOs do Servidor do sistema BET -->
 	
-	<bean id="AutenticacaoDAO" class="lps.bet.basico.autenticacao.AutenticacaoDAO">
+	<bean id="AutenticacaoDAO" class="lps.bet.basico.web.autenticacao.AutenticacaoDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
