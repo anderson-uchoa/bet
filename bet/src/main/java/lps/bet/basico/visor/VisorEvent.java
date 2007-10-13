@@ -1,4 +1,4 @@
-package lps.bet.basico.visor;
+package lps.bet.basico.onibus.visor;
 
 public class VisorEvent extends java.util.EventObject{
 

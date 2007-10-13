@@ -1,4 +1,4 @@
-package lps.bet.basico.visor;
+package lps.bet.basico.onibus.visor;
 
 public interface IVisor {
 	public void removeVisorListener (VisorListener listener);

@@ -1,4 +1,4 @@
-package lps.bet.basico.visor;
+package lps.bet.basico.onibus.visor;
 
 import java.util.ArrayList;
 import java.util.Iterator;
