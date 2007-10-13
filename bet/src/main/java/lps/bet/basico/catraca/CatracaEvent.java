@@ -1,4 +1,4 @@
-package lps.bet.basico.catraca;
+package lps.bet.basico.onibus.catraca;
 
 public class CatracaEvent extends java.util.EventObject{
 	

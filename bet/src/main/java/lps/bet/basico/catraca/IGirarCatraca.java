@@ -7,16 +7,19 @@
  * and open the template in the editor.
  */
 
-package lps.bet.basico.catraca;
+package lps.bet.basico.onibus.catraca;
 
-import lps.bet.basico.visor.VisorListener;
+import lps.bet.basico.onibus.visor.VisorListener;
 
 /**
  *
  * @author Paula
  */
 public interface IGirarCatraca {
+	
+    public void girarCatraca();
 	public void removeCatracaListener (CatracaListener listener);
 	public void addCatracaListener (CatracaListener listener);
-    public void girarCatraca();
+
 }
+

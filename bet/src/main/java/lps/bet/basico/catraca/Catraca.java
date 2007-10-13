@@ -1,12 +1,12 @@
-package lps.bet.basico.catraca;
+package lps.bet.basico.onibus.catraca;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import lps.bet.basico.controlValidadorOnibus.IPermitirLeitura;
-import lps.bet.basico.visor.VisorEvent;
-import lps.bet.basico.visor.VisorListener;
+import lps.bet.basico.onibus.controlValidadorOnibus.IPermitirLeitura;
+import lps.bet.basico.onibus.visor.VisorEvent;
+import lps.bet.basico.onibus.visor.VisorListener;
 
 
 public class Catraca implements IGirarCatraca, ILiberarCatraca{
@@ -19,10 +19,6 @@ public class Catraca implements IGirarCatraca, ILiberarCatraca{
 	public Catraca() {
 		travada = true;
 		listeners = new ArrayList();
-	}
-	
-	public void setInterfacePermitirLeitura(IPermitirLeitura interfacePermitirLeitura){
-		this.interfacePermitirLeitura = interfacePermitirLeitura;
 	}
 	
 	public void girarCatraca(){
@@ -41,6 +37,13 @@ public class Catraca implements IGirarCatraca, ILiberarCatraca{
 		travada = true;
 	}
 	
+	private void disparaCatracaLiberada(){
+		for (Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+			CatracaListener listener = (CatracaListener) iterator.next();
+			listener.catracaLiberada(new CatracaEvent(this));			
+		}
+	}
+
 	public void addCatracaListener(CatracaListener listener){
 		if (!listeners.contains(listener))
 			listeners.add(listener);
@@ -50,10 +53,8 @@ public class Catraca implements IGirarCatraca, ILiberarCatraca{
 		listeners.remove(listener);
 	}
 	
-	private void disparaCatracaLiberada(){
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext();) {
-			CatracaListener listener = (CatracaListener) iterator.next();
-			listener.catracaLiberada(new CatracaEvent(this));			
-		}
+	public void setInterfacePermitirLeitura(IPermitirLeitura interfacePermitirLeitura){
+		this.interfacePermitirLeitura = interfacePermitirLeitura;
 	}
+	
 }
