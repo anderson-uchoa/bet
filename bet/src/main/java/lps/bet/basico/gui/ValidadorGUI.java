@@ -1,12 +1,12 @@
-package lps.bet.basico.gui;
+package lps.bet.basico.onibus.gui;
 
-import lps.bet.basico.catraca.CatracaEvent;
-import lps.bet.basico.catraca.CatracaListener;
-import lps.bet.basico.catraca.IGirarCatraca;
-import lps.bet.basico.leitoraCartao.ILeitora;
-import lps.bet.basico.visor.IVisor;
-import lps.bet.basico.visor.VisorEvent;
-import lps.bet.basico.visor.VisorListener;
+import lps.bet.basico.onibus.catraca.CatracaEvent;
+import lps.bet.basico.onibus.catraca.CatracaListener;
+import lps.bet.basico.onibus.catraca.IGirarCatraca;
+import lps.bet.basico.onibus.leitoraCartao.ILeitora;
+import lps.bet.basico.onibus.visor.IVisor;
+import lps.bet.basico.onibus.visor.VisorEvent;
+import lps.bet.basico.onibus.visor.VisorListener;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
