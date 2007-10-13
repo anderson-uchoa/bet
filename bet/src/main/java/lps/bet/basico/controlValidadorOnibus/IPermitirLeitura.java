@@ -1,4 +1,4 @@
-package lps.bet.basico.controlValidadorOnibus;
+package lps.bet.basico.onibus.controlValidadorOnibus;
 
 public interface IPermitirLeitura {
 	public void permitirLeitura();
