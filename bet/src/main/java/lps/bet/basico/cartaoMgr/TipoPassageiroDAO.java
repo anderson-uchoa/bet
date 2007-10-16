@@ -1,10 +1,7 @@
 package lps.bet.basico.cartaoMgr;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
