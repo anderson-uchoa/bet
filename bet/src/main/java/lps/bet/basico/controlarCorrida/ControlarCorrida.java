@@ -10,7 +10,6 @@
 package lps.bet.basico.controlarCorrida;
 
 import lps.bet.basico.linhaMgr.IAtualizarCorrida;
-import lps.bet.basico.tiposDados.Onibus;
 
 /**
  *
