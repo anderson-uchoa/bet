@@ -4,8 +4,6 @@ import java.util.List;
 
 import lps.bet.basico.tiposDados.Cargo;
 
-import org.hibernate.classic.Session;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class CargoDAO extends HibernateDaoSupport {
