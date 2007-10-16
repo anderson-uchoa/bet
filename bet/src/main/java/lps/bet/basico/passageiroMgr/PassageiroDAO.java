@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import lps.bet.basico.tiposDados.Passageiro;
-import lps.bet.basico.tiposDados.Usuario;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
