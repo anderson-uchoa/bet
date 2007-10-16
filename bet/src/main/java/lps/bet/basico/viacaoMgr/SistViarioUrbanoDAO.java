@@ -2,7 +2,6 @@ package lps.bet.basico.viacaoMgr;
 
 import java.util.List;
 
-import lps.bet.basico.tiposDados.EmpresaViaria;
 import lps.bet.basico.tiposDados.SistViarioUrbano;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
