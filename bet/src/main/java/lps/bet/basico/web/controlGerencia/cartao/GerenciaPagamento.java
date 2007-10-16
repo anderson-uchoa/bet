@@ -9,12 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
-import lps.bet.basico.funcionarioMgr.IFuncionarioMgt;
-import lps.bet.basico.tiposDados.Cargo;
 import lps.bet.basico.tiposDados.Cartao;
-import lps.bet.basico.tiposDados.Corrida;
-import lps.bet.basico.tiposDados.EmpresaViaria;
-import lps.bet.basico.tiposDados.Funcionario;
 import lps.bet.basico.tiposDados.Pagamento;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 

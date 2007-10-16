@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.passageiroMgr.IPassageiroMgt;
-import lps.bet.basico.tiposDados.Cargo;
 import lps.bet.basico.tiposDados.Cartao;
-import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;

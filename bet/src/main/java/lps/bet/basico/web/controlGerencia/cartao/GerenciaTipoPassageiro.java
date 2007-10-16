@@ -1,15 +1,12 @@
 package lps.bet.basico.web.controlGerencia.cartao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
-import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 
 import org.springframework.web.servlet.ModelAndView;
