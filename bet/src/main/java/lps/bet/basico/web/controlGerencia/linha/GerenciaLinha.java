@@ -1,8 +1,6 @@
 package lps.bet.basico.web.controlGerencia.linha;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.SistViarioUrbano;
-import lps.bet.basico.tiposDados.Tarifa;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 
 import org.springframework.web.servlet.ModelAndView;

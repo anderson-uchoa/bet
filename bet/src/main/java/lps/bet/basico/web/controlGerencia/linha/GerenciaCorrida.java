@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.linhaMgr.ILinhaMgt;
-import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecao;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoDiaria;

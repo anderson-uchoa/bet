@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import lps.bet.basico.funcionarioMgr.IFuncionarioMgt;
 import lps.bet.basico.tiposDados.Cargo;
 import lps.bet.basico.tiposDados.EmpresaViaria;
 import lps.bet.basico.tiposDados.Funcionario;
-import lps.bet.basico.tiposDados.Pagamento;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;

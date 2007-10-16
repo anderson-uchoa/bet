@@ -13,7 +13,7 @@ import lps.bet.basico.tiposDados.Passageiro;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaPassageiro extends MultiActionController implements IGerenciaPassageiro{
+public class GerenciaPassageiro extends MultiActionController{
 
 	IPassageiroMgt interfacePassageiroMgt;
 

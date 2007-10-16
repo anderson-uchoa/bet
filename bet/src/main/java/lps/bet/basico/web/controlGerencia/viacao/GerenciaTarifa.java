@@ -12,9 +12,7 @@ import lps.bet.basico.tiposDados.SistViarioUrbano;
 import lps.bet.basico.tiposDados.Tarifa;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 
-import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class GerenciaTarifa extends MultiActionController{
