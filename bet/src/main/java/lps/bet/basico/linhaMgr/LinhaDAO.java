@@ -2,7 +2,6 @@ package lps.bet.basico.linhaMgr;
 
 import java.util.List;
 
-import lps.bet.basico.tiposDados.Cargo;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
 
