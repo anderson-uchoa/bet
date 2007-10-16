@@ -2,7 +2,6 @@
 package lps.bet.basico.tiposDados ;
 
 import java.util.Collection;
-import java.util.List;
 
 public class Passageiro extends Usuario{
 
