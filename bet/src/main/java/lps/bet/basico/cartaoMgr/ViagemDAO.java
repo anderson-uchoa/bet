@@ -5,7 +5,6 @@ import java.util.List;
 
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Linha;
-import lps.bet.basico.tiposDados.Pagamento;
 import lps.bet.basico.tiposDados.Viagem;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
