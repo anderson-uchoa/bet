@@ -20,7 +20,7 @@
 		
 		<div class="bar menu">
 			<ul>
-				<li class="browse_category">Módulos:</li>
+				<li class="browse_category">Olá, $login!</li>
 				<li><a href="#">Viação</a>
 					<ul>
 						<li><a href="gerenciaEmprViaria.html">Empresa Viária</a></li>
@@ -51,5 +51,6 @@
 						<li><a href="gerenciaCorrida.html">Corrida</a></li>
 					</ul> 
 				</li>
+				<li class="logout"><a href="logout.html?operacao=logout">Sair</a>
 			</ul>
 		</div>
