@@ -174,7 +174,7 @@ public class GerenciaCartao extends MultiActionController{
 			}			
 		}
 		else {
-			return mostrarForm(request.getParameter("cartaoID"),request.getParameter("passageiroID"));
+			return mostrarForm(request.getParameter("cartaoID"),request.getParameter("usuarioID"));
 		}
 	}
 	
