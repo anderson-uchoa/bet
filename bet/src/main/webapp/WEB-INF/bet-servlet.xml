@@ -289,6 +289,14 @@
 		</property> 
 	</bean>
 		
+	<!--Beans de Aspectos do sistema BET-->
+
+	<bean id="AutenticacaoAspecto" class="lps.bet.basico.web.autenticacao.Autenticacao" factory-method="aspectOf">
+		<property name="autenticacaoDAO">
+			<ref bean="AutenticacaoDAO"/>
+		</property>
+	</bean>
+	
 	<!-- Beans relacionados ao Hibernate: dataSource e sessionFactory -->
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

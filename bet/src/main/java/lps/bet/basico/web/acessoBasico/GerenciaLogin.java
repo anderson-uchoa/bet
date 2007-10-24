@@ -29,8 +29,7 @@ public class GerenciaLogin extends MultiActionController{
 		String senha = request.getParameter("senha");
 		
 		try {
-			interfaceAutenticacao.doLogin(login, senha);
-			request.getSession().setAttribute("login", login);
+			interfaceAutenticacao.doLogin(request, login, senha);
 			mav.setViewName("controlGerencia");
 		} catch (LoginException e) {
 			mav.addObject("excecao", e);
