@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import lps.bet.basico.onibus.controlValidadorOnibus.IPermitirLeitura;
-import lps.bet.basico.onibus.visor.VisorEvent;
-import lps.bet.basico.onibus.visor.VisorListener;
 
 
 public class Catraca implements IGirarCatraca, ILiberarCatraca{

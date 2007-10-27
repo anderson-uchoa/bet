@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.tiposDados.Cartao;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
-public class CargaCartao extends AbstractController implements ISolicitarCarga{
+public class CargaCartao extends ControladorBet implements ISolicitarCarga{
 	
 	ICartaoMgt interfaceCartaoMgt;
 	//IContabilidade interfaceContabilidade;

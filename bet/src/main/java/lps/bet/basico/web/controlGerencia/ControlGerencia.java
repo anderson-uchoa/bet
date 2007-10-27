@@ -3,10 +3,11 @@ package lps.bet.basico.web.controlGerencia;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+import lps.bet.basico.web.ControladorBet;
 
-public class ControlGerencia extends MultiActionController{
+import org.springframework.web.servlet.ModelAndView;
+
+public class ControlGerencia extends ControladorBet{
 
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			

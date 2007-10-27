@@ -9,13 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.passageiroMgr.IPassageiroMgt;
 import lps.bet.basico.tiposDados.Passageiro;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaPassageiro extends MultiActionController{
+public class GerenciaPassageiro extends ControladorBet{
 
 	IPassageiroMgt interfacePassageiroMgt;
+
+	public GerenciaPassageiro() {
+		nivelMinimoAcesso = 10;
+	}
 
 	public IPassageiroMgt getInterfacePassageiroMgt() {
 		return interfacePassageiroMgt;

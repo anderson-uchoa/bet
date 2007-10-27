@@ -9,7 +9,6 @@
 
 package lps.bet.basico.onibus.catraca;
 
-import lps.bet.basico.onibus.visor.VisorListener;
 
 /**
  *

@@ -10,11 +10,11 @@ import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.SistViarioUrbano;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaLinha extends MultiActionController{
+public class GerenciaLinha extends ControladorBet{
 	
 	ILinhaMgt interfaceLinhaMgt;
 	IViacaoMgt interfaceViacaoMgt;

@@ -13,11 +13,11 @@ import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.passageiroMgr.IPassageiroMgt;
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Passageiro;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
-public class AcessoBasico extends AbstractController {
+public class AcessoBasico extends ControladorBet {
 
 	ICartaoMgt interfaceCartaoMgt;
 	IPassageiroMgt interfacePassageiroMgt;

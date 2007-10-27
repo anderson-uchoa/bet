@@ -15,12 +15,15 @@
 		<property name="login" type="java.lang.String" update="true" insert="true" column="login"/>
 
 		<property name="senha" type="java.lang.String" update="true" insert="true" column="senha"/>
+
+		<property name="nivelAcesso" type="int" update="true" insert="true" column="nivelAcesso"/>
+
 		
 		<joined-subclass name="Funcionario" table="FUNCIONARIO">
 			<key column="usuarioID"></key>
 			<property name="nomeFuncionario" type="java.lang.String" update="true" insert="true" column="nomeFuncionario"/>
 			<property name="dtAdmissao" type="java.util.Calendar" update="true" insert="true" column="dtAdmissao"/>
-
+			
 			<many-to-one
 				name="empresaViaria"
 				class="EmpresaViaria"

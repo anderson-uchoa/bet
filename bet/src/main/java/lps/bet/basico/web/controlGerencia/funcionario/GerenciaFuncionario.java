@@ -13,12 +13,12 @@ import lps.bet.basico.tiposDados.Cargo;
 import lps.bet.basico.tiposDados.EmpresaViaria;
 import lps.bet.basico.tiposDados.Funcionario;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
+import lps.bet.basico.web.ControladorBet;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaFuncionario extends MultiActionController{
+public class GerenciaFuncionario extends ControladorBet{
 	
 	IFuncionarioMgt interfaceFuncionarioMgt;
 	IViacaoMgt interfaceViacaoMgt;

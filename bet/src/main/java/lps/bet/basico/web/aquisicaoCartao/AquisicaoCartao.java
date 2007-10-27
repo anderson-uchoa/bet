@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.passageiroMgr.IPassageiroMgt;
 import lps.bet.basico.tiposDados.Passageiro;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
-public class AquisicaoCartao extends AbstractController implements ISolicitarCartao{
+public class AquisicaoCartao extends ControladorBet implements ISolicitarCartao{
 
 	ICartaoMgt interfaceCartaoMgt;
 	IPassageiroMgt interfacePassageiroMgt;

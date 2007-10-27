@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Onibus;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaOnibus extends MultiActionController{
+public class GerenciaOnibus extends ControladorBet{
 	
 	ILinhaMgt interfaceLinhaMgt;
 

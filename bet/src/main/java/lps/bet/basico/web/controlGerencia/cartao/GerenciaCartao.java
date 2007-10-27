@@ -14,12 +14,12 @@ import lps.bet.basico.passageiroMgr.IPassageiroMgt;
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
+import lps.bet.basico.web.ControladorBet;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaCartao extends MultiActionController{
+public class GerenciaCartao extends ControladorBet{
 
 	ICartaoMgt interfaceCartaoMgt;
 	IPassageiroMgt interfacePassageiroMgt;

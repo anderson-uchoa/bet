@@ -5,7 +5,14 @@ public class Usuario {
 	protected int usuarioID;
 	protected String login;
 	protected String senha;
+	protected int nivelAcesso;
 	
+	public int getNivelAcesso() {
+		return nivelAcesso;
+	}
+	public void setNivelAcesso(int nivelAcesso) {
+		this.nivelAcesso = nivelAcesso;
+	}
 	public int getUsuarioID() {
 		return usuarioID;
 	}

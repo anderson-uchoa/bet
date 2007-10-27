@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Pagamento;
+import lps.bet.basico.web.ControladorBet;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaPagamento extends MultiActionController{
+public class GerenciaPagamento extends ControladorBet{
 	
 	ICartaoMgt interfaceCartaoMgt;
 	SimpleDateFormat sdf;

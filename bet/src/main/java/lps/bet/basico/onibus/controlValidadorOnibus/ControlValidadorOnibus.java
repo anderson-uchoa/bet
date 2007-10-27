@@ -1,16 +1,10 @@
 package lps.bet.basico.onibus.controlValidadorOnibus;
 
 import lps.bet.basico.controlValidadorServidor.IProcessarTransacao;
-import lps.bet.basico.onibus.catraca.Catraca;
 import lps.bet.basico.onibus.catraca.ILiberarCatraca;
 import lps.bet.basico.onibus.leitoraCartao.ILeitora;
 import lps.bet.basico.onibus.validadorMgr.IValidadorMgt;
 import lps.bet.basico.onibus.visor.IVisor;
-
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 
 public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{

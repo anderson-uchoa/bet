@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.tiposDados.TipoPassageiro;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaTipoPassageiro extends MultiActionController{
+public class GerenciaTipoPassageiro extends ControladorBet{
 	
 	ICartaoMgt interfaceCartaoMgt;
 

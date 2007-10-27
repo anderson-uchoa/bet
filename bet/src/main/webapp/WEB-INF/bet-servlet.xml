@@ -73,11 +73,20 @@
 	
 	<!--Parte do Acesso WEB-->
 	<bean id="ControlGerencia" class="lps.bet.basico.web.controlGerencia.ControlGerencia"/>
+
+	<!--bean id="ControladorBET" class="lps.bet.basico.web.ControladorBet">
+		<property name="nivelMinimoAcesso">
+			<value>${config.nivel.ControladorBET}</value>
+		</property>
+	</bean-->
 	
 	<bean id="CargaCartao" class="lps.bet.basico.web.cargaCartao.CargaCartao">
 		<property name="interfaceCartaoMgt">
 			<ref bean="CartaoMgr"/>
 		</property> 
+		<property name="nivelMinimoAcesso">
+			<value>${config.nivel.CargaCartao}</value>
+		</property>
 	</bean>
 	
 	<bean id="AcessoBasico" class="lps.bet.basico.web.acessoBasico.AcessoBasico">
@@ -87,12 +96,15 @@
 		<property name="interfacePassageiroMgt">
 			<ref bean="PassageiroMgr"/>
 		</property> 
+		<property name="nivelMinimoAcesso">
+			<value>${config.nivel.AcessoBasico}</value>
+		</property>
 	</bean>
 
 	<bean id="GerenciaLogin" class="lps.bet.basico.web.acessoBasico.GerenciaLogin">
 		<property name="interfaceAutenticacao">
 			<ref bean="AutenticacaoDAO"/>
-		</property>
+		</property>		
 	</bean>
 	
 	<bean id="AquisicaoCartao" class="lps.bet.basico.web.aquisicaoCartao.AquisicaoCartao">
@@ -162,6 +174,9 @@
 		<property name="interfacePassageiroMgt">
 			<ref bean="PassageiroMgr"/>
 		</property> 
+		<property name="nivelMinimoAcesso">
+			<value>${config.nivel.GerenciaPassageiro}</value>
+		</property>
 	</bean>
 	
 	<bean id="GerenciaTipoPassageiro" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaTipoPassageiro">
@@ -177,6 +192,9 @@
 		<property name="interfacePassageiroMgt">
 			<ref bean="PassageiroMgr"/>
 		</property> 
+		<property name="nivelMinimoAcesso">
+			<value>${config.nivel.GerenciaCartao}</value>
+		</property>
 	</bean>	
 
 	<bean id="GerenciaPagamento" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaPagamento">

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Corrida;
+import lps.bet.basico.web.ControladorBet;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecao;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoDiaria;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoDiasUteis;
@@ -17,9 +18,8 @@ import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoFDS;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoSemanal;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaCorrida extends MultiActionController{
+public class GerenciaCorrida extends ControladorBet{
 
 	ILinhaMgt interfaceLinhaMgt;
 

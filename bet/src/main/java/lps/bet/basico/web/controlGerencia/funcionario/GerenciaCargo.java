@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.funcionarioMgr.IFuncionarioMgt;
 import lps.bet.basico.tiposDados.Cargo;
+import lps.bet.basico.web.ControladorBet;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-public class GerenciaCargo extends MultiActionController {
+public class GerenciaCargo extends ControladorBet {
 
 	IFuncionarioMgt interfaceFuncionarioMgt;
 
