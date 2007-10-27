@@ -9,7 +9,7 @@ public interface IAutenticacao {
 	public boolean estaExpirada(HttpServletRequest request);
 	
 	public void doLogin(HttpServletRequest request, String login, String senha) throws LoginException;
-	public void doLogout(String login);
+	public void doLogout(HttpServletRequest request);
 	
 	public void atualizarSessao(HttpServletRequest request);
 }

@@ -18,7 +18,7 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 	private WeakHashMap<String, String> senhas;
 	
 	//Tempo de Sessão (sem expirar)
-	private long tempoSessao = 30;
+	private long tempoSessao = 200;
 	
 	public AutenticacaoDAO(){
 		senhas = new WeakHashMap<String, String>();
@@ -43,18 +43,32 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 		}
 	}
 
-	public void doLogout(String login) {
-		if (senhas.containsKey(login))
+	public void doLogout(HttpServletRequest request) {
+		HttpSession sessao = request.getSession(false);
+		String login = (String) sessao.getAttribute("login");
+		if (senhas.containsKey(login)){
 			senhas.remove(login);
+			sessao.invalidate();
+		}	
 	}
 	
 	protected void criarSessao(HttpServletRequest request){
 		HttpSession sessao = request.getSession(true);
-		sessao.setAttribute("login", request.getParameter("login"));
+		String login = request.getParameter("login");
+		sessao.setAttribute("login", login);
 		Calendar hora = Calendar.getInstance();
 		sessao.setAttribute("hora", hora);
+		
+		DetachedCriteria criteria = DetachedCriteria.forClass(Usuario.class);
+		criteria.add(Restrictions.eq("login", login));
+		List usuarios = getHibernateTemplate().findByCriteria(criteria);
+		
+		Usuario usuario = (Usuario) usuarios.get(0);
+		sessao.setAttribute("nivel", usuario.getNivelAcesso());
+
 		System.out.println("--> CRIAR SESSAO: " + sessao);
 		System.out.println("--> Login: "+ sessao.getAttribute("login"));
+		
 	}
 	
 	public void atualizarSessao(HttpServletRequest request){
@@ -80,8 +94,7 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 			return false;
 		}
 		else {
-			String login = (String) sessao.getAttribute("login");
-			doLogout(login);
+			doLogout(request);
 			return true;
 		}
 	}	
