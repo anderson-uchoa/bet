@@ -2,21 +2,22 @@ package lps.bet.basico.web.acessoBasico;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import lps.bet.basico.web.autenticacao.IAutenticacao;
+import lps.bet.basico.web.autenticacao.LoginException;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-import lps.bet.basico.web.autenticacao.*;
 
 public class GerenciaLogin extends MultiActionController{
 
 	IAutenticacao interfaceAutenticacao;
 	
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String operacao = request.getParameter("operacao");
+		String operacao = request.getParameter("operacao") != null ? request.getParameter("operacao") : "login";
 		
-		if (request.getParameter("login") == null)
+		if (operacao.equals("login") && request.getParameter("login") == null)
 			return new ModelAndView("gerenciaLogin");
 		
 		return (operacao.equals("login")) ? doLogin(request) : doLogout(request);
@@ -40,7 +41,7 @@ public class GerenciaLogin extends MultiActionController{
 	}
 	
 	private ModelAndView doLogout (HttpServletRequest request){
-		interfaceAutenticacao.doLogout(request.getParameter("login"));
+		interfaceAutenticacao.doLogout(request);
 		
 		return new ModelAndView("gerenciaLogin");
 	}
