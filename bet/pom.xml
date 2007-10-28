@@ -48,6 +48,12 @@
         <artifactId>maven-jetty-plugin</artifactId>
         <version>6.0.0</version>
         <configuration>
+          <connectors>
+            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+              <port>7691</port>
+              <maxIdleTime>60000</maxIdleTime>
+            </connector>
+          </connectors>
           <webAppSourceDirectory>${basedir}/target/classes</webAppSourceDirectory>
           <scanIntervalSeconds>10</scanIntervalSeconds>
         </configuration>
@@ -62,17 +68,14 @@
           </archive>
         </configuration>
       </plugin>
-	  
-	<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>aspectj-maven-plugin</artifactId>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
-        </configuration>		
-	</plugin>
-	  
-	  
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -126,6 +129,11 @@
       <groupId>aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
       <version>1.5.2a</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta-regexp</groupId>
+      <artifactId>jakarta-regexp</artifactId>
+      <version>1.4</version>
     </dependency>
   </dependencies>
 </project>

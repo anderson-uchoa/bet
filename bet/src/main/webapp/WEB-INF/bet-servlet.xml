@@ -101,7 +101,7 @@
 		</property>
 	</bean>
 
-	<bean id="GerenciaLogin" class="lps.bet.basico.web.acessoBasico.GerenciaLogin">
+	<bean id="GerenciaLogin" class="lps.bet.basico.web.autenticacao.GerenciaLogin">
 		<property name="interfaceAutenticacao">
 			<ref bean="AutenticacaoDAO"/>
 		</property>		
@@ -314,6 +314,13 @@
 			<ref bean="AutenticacaoDAO"/>
 		</property>
 	</bean>
+
+	<bean id="AutorizacaoAspecto" class="lps.bet.basico.web.autenticacao.Autorizacao" factory-method="aspectOf">
+		<property name="nomeArquivoMenu">
+			<value>${config.menu.nomeArquivo}</value>
+		</property>
+	</bean>
+
 	
 	<!-- Beans relacionados ao Hibernate: dataSource e sessionFactory -->
 	
@@ -354,6 +361,9 @@
 	<bean id="AutenticacaoDAO" class="lps.bet.basico.web.autenticacao.AutenticacaoDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
+		</property>
+		<property name="tempoSessao">
+			<value>30</value>
 		</property>
 	</bean>
 

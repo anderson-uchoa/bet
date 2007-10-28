@@ -1,10 +1,8 @@
-package lps.bet.basico.web.acessoBasico;
+package lps.bet.basico.web.autenticacao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lps.bet.basico.web.autenticacao.IAutenticacao;
-import lps.bet.basico.web.autenticacao.LoginException;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;

@@ -18,7 +18,7 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 	private WeakHashMap<String, String> senhas;
 	
 	//Tempo de Sessão (sem expirar)
-	private long tempoSessao = 200;
+	private long tempoSessao;
 	
 	public AutenticacaoDAO(){
 		senhas = new WeakHashMap<String, String>();
@@ -38,7 +38,6 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 		
 		else{
 			senhas.put(login, senha);
-			System.out.println("--> SENHAS: " + senhas);
 			criarSessao(request);
 		}
 	}
@@ -66,21 +65,15 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 		Usuario usuario = (Usuario) usuarios.get(0);
 		sessao.setAttribute("nivel", usuario.getNivelAcesso());
 
-		System.out.println("--> CRIAR SESSAO: " + sessao);
-		System.out.println("--> Login: "+ sessao.getAttribute("login"));
-		
 	}
 	
 	public void atualizarSessao(HttpServletRequest request){
 		HttpSession sessao = request.getSession(false);
 		Calendar novaHora = Calendar.getInstance();
 		sessao.setAttribute("hora", novaHora);
-		System.out.println("--> ATUALIZAR SESSAO: " + sessao);
-		System.out.println("--> Hora atualizada: " + sessao.getAttribute("hora"));
 	}
 
 	public boolean estaAutenticado(String login) {
-		System.out.println(senhas);
 		return senhas.containsKey(login);
 	}
 	
@@ -97,5 +90,13 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 			doLogout(request);
 			return true;
 		}
+	}
+
+	public long getTempoSessao() {
+		return tempoSessao;
+	}
+
+	public void setTempoSessao(long tempoSessao) {
+		this.tempoSessao = tempoSessao;
 	}	
 }

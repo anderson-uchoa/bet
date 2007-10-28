@@ -18,39 +18,4 @@
 			</div>
 		</div>
 		
-		<div class="bar menu">
-			<ul>
-				<li class="browse_category">Olá, $login!</li>
-				<li><a href="#">Viação</a>
-					<ul>
-						<li><a href="gerenciaEmprViaria.html">Empresa Viária</a></li>
-						<li><a href="gerenciaSistViarioUrbano.html">Sistema Viário</a></li>
-						<li><a href="gerenciaTarifa.html">Tarifa</a></li>
-					</ul> 					
-				</li>
-				<li><a href="#">Cartão</a>
-					<ul>
-						<li><a href="gerenciaCartao.html">Cartão</a></li>
-						<li><a href="gerenciaTipoPassageiro.html">Tipo Passageiro</a></li>
-						<li><a href="gerenciaPagamento.html">Pagamento</a></li>
-						<li><a href="gerenciaViagem.html">Viagem</a></li>
-						<li><a href="cargaCartao.html">Carga Cartão</a></li>
-					</ul> 
-				<li><a href="#">Funcionário</a>
-					<ul>
-						<li><a href="gerenciaFuncionario.html">Funcionário</a></li>
-						<li><a href="gerenciaCargo.html">Cargo</a></li>
-					</ul> 
-				</li>
-				<li><a href="gerenciaPassageiro.html">Passageiro</a>
-				</li>				
-				<li><a href="#">Linha</a>				
-					<ul>
-						<li><a href="gerenciaLinha.html">Linha</a></li>
-						<li><a href="gerenciaOnibus.html">Ônibus</a></li>
-						<li><a href="gerenciaCorrida.html">Corrida</a></li>
-					</ul> 
-				</li>
-				<li class="logout"><a href="logout.html?operacao=logout">Sair</a>
-			</ul>
-		</div>
+		$!menu.obterMenuPersonalizado()
