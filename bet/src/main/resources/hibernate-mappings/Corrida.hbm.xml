@@ -18,8 +18,10 @@
         <property name="horaChegada" type="java.util.Calendar" update="true" insert="true" column="horaChegada"/>
         <property name="saida" type="boolean" update="true" insert="true" column="saida"/>
         <property name="arrecadacao" type="float" update="true" insert="true" column="arrecadacao"/>
+		<property name="credito" type="float" update="true" insert="true" column="credito"/>
         <property name="encerrado" type="boolean" update="true" insert="true" column="encerrado"/>
-
+		<property name="qtdPassageiros" type="int" update="true" insert="true" column="qtdPassageiros"/>
+		
         <many-to-one 
             name="linha"
             class="Linha"

@@ -75,6 +75,17 @@ public class AcessoBasico extends ControladorBet {
 			mav.addObject("sdf", sdf);
 			mav.addObject("acessarPassageiro", "Dados do Passageiro");				
 		}			
+	
+		Collection cartoes = interfacePassageiroMgt.buscarCartoesPorPassageiro(cpf);
+		
+		if (cartoes == null){
+			mav.addObject("mensagemSemCartao", "Passageiro não possui cartão.");	
+		}		
+		else{
+			Calendar data = Calendar.getInstance();
+			mav.addObject("cartoes", cartoes);
+			mav.addObject("data",data);
+		}
 		return mav;
 	}
 	
@@ -105,9 +116,6 @@ public class AcessoBasico extends ControladorBet {
 		
 		if (operacao.equals("acessarPassageiro")){
 			return buscarPassageiro(Long.parseLong(request.getParameter("cpf").trim()));
-		}
-		else if (operacao.equals("obterCartoes")){
-			return buscarCartoesPorPassageiro(Long.parseLong(request.getParameter("cpf").trim()));
 		}
 
 		//Mostrando um cartão ou todos, dependendo da operacao requisitada

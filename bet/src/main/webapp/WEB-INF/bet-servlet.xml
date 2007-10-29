@@ -67,6 +67,9 @@
 				<prop key="/formFuncionario.html">GerenciaFuncionario</prop>
 				
 				<prop key="/tratarCartao.html">TratarCartao</prop>
+				
+				<prop key="/buscaAvancadaCorrida.html">RelatorioCorrida</prop>
+				
 			</props>
 		</property>
 	</bean>	
@@ -165,6 +168,12 @@
 	</bean>
 	
 	<bean id="GerenciaCorrida" class="lps.bet.basico.web.controlGerencia.linha.GerenciaCorrida">
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property>
+	</bean>
+
+	<bean id="RelatorioCorrida" class="lps.bet.basico.web.controlGerencia.linha.RelatorioCorrida">
 		<property name="interfaceLinhaMgt">
 			<ref bean="LinhaMgr"/>
 		</property>

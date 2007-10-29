@@ -91,6 +91,8 @@ public class GerenciaCorrida extends ControladorBet{
 				corrida.setHoraChegadaPrevista(horaChegadaPrevista);
 				corrida.setNumCorridaDia(1);
 				corrida.setArrecadacao(0);
+				corrida.setCredito(0);
+				corrida.setQtdPassageiros(0);
 				corrida.setEncerrado(false);
 				corrida.setSaida(false);
 				corrida.setLinha(interfaceLinhaMgt.buscarLinha(request.getParameter("nomeLinha")));

@@ -61,6 +61,7 @@ public class GerenciaCargo extends ControladorBet {
 		}
 
 		cargo.setNomeCargo(request.getParameter("nomeCargo").trim());
+		cargo.setNivelAcessoDefault(Integer.parseInt(request.getParameter("nivelAcessoDefault").trim()));
 						
 		return cargo;
 	}
@@ -81,7 +82,9 @@ public class GerenciaCargo extends ControladorBet {
 			mav.addObject("nomeOperacao", "Alterar");
 			cargo = interfaceFuncionarioMgt.buscarCargo(Integer.parseInt(cargoID));
 		}
-		mav.addObject("cargo",cargo);		
+		mav.addObject("niveisPermitidos", new int[]{1, 2, 3, 4, 5});
+		mav.addObject("cargo",cargo);
+		
 		return mav;		
 	}
 

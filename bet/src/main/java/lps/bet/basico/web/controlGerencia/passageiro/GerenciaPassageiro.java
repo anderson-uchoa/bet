@@ -50,7 +50,7 @@ public class GerenciaPassageiro extends ControladorBet{
 		passageiro.setNomePassageiro(request.getParameter("nomePassageiro").trim());
 		passageiro.setLogin(request.getParameter("login").trim());
 		passageiro.setSenha(request.getParameter("senha").trim());
-		
+		passageiro.setNivelAcesso(1);
 		return passageiro;
 	}
 	

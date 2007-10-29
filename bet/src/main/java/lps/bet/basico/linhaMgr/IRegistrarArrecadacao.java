@@ -14,5 +14,10 @@ package lps.bet.basico.linhaMgr;
  * @author Paula
  */
 public interface IRegistrarArrecadacao {
-    public void registrarArrecadacao(int onibusID, float valor);
+    
+	//Arrecadação manual é registrada:
+	public void registrarArrecadacao(int onibusID, float valor);
+	
+	//Arrecadação por meio de débito em cartão é registrada
+    public void registrarCredito(int onibusID, float valor);
 }

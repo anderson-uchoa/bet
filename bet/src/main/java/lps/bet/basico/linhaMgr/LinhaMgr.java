@@ -80,26 +80,19 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     public String atualizarCorrida(int onibusID){
         
         Onibus onibus = onibusDAO.buscarOnibus(onibusID);
-        System.out.println("Atualizar Corrida com onibusID " + onibusID + " e o emCorrida é " + onibus.isEmCorrida());
         
         if (onibus.isEmCorrida()){
-        	System.out.println("Onibus está em corrida");
             Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);       
-            System.out.println("LinhaMgr: corrida em aberto" + corrida.getCorridaID());
             onibusDAO.alterarEmCorrida(onibus);
             String resposta = corridaDAO.encerrarCorrida(corrida);
-            System.out.println(corrida.getArrecadacao());
             
             return resposta;
         }
         else{
-        	System.out.println("Onibus vai começar uma corrida");
         	List corridas = corridaDAO.buscarCorridasPrevistas(onibusID);
             Corrida corrida = (Corrida) corridas.get(0);
-            System.out.println("LinhaMgr: corrida agendada " + corrida.getCorridaID());
             onibusDAO.alterarEmCorrida(onibus);
             String resposta = corridaDAO.iniciarCorrida(corrida);
-            System.out.println(corrida.getArrecadacao());
             
             return resposta;
         }
@@ -109,8 +102,12 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     public void registrarArrecadacao(int onibusID, float valor){
     	corridaDAO.registrarArrecadacao(onibusID, valor);
     }
-    
-    //Getters e Setters    
+           
+    public void registrarCredito(int onibusID, float valor) {
+		corridaDAO.registrarCredito(onibusID, valor);		
+	}
+
+	//Getters e Setters    
 	public CorridaDAO getCorridaDAO() {
 		return corridaDAO;
 	}

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 		<div class="bar menu">
 			<ul>
+				<li nivel="1"><a href="acessoBasico.html">Acesso Básico</a>		
+				</li>
 				<li nivel="5"><a href="#">Viação</a>
 					<ul>
 						<li nivel="5"><a href="gerenciaEmprViaria.html">Empresa Viária</a></li>

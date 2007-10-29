@@ -20,7 +20,7 @@
 			<form id="formListaCargos">
 			<table id="tabelaListaCargos">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Cargo</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Cargo</th><th>Nível Padrão de Acesso</th></tr>
 				</thead>
 				<tbody>
 					#foreach($cargo in $cargos)
@@ -28,6 +28,7 @@
 						<td><input type="checkbox" name="chkCargoID" value="$cargo.CargoID"/></td>
 						<td>$cargo.CargoID</td>
 						<td>$cargo.NomeCargo</td>
+						<td>$cargo.nivelAcessoDefault</td>
 						<td><a href="formCargo.html?cargoID=$cargo.CargoID">Alterar</a></td>
 					</tr>
 					#end

@@ -5,7 +5,7 @@
 				<div class="search_form">
 				<p>Busca Por ID: <input type="text" name="corridaID" class="search_tiny" /> 
 				<input type="hidden" name="operacao" value="buscar"/>
-				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="#">Avançada</a></p>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="buscaAvancadaCorrida.html">Avançada</a></p>
 				</div>
 			</form>	
 			<p>&nbsp;</p>
@@ -22,7 +22,7 @@
 			<form id="formListaCorridas">
 			<table id="tabelaListaCorridas">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Hora Prevista Saída</th><th>Hora Prevista Chegada</th><th>Hora Saída</th><th>Hora Chegada</th><th>Nome Linha</th><th>ID Bus</th><th>Saída</th><th>Encerrado</th><th>Arrecadação</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Hora Prevista Saída</th><th>Hora Prevista Chegada</th><th>Hora Saída</th><th>Hora Chegada</th><th>Nome Linha</th><th>ID Bus</th><th>Saída</th><th>Encerrado</th><th>Arrecadação</th><th>Crédito</th><th>Qtd. Passageiros</th></tr>
 				</thead>
 				<tbody>
 					#foreach($corrida in $corridas)
@@ -38,6 +38,8 @@
 						<td>$corrida.Saida</td>
 						<td>$corrida.Encerrado</td>
 						<td>$corrida.Arrecadacao</td>
+						<td>$corrida.Credito</td>
+						<td>$corrida.QtdPassageiros</td>
 						<td><a href="formCorrida.html?corridaID=$corrida.CorridaID">Alterar</a></td>
 					</tr>
 					#end

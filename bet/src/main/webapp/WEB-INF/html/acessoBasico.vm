@@ -19,7 +19,7 @@
 			<form id="formAcesso">
 				<label>CPF do Passageiro: <input type="text" name="cpf" class="search_small"/></label><br/>
 				<input type="submit" class="submit" value="Buscar"/>
-				<input type="hidden" name="operacao" value="acessarPassageiro"/>
+				<input type="hidden" name="operacao" value="acessarPassageiro"/><br/><br/><br/>
 			</form>
 		</div>
 	#if ($acessarPassageiro)			
@@ -30,18 +30,17 @@
 				<label>Identificador do Passageiro: $passageiro.PassageiroID</label><br/>
 				<label>Nome: $passageiro.NomePassageiro</label><br/>
 				<label>CPF: $passageiro.Cpf</label><br/>
-				<input type="submit" class="submit" value="Cartões"/>				
-				<input type="hidden" name="operacao" value="obterCartoes"/>
 				<input type="hidden" name="cpf" value="$passageiro.Cpf"/>
-			#else <label>$mensagem</label/><br/><br/>#end
+			#else <label>$mensagem</label/><br/><br/><br/>
 			#end
 			
 			</form>
 		</div>
 	#end
 	
-	#if ($obterCartoes)
-			<div class="left_box">	
+	#if ($passageiro)
+		<h3>Lista de Cartões</h3>
+		<div class="left_box">	
 			<form id="formListaCartoes">
 			<table id="tabelaListaCartoes">
 				<thead>
@@ -60,36 +59,10 @@
 					#end
 				</tbody>
 			</table>
-			#if ($mensagemSemCartao) <label>$mensagemSemCartao</label/><br/><br/>#end
+			<label>$!mensagemSemCartao</label/><br/><br/>
 			</form>
 		</div>
 	#end
-	
-	<h3>Lista de Cartões</h3>
-	
-		<div class="left_box">	
-			<form id="formListaCartoes">
-			<table id="tabelaListaCartoes">
-				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Nome do Passageiro</th><th>Tipo</th><th>Data de Aquisição</th><th>Data de Validade</th><th>Saldo</th></tr>
-				</thead>
-				<tbody>
-					#foreach($cartao in $cartoes)
-					<tr id="linha$cartao.CartaoID" class="selectable">
-						<td><input type="checkbox" name="chkCartaoID" value="$cartao.CartaoID"/></td>
-						<td>$cartao.CartaoID</td>
-						<td>$cartao.Passageiro.NomePassageiro</td>
-						<td>$cartao.TipoPassageiro.NomeTipo</td>
-						<td>$sdf.format($cartao.DtAquisicao.Time)</td>
-						<td>$sdf.format($cartao.DtValidade.Time)</td>
-						<td>$cartao.Saldo</td>
-					</tr>
-					#end
-				</tbody>
-			</table>
-			</form>
-		</div>
-	</div>	
 	
 	<div class="right">
 	</div>	

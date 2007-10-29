@@ -43,25 +43,19 @@ public class ControlarViagem implements IProcessarViagem {
         System.out.println("Viagem Permitida: " + viagemPermitida);
         if (!viagemPermitida){
         	estado = "V-NOK";
-        	System.out.println(estado);
         	return estado; //Viagem não permitida, pois não há corrida aberta
         }
         
         //2. Buscar a linha do ônibus naquele momento:
         Linha linha = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID);
-        System.out.println("Linha do ônibus:" + linha.getLinhaID());
         
         //3. Buscar o tipo de passageiro:
         TipoPassageiro tipo = interfaceCartaoMgt.buscarTipoPassagPorCartao(cartaoID);
-        System.out.println("Tipo de Passageiro:" + tipo.getTipoID());
                 
         //4. Se o tipo de passageiro não for isento: 
         if (!tipo.getFormaPgtoPassagem().equalsIgnoreCase("isento")){
         	//5. buscar a tarifa:
         	valor = calcularValorPassagem(tipo);
-        	
-        	System.out.println("Valor da Passagem:" + valor);
-        	System.out.println("Forma de Pgto:" + tipo.getFormaPgtoPassagem());
         	
         	//6. Se a forma de pgto for debito, deve-se verificar o saldo do cartão:
             if (tipo.getFormaPgtoPassagem().equalsIgnoreCase("debito")){
@@ -70,11 +64,12 @@ public class ControlarViagem implements IProcessarViagem {
             	if (interfaceCartaoMgt.podeDebitar(cartaoID, valor)){
             		interfaceRegistrarViagem.debitarPassagem(cartaoID, valor);
             		estado = "PD-OK";
-            		System.out.println(estado);
+            		
+            		//Registrar o credito de arrecadacao para a corrida do onibus  
+            		interfaceRegistrarArrecadacao.registrarCredito(onibusID, valor);
             	}
             	else {
             		estado = "PD-NOK";
-            		System.out.println(estado);
             		return estado;
             	}
             }
@@ -83,7 +78,6 @@ public class ControlarViagem implements IProcessarViagem {
             else if (tipo.getFormaPgtoPassagem().equalsIgnoreCase("manual")){
             	interfaceRegistrarArrecadacao.registrarArrecadacao(onibusID, valor);
             	estado = "PM-OK";
-            	System.out.println(estado);
             }            
         }
         

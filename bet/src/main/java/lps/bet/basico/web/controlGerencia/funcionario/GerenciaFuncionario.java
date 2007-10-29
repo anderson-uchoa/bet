@@ -92,6 +92,7 @@ public class GerenciaFuncionario extends ControladorBet{
 		funcionario.setCargo(cargo);
 		funcionario.setLogin(request.getParameter("login").trim());
 		funcionario.setSenha(request.getParameter("senha").trim());
+		funcionario.setNivelAcesso(cargo.getNivelAcessoDefault());
 		
 		return funcionario;
 	}

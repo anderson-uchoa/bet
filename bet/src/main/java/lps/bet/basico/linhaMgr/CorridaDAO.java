@@ -86,6 +86,20 @@ public class CorridaDAO extends HibernateDaoSupport{
     public void registrarArrecadacao(int onibusID, float valor){
     	Corrida corrida = buscarCorridaAtualOnibus(onibusID);
     	corrida.setArrecadacao(corrida.getArrecadacao()+ valor);
+    	
+    	//Incrementar em uma unidade a qtd de passageiros para a corrida:
+    	corrida.setQtdPassageiros(corrida.getQtdPassageiros() + 1);
+    	
+    	salvarCorrida(corrida);
+    }
+    
+    public void registrarCredito(int onibusID, float valor){
+    	Corrida corrida = buscarCorridaAtualOnibus(onibusID);
+    	corrida.setCredito(corrida.getCredito()+ valor);
+    	
+    	//Incrementar em uma unidade a qtd de passageiros para a corrida:
+    	corrida.setQtdPassageiros(corrida.getQtdPassageiros() + 1);
+    	
     	salvarCorrida(corrida);
     }
     
