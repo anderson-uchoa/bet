@@ -1,12 +1,7 @@
 #parse("cabecalho.vm")
 
 		<div class="search_field">
-			<form method="post" action="?">
-				<div class="search_form">
-				<p>Search the Web: <input type="text" name="search" class="search" /> 
-				<input type="submit" value="Search" class="submit" /> <a class="grey" href="#">Advanced</a></p>
-				</div>
-			</form>	
+			
 			<p>&nbsp;</p>
 		</div>
 		

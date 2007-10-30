@@ -167,7 +167,7 @@ public class GerenciaCartao extends ControladorBet{
 				}
 			}
 			
-			// mostrando uma tarifa ou todas elas, dependendo da operacao requisitada
+			// mostrando um cartão ou todos, dependendo da operacao requisitada
 			if (operacao.equals("buscar")){
 				return buscarCartao(Integer.parseInt(request.getParameter("cartaoID")));			
 			}

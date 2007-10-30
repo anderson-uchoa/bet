@@ -1,6 +1,7 @@
 package lps.bet.basico.web.cargaCartao;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -43,10 +44,18 @@ public class CargaCartao extends ControladorBet implements ISolicitarCarga{
 	
 	protected ModelAndView buscarCartao(int cartaoID){
 		Cartao cartao = interfaceCartaoMgt.buscarCartao(cartaoID);
-
 		ModelAndView mav = new ModelAndView("cargaCartao");
-		mav.addObject("cartao", cartao);
-		mav.addObject("sdf", sdf);
+		if (cartao == null){
+			mav.addObject("mensagem", "Cartão não encontrado.");
+		}
+		else{
+			List cartoes = new ArrayList();
+			cartoes.add(cartao);
+			Calendar data = Calendar.getInstance();
+			mav.addObject("cartoes", cartoes);
+			mav.addObject("sdf", sdf);
+			mav.addObject("data",data);
+		}
 		return mav;
 	}
 
