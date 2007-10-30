@@ -96,6 +96,8 @@ public class GerenciaCartao extends ControladorBet{
 			mav.addObject("nomeOperacao", "Alterar");
 			cartao = interfaceCartaoMgt.buscarCartao(Integer.parseInt(cartaoID));
 			tipos = interfaceCartaoMgt.buscarTiposPermitidos(cartao.getPassageiro());
+			//Na alteração pode-se optar por não mudar o tipo, então ele tb deve ser uma opção:
+			tipos.add(cartao.getTipoPassageiro());
 			dtAquisicao = cartao.getDtAquisicao();
 			dtValidade = cartao.getDtValidade();
 		}
@@ -135,7 +137,7 @@ public class GerenciaCartao extends ControladorBet{
 		Passageiro passageiro = interfacePassageiroMgt.buscarPassageiro(request.getParameter("nomePassageiro").trim());
 		cartao.setPassageiro(passageiro);
 		
-		TipoPassageiro tipoRequisitado = interfaceCartaoMgt.buscarTipoPassageiro(request.getParameter("nomeTipo"));
+		TipoPassageiro tipoRequisitado = interfaceCartaoMgt.buscarTipoPassageiro(request.getParameter("nomeTipo").trim());
 		cartao.setTipoPassageiro(tipoRequisitado);
 				
 		return cartao;

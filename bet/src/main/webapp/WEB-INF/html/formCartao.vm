@@ -12,11 +12,11 @@
 				#if ($cartaoID)<label>Identificador do Cartão: <input type="text" name="cartaoID" value="$cartaoID" readonly="readonly" class="search_tiny"/></label><br/>#end 
 				<label>Tipo de Passageiro: 
 					<select name="nomeTipo">
-					#if ($tipoID)
+					#if ($cartaoID)
 						#foreach ($tipo in $tipos)
 							#if ($tipo.NomeTipo==$cartao.TipoPassageiro.NomeTipo)
-							<option value="$tipo.NomeTipo" selected="selected">$tipo.NomeTipo</option>
-							#else <option value="$cargo.NomeCargo">$tipo.NomeTipo</option>
+								<option value="$tipo.NomeTipo" selected="selected">$tipo.NomeTipo</option>
+							#else <option value="$tipo.NomeTipo">$tipo.NomeTipo</option>
 							#end
 						#end
 					#else	
