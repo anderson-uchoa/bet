@@ -66,9 +66,10 @@
 				<prop key="/formCargo.html">GerenciaCargo</prop>
 				<prop key="/formFuncionario.html">GerenciaFuncionario</prop>
 				
+				<prop key="/buscaAvancadaCorrida.html">GerenciaCorrida</prop>
+				
 				<prop key="/tratarCartao.html">TratarCartao</prop>
 				
-				<prop key="/buscaAvancadaCorrida.html">RelatorioCorrida</prop>
 				
 			</props>
 		</property>
@@ -173,12 +174,6 @@
 		</property>
 	</bean>
 
-	<bean id="RelatorioCorrida" class="lps.bet.basico.web.controlGerencia.linha.RelatorioCorrida">
-		<property name="interfaceLinhaMgt">
-			<ref bean="LinhaMgr"/>
-		</property>
-	</bean>
-	
 	<bean id="GerenciaPassageiro" class="lps.bet.basico.web.controlGerencia.passageiro.GerenciaPassageiro">
 		<property name="interfacePassageiroMgt">
 			<ref bean="PassageiroMgr"/>
@@ -372,7 +367,7 @@
 			<ref bean="sessionFactory"/>
 		</property>
 		<property name="tempoSessao">
-			<value>30</value>
+			<value>120</value>
 		</property>
 	</bean>
 
@@ -488,5 +483,43 @@
 		</property>
 	</bean>
 
+	<!-- Variabilidades da LPS BET -->
+	
+	<!--TEMPO de integracao:-->
+	<bean id="ViacaoTempoMgr" class="lps.bet.variabilidades.viacaoTempoMgr.ViacaoTempoMgr">
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property> 
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property> 
+	</bean>
+	
+	<bean id="TempoMgr" class="lps.bet.variabilidades.tempoMgr.TempoDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+
+	<bean id="ControlarViagemTempo" class="lps.bet.variabilidades.controlarViagemTempo.ControlarViagemTempo">
+		<property name="interfaceRegistrarViagem">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property> 
+		<property name="interfaceObterTempo">
+			<ref bean="ViacaoTempoMgr"/>
+		</property> 
+	</bean>
 	
 </beans>

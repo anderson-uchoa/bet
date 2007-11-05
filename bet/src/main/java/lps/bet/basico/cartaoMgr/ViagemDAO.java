@@ -7,6 +7,9 @@ import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Viagem;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class ViagemDAO extends HibernateDaoSupport{
@@ -57,6 +60,14 @@ public class ViagemDAO extends HibernateDaoSupport{
 	
 	public List buscarViagensPorCartao(int cartaoID){
 		return getHibernateTemplate().find(hqlBuscarViagensPorCartao, new Integer(cartaoID));     	
+	}
+	
+	public Viagem buscarUltimaViagem(int cartaoID){
+		DetachedCriteria criteria = DetachedCriteria.forClass(Viagem.class);
+		criteria.add(Restrictions.eq("cartaoID", cartaoID));
+		criteria.addOrder(Order.desc("hora"));
+		List viagens = getHibernateTemplate().findByCriteria(criteria);
+		return (Viagem) viagens.get(0);
 	}
 	
 	public List buscarViagens(){

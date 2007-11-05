@@ -2,6 +2,7 @@ package lps.bet.basico.linhaMgr;
 
 import java.util.List;
 
+import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Onibus;
@@ -17,6 +18,7 @@ public interface ILinhaMgt {
 	public void removerLinha(int linhaID);	 
 
 	public List buscarCorridas();
+	public List buscarCorridas(DadosRelatorioCorrida dadosRelatorioCorrida);
 	public Corrida buscarCorrida(int corridaID);
 	public void criarCorrida(Corrida corrida);
 	public void alterarCorrida(Corrida corrida);

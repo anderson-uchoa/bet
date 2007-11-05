@@ -8,9 +8,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Corrida;
+import lps.bet.basico.tiposDados.Linha;
+import lps.bet.basico.tiposDados.Onibus;
 import lps.bet.basico.web.ControladorBet;
+import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecao;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoDiaria;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecaoDiasUteis;
@@ -31,6 +35,45 @@ public class GerenciaCorrida extends ControladorBet{
 		sdfData.applyPattern("dd/MM/yyyy");
 		sdfHora = new SimpleDateFormat();
 		sdfHora.applyPattern("hh:mm");
+	}
+	
+	
+	protected ModelAndView buscarCorridas(HttpServletRequest request){
+		
+		DadosRelatorioCorrida dados = new DadosRelatorioCorrida();
+		dados.setCorridaID(Integer.parseInt(request.getParameter("corridaID")));
+		
+		Linha linha = interfaceLinhaMgt.buscarLinha(request.getParameter("nomeLinha"));
+		Onibus onibus = interfaceLinhaMgt.buscarOnibus(Integer.parseInt(request.getParameter("onibusID")));
+		dados.setLinha(linha);
+		dados.setOnibus(onibus);
+		dados.setEncerrado(Boolean.parseBoolean(request.getParameter("encerrado")));
+		dados.setSaida(Boolean.parseBoolean(request.getParameter("saida")));
+		if (request.getParameter("inicioDtCorrida") != null){
+			Calendar inicioDtCorrida = UtilsGerencia.calendarFromString(request.getParameter("inicioDtCorrida").trim());
+			dados.setInicioDtCorrida(inicioDtCorrida);	
+		}
+		if (request.getParameter("fimDtCorrida") != null){
+			Calendar fimDtCorrida = UtilsGerencia.calendarFromString(request.getParameter("fimDtCorrida").trim());
+			dados.setFimDtCorrida(fimDtCorrida);	
+		}
+		dados.setMinPassageiros(Integer.parseInt(request.getParameter("minPassageiros").trim()));
+		dados.setMaxPassageiros(Integer.parseInt(request.getParameter("maxPassageiros").trim()));
+		dados.setMinArrecadacao(Float.parseFloat(request.getParameter("minArrecadacao").trim()));
+		dados.setMaxArrecadacao(Float.parseFloat(request.getParameter("maxArrecadacao").trim()));
+		dados.setMinCredito(Float.parseFloat(request.getParameter("minCredito").trim()));
+		dados.setMaxCredito(Float.parseFloat(request.getParameter("maxCredito").trim()));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		Calendar data = Calendar.getInstance();
+
+		ModelAndView mav = new ModelAndView("gerenciaCorrida");
+		List corridas = interfaceLinhaMgt.buscarCorridas(dados);
+		
+		mav.addObject("corridas", corridas);
+		mav.addObject("sdf", sdf);
+		mav.addObject("data",data);
+		return mav;
 	}
 	
 	protected List<Corrida> montarCorridas(HttpServletRequest request){
@@ -183,6 +226,15 @@ public class GerenciaCorrida extends ControladorBet{
 		return mav;		
 	}
 	
+	protected ModelAndView mostrarFormAvancado(){
+
+		ModelAndView mav = new ModelAndView("formBuscaAvancadaCorrida");
+		List linhas = interfaceLinhaMgt.buscarLinhas();
+		List todosOnibus = interfaceLinhaMgt.buscarTodosOnibus();
+		mav.addObject("linhas", linhas);
+		mav.addObject("todosOnibus", todosOnibus);
+		return mav;		
+	}
 
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String operacao = request.getParameter("operacao");
@@ -198,7 +250,10 @@ public class GerenciaCorrida extends ControladorBet{
 			else if (operacao.equals("alterar")){
 				alterarCorridas(montarCorridas(request));
 			}
-
+			else if (operacao.equals("buscaAvancada")){
+				return buscarCorridas(request);			
+			}
+			
 			if (operacao.equals("remover")){
 				String[] corridasIDs = request.getParameterValues("chkCorridaID");
 				for (int i = 0; i < corridasIDs.length; i++) {
@@ -214,11 +269,14 @@ public class GerenciaCorrida extends ControladorBet{
 				return buscarCorridas();
 			}
 		}
+		
+		else if (request.getServletPath().equals("/buscaAvancadaCorrida.html")){
+			return mostrarFormAvancado();
+		}
+		
 		else{
 			return mostrarForm(request.getParameter("corridaID"));
 		}
-
-
 	}
 
 	

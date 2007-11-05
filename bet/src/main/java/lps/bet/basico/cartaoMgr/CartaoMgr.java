@@ -20,10 +20,6 @@ import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.tiposDados.Viagem;
 
-/**
- *
- * @author Paula
- */
 public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 
 	CartaoDAO cartaoDAO;
@@ -191,6 +187,10 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 	
 	public List buscarViagensPorCartao(int cartaoID){
 		return viagemDAO.buscarViagensPorCartao(cartaoID);
+	}
+	
+	public Viagem buscarUltimaViagem(int cartaoID) {
+		return viagemDAO.buscarUltimaViagem(cartaoID);
 	}
 
 	public List buscarViagens() {

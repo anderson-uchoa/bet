@@ -59,3 +59,17 @@ function controlaCamposData(opcao){
 function redireciona(url){
 	document.location.href = url;
 }
+
+function criaBoolean(formid){
+	var form = document.getElementById(formid);
+	var chks = form.getElementsByTagName("input");
+	for (var i = 0; i < chks.length; i++){
+		if (chks[i].getAttribute("type") == "checkbox") {
+			if (chks[i].checked)
+				chks[i].setAttribute("value", true);
+			else
+				chks[i].setAttribute("value", false);
+		}
+			
+	}
+}

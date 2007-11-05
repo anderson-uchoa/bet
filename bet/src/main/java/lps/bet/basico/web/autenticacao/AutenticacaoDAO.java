@@ -64,7 +64,6 @@ public class AutenticacaoDAO extends HibernateDaoSupport implements IAutenticaca
 		
 		Usuario usuario = (Usuario) usuarios.get(0);
 		sessao.setAttribute("nivel", usuario.getNivelAcesso());
-
 	}
 	
 	public void atualizarSessao(HttpServletRequest request){

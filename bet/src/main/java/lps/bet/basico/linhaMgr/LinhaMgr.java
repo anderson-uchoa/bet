@@ -1,6 +1,8 @@
 package lps.bet.basico.linhaMgr;
 
 import java.util.List;
+
+import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Onibus;
@@ -41,8 +43,13 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     //Métodos da interface ILinhaMgt delegados para o CorridaDAO
     public List buscarCorridas(){
     	return corridaDAO.buscarCorridas();
-    }    
-    public Corrida buscarCorrida(int corridaID) {
+    }
+    
+    public List buscarCorridas(DadosRelatorioCorrida dadosRelatorioCorrida) {
+		return corridaDAO.buscarCorridas(dadosRelatorioCorrida);
+	}
+
+	public Corrida buscarCorrida(int corridaID) {
     	return corridaDAO.buscarCorrida(corridaID);
     }
     public void criarCorrida(Corrida corrida) {

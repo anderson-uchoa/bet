@@ -92,6 +92,10 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 			interfaceVisor.mostrar("Viagem permitida.");
 			interfaceLiberarCatraca.liberarCatraca();
 		}
+		if (resposta.startsWith("INT-OK")){
+			interfaceVisor.mostrar("Viagem de Integração.");
+			interfaceLiberarCatraca.liberarCatraca();
+		}
 		else if (resposta.startsWith("PD-OK")){
 			String prefix = "PD-OK ";
 			String saldo = resposta.substring(prefix.length());

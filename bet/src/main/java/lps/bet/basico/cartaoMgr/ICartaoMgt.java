@@ -38,6 +38,7 @@ public interface ICartaoMgt {
 	
 	public List buscarViagens();
 	public List buscarViagensPorCartao(int cartaoID);
+	public Viagem buscarUltimaViagem(int cartaoID);
 	public Viagem buscarViagem(int viagemID);
 	public void criarViagem(Viagem viagem);	
 	public void alterarViagem(Viagem viagem);
