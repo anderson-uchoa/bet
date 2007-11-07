@@ -49,29 +49,37 @@ public class ViagemDAO extends HibernateDaoSupport{
 		removerViagem(viagem);
 	}
 	
-	public void registrarViagem(Cartao cartao, Linha linha){
+	public void registrarViagem(Cartao cartao, Linha linha, int numViagem){
+		
 		Viagem viagem = new Viagem();
 		viagem.setHora(Calendar.getInstance());
 		viagem.setLinha(linha);
 		viagem.setCartao(cartao);
+		viagem.setNumViagens(numViagem);
 		salvarViagem(viagem);
-        System.out.println("Viagem registrada.");
+		System.out.println("Viagem registrada.");
+
 	}
 	
 	public List buscarViagensPorCartao(int cartaoID){
 		return getHibernateTemplate().find(hqlBuscarViagensPorCartao, new Integer(cartaoID));     	
 	}
 	
-	public Viagem buscarUltimaViagem(int cartaoID){
+	public Viagem buscarUltimaViagem(Cartao cartao){
 		DetachedCriteria criteria = DetachedCriteria.forClass(Viagem.class);
-		criteria.add(Restrictions.eq("cartaoID", cartaoID));
+		criteria.add(Restrictions.eq("cartao", cartao));
 		criteria.addOrder(Order.desc("hora"));
 		List viagens = getHibernateTemplate().findByCriteria(criteria);
-		return (Viagem) viagens.get(0);
+		if (viagens.isEmpty()){
+			return null;
+		}
+		else{
+			return (Viagem) viagens.get(0);
+
+		}
 	}
 	
 	public List buscarViagens(){
 		return getHibernateTemplate().loadAll(Viagem.class);
-	}
-	
+	}	
 }

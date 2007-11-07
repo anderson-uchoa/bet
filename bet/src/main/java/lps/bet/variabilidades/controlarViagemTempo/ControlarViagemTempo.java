@@ -3,7 +3,6 @@ package lps.bet.variabilidades.controlarViagemTempo;
 import java.util.Calendar;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
-import lps.bet.basico.cartaoMgr.IRegistrarViagem;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
 import lps.bet.basico.tiposDados.Linha;
@@ -11,6 +10,8 @@ import lps.bet.basico.tiposDados.Tarifa;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
+import lps.bet.interfaces.IProcessarViagem;
+import lps.bet.interfaces.IRegistrarViagem;
 import lps.bet.variabilidades.viacaoTempoMgr.IObterTempo;
 
 public class ControlarViagemTempo implements IProcessarViagem {
@@ -23,6 +24,8 @@ public class ControlarViagemTempo implements IProcessarViagem {
 	    
 		//VARIABILIDADE de TEMPO de INTEGRAÇÃO:
 		IObterTempo interfaceObterTempo;
+		
+		long tempoDecorrido;
 		
 	    public String processarViagem(int cartaoID, int onibusID){
 	        String estado = "IS-OK";
@@ -44,17 +47,23 @@ public class ControlarViagemTempo implements IProcessarViagem {
         	//*************** VARIABILIDADE - TEMPO*****************:
 	        //Verificar se está dentro do tempo para realizar integração
 	        int tempoMaxIntegracao = interfaceObterTempo.obterTempo();
-	        Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);
-	        Calendar horaUltimaViagem = viagem.getHora();
+	        //De início considera-se que não haverá integração, então o tempo passou do que poderia ser:
+	        tempoDecorrido = tempoMaxIntegracao+1;
 	        
+	        Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);
+	        	        
 	        //Viagem dentro do tempo de integração
-	        if (Calendar.getInstance().getTimeInMillis() - horaUltimaViagem.getTimeInMillis() <= tempoMaxIntegracao*1000){
-	        	//Não recebe dinheiro, mas incrementa o numero de passageiros
-	        	interfaceRegistrarArrecadacao.registrarArrecadacao(onibusID, 0);
-	        	estado="INT-OK";
+	        if(viagem != null){
+	        	Calendar horaUltimaViagem = viagem.getHora();
+	        	tempoDecorrido = Calendar.getInstance().getTimeInMillis() - horaUltimaViagem.getTimeInMillis();
+	        	if (tempoDecorrido <= tempoMaxIntegracao*1000){
+	        		//Não recebe dinheiro, mas incrementa o numero de passageiros
+	        		interfaceRegistrarArrecadacao.registrarArrecadacao(onibusID, 0);
+	        		estado="INT-OK";
+	        	}
 	        }
 	        //Viagem fora do tempo de integração: nova viagem
-	        else {	        	        
+	        if (!estado.equals("INT-OK")){	        	        
 	        	//4. Se o tipo de passageiro não for isento: 
 	        	if (!tipo.getFormaPgtoPassagem().equalsIgnoreCase("isento")){
 
@@ -87,7 +96,8 @@ public class ControlarViagemTempo implements IProcessarViagem {
 
 	        	if (estado.matches("\\w+-OK")){
 	        		//Registrar Viagem:
-	        		interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
+	        		int numViagem = 0; //Viagem inicial
+	        		interfaceRegistrarViagem.registrarViagem(cartaoID, linha, numViagem);
 	        	} 
 	        }
 

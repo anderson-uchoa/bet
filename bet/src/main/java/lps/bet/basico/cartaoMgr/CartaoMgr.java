@@ -19,6 +19,7 @@ import lps.bet.basico.tiposDados.Pagamento;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.tiposDados.Viagem;
+import lps.bet.interfaces.IRegistrarViagem;
 
 public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 
@@ -97,9 +98,9 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 		cartaoDAO.debitarPassagem(cartaoID, valor);
 	}
 	
-	public void registrarViagem(int cartaoID, Linha linha){
+	public void registrarViagem(int cartaoID, Linha linha, int numViagem){
 		Cartao cartao = cartaoDAO.buscarCartao(cartaoID);
-		viagemDAO.registrarViagem(cartao, linha);
+		viagemDAO.registrarViagem(cartao, linha, numViagem);
 		
 	}
 	
@@ -190,7 +191,8 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 	}
 	
 	public Viagem buscarUltimaViagem(int cartaoID) {
-		return viagemDAO.buscarUltimaViagem(cartaoID);
+		Cartao cartao = cartaoDAO.buscarCartao(cartaoID);
+		return viagemDAO.buscarUltimaViagem(cartao);
 	}
 
 	public List buscarViagens() {

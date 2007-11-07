@@ -216,7 +216,6 @@
 		</property> 
 	</bean>
 	
-  	<!--COPIEI DO BETSERVIDOR-CONTEXT tudo que tem aqui embaixo-->
 	
 	<bean id="ControlValidadorServidor" class="lps.bet.basico.controlValidadorServidor.ControlValidadorServidor">
 		<property name="interfaceRegistrarCorrida">
@@ -519,6 +518,76 @@
 		</property> 
 		<property name="interfaceObterTempo">
 			<ref bean="ViacaoTempoMgr"/>
+		</property> 
+	</bean>
+	
+	<!--NUMERO DE VIAGENS para integracao:-->
+	<bean id="ViacaoNumViagensMgr" class="lps.bet.variabilidades.viacaoNumViagensMgr.ViacaoNumViagensMgr">
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property> 
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property> 
+	</bean>
+
+	<bean id="CartaoNumViagensMgr" class="lps.bet.variabilidades.cartaoNumViagensMgr.CartaoNumViagensMgr">
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceRegistrarViagem">
+			<ref bean="CartaoMgr"/>
+		</property> 
+	</bean>
+	
+	<bean id="NumViagensMgr" class="lps.bet.variabilidades.numViagensMgr.NumViagensDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+
+	<bean id="ControlarViagemNumViagens" class="lps.bet.variabilidades.controlarViagemNumViagens.ControlarViagemNumViagens">
+		<property name="interfaceRegistrarViagem">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property> 
+		<property name="interfaceObterNumViagens">
+			<ref bean="ViacaoNumViagensMgr"/>
+		</property> 
+	</bean>
+
+	<bean id="ControlarViagemTempoNumViagens" class="lps.bet.variabilidades.controlarViagemTempoNumViagens.ControlarViagemTempoNumViagens">
+		<property name="interfaceRegistrarViagem">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property> 
+		<property name="interfaceObterTempo">
+			<ref bean="ViacaoTempoMgr"/>
+		</property> 
+		<property name="interfaceObterNumViagens">
+			<ref bean="ViacaoNumViagensMgr"/>
 		</property> 
 	</bean>
 	

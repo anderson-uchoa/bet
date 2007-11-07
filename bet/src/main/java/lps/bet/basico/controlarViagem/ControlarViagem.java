@@ -10,18 +10,15 @@
 package lps.bet.basico.controlarViagem;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
-import lps.bet.basico.cartaoMgr.IRegistrarViagem;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Tarifa;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
+import lps.bet.interfaces.IProcessarViagem;
+import lps.bet.interfaces.IRegistrarViagem;
 
-/**
- *
- * @author Paula
- */
 public class ControlarViagem implements IProcessarViagem {
     
 	IRegistrarViagem interfaceRegistrarViagem;
@@ -30,7 +27,6 @@ public class ControlarViagem implements IProcessarViagem {
 	IViacaoMgt interfaceViacaoMgt;
 	ICartaoMgt interfaceCartaoMgt;
 	
-    /** Creates a new instance of ControlarViagem */
     public ControlarViagem() {
     }
     
@@ -83,7 +79,8 @@ public class ControlarViagem implements IProcessarViagem {
         
         if (estado.matches("\\w+-OK")){
        	 	//Registrar Viagem:
-           interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
+        	int numViagem = 0; //Viagem inicial
+        	interfaceRegistrarViagem.registrarViagem(cartaoID, linha, numViagem);
         } 
       
                

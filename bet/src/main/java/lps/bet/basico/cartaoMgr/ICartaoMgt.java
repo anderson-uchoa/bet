@@ -1,12 +1,3 @@
-/*
- * ICartaoMgt.java
- *
- * Created on 26 de Agosto de 2007, 20:30
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package lps.bet.basico.cartaoMgr;
 
 import java.util.Collection;
@@ -18,10 +9,6 @@ import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.tiposDados.Viagem;
 
-/**
- *
- * @author Paula
- */
 public interface ICartaoMgt {
     
 	public boolean validarCartao(int cartaoID);

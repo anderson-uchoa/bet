@@ -13,6 +13,8 @@
         </id>
 
         <property name="hora" type="java.util.Calendar" update="true" insert="true" column="hora"/>
+		
+		<property name="numViagens" type="int" update="true" insert="true" column="numViagens"/>
 
         <many-to-one
             name="cartao"

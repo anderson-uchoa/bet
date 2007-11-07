@@ -92,7 +92,7 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 			interfaceVisor.mostrar("Viagem permitida.");
 			interfaceLiberarCatraca.liberarCatraca();
 		}
-		if (resposta.startsWith("INT-OK")){
+		else if (resposta.startsWith("INT-OK")){
 			interfaceVisor.mostrar("Viagem de Integração.");
 			interfaceLiberarCatraca.liberarCatraca();
 		}
@@ -102,7 +102,7 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 			interfaceVisor.mostrar("Viagem debitada. Saldo: " + saldo);
 			interfaceLiberarCatraca.liberarCatraca();
 		}
-		else{ // Nenhuma viagem foi feita. Portanto a catraca continua travada e uma nova leitura pode ser feita.
+		else { // Nenhuma viagem foi feita. Portanto a catraca continua travada e uma nova leitura pode ser feita.
 			permitirLeitura();
 			if (resposta.startsWith("CO")){
 				String msg = "Corrida registrada: ";

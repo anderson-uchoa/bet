@@ -2,7 +2,7 @@ package lps.bet.basico.controlValidadorServidor;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.controlarCorrida.IRegistrarCorrida;
-import lps.bet.basico.controlarViagem.IProcessarViagem;
+import lps.bet.interfaces.IProcessarViagem;
 
 public class ControlValidadorServidor implements IProcessarTransacao{
 

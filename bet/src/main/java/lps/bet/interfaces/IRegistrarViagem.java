@@ -7,18 +7,14 @@
  * and open the template in the editor.
  */
 
-package lps.bet.basico.cartaoMgr;
+package lps.bet.interfaces;
 
 import lps.bet.basico.tiposDados.Linha;
 
-/**
- *
- * @author Paula
- */
 public interface IRegistrarViagem {
     
 	public void debitarPassagem(int cartaoID, float valor);
 	
-	public void registrarViagem(int cartaoID, Linha linha);
+	public void registrarViagem(int cartaoID, Linha linha, int numViagem);
 	
 }

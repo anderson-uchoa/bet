@@ -7,6 +7,7 @@ public class Viagem {
 
 	private Calendar hora;
 	private int viagemID;
+	private int numViagens;
 	private Cartao cartao;
 	private Linha linha;
 	   
@@ -25,6 +26,14 @@ public class Viagem {
 	} 
 	public void setViagemID (int viagemID) {
 		this.viagemID = viagemID;
+	}
+	
+	public int getNumViagens() {
+		return numViagens;
+	}
+
+	public void setNumViagens(int numViagens) {
+		this.numViagens = numViagens;
 	}
 
 	public Cartao getCartao() {

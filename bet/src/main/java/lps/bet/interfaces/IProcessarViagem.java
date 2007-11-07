@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package lps.bet.basico.controlarViagem;
+package lps.bet.interfaces;
 
 /**
  *
