@@ -17,7 +17,7 @@ import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 import lps.bet.variabilidades.viacaoNumViagensMgr.IObterNumViagens;
 import lps.bet.variabilidades.viacaoTempoMgr.IObterTempo;
 
-public class ControlarViagemTempoNumViagens implements IProcessarViagem {
+public class ViagemCtrlTempoNumViagens implements IProcessarViagem {
 	
 	IRegistrarViagem interfaceRegistrarViagem;
 	IRegistrarArrecadacao interfaceRegistrarArrecadacao;

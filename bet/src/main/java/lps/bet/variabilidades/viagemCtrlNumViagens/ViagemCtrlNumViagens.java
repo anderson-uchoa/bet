@@ -13,7 +13,7 @@ import lps.bet.interfaces.IRegistrarViagem;
 import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
 
 
-public class ControlarViagemNumViagens implements IProcessarViagem{
+public class ViagemCtrlNumViagens implements IProcessarViagem{
 
 	IRegistrarViagem interfaceRegistrarViagem;
 	IRegistrarArrecadacao interfaceRegistrarArrecadacao;
@@ -26,7 +26,7 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 	
 	int numViagem;
 	
-	public ControlarViagemNumViagens() {
+	public ViagemCtrlNumViagens() {
 	}
 
 	public String processarViagem(int cartaoID, int onibusID){
