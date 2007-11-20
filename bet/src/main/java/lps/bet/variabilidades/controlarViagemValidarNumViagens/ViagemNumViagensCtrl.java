@@ -1,4 +1,4 @@
-package lps.bet.variabilidades.viagem_NumViagensCtrl;
+package lps.bet.variabilidades.viagemNumViagensCtrl;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
