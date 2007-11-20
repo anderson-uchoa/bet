@@ -1,4 +1,4 @@
-package lps.bet.variabilidades.controlarViagemTempoNumViagens;
+package lps.bet.variabilidades.viagemCtrlTempoNumViagens;
 
 import java.util.Calendar;
 
@@ -12,6 +12,8 @@ import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
 import lps.bet.interfaces.IRegistrarViagem;
+import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
+import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 import lps.bet.variabilidades.viacaoNumViagensMgr.IObterNumViagens;
 import lps.bet.variabilidades.viacaoTempoMgr.IObterTempo;
 
@@ -24,23 +26,16 @@ public class ControlarViagemTempoNumViagens implements IProcessarViagem {
 	ICartaoMgt interfaceCartaoMgt;
     
 	//VARIABILIDADE de TEMPO de INTEGRAÇÃO:
-	IObterTempo interfaceObterTempo;	
+	ITempoMgt interfaceTempoMgt;	
 	long tempoDecorrido;
 	
 	//VARIABILIDADE de NUMERO DE VIAGENS máximas de INTEGRAÇÃO:
-	IObterNumViagens interfaceObterNumViagens;	
+	INumViagensMgt interfaceNumViagensMgt;	
 	int numViagem;
 	
     public String processarViagem(int cartaoID, int onibusID){
         String estado = "IS-OK";
         float valor=0;
-
-        //1. Verificar se viagem pode ser feita:
-        boolean viagemPermitida = interfaceLinhaMgt.verificarPermissaoViagem(onibusID);
-        if (!viagemPermitida){
-        	estado = "V-NOK";
-        	return estado; //Viagem não permitida, pois não há corrida aberta
-        }
         
         //2. Buscar a linha do ônibus naquele momento:
         Linha linha = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID);
@@ -53,13 +48,13 @@ public class ControlarViagemTempoNumViagens implements IProcessarViagem {
         Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);
         
         //Verificar se está dentro do tempo para realizar integração
-        int tempoMaxIntegracao = interfaceObterTempo.obterTempo();
+        int tempoMaxIntegracao = interfaceTempoMgt.buscarTempo();
         //De início considera-se que não haverá integração, então o tempo passou do que poderia ser:
         tempoDecorrido = tempoMaxIntegracao+1;
         
         //*************** VARIABILIDADE - NUMERO DE VIAGENS*****************:
 		//Verificar se está dentro do número permitido de viagens para realizar integração
-		int numMaxViagens = interfaceObterNumViagens.obterNumViagens();
+		int numMaxViagens = interfaceNumViagensMgt.buscarMaxNumViagens();
 		//De início considera-se que não haverá integração:
 		numViagem = numMaxViagens;
         
@@ -116,7 +111,7 @@ public class ControlarViagemTempoNumViagens implements IProcessarViagem {
         }
         if (estado.matches("\\w+-OK")){
         	//Registrar Viagem:
-        	interfaceRegistrarViagem.registrarViagem(cartaoID, linha, numViagem);
+        	interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
         } 
 
         return estado;
@@ -169,23 +164,24 @@ public class ControlarViagemTempoNumViagens implements IProcessarViagem {
 	public void setInterfaceCartaoMgt(ICartaoMgt interfaceCartaoMgt) {
 		this.interfaceCartaoMgt = interfaceCartaoMgt;
 	}
-	//***********VARIABILIDADE de TEMPO DE INTEGRAÇÃO:***********
-	public IObterTempo getInterfaceObterTempo() {
-		return interfaceObterTempo;
+	
+	//**************VARIABILIDADE de TEMPO DE INTEGRAÇÃO:***************
+	public ITempoMgt getInterfaceTempoMgt() {
+		return interfaceTempoMgt;
 	}
 
-	public void setInterfaceObterTempo(IObterTempo interfaceObterTempo) {
-		this.interfaceObterTempo = interfaceObterTempo;
-	}		
+	public void setInterfaceTempoMgt(ITempoMgt interfaceTempoMgt) {
+		this.interfaceTempoMgt = interfaceTempoMgt;
+	}	
 	//******************************************************************
 	
 	//****VARIABILIDADE de NUMERO DE VIAGENS máximas de INTEGRAÇÃO:*****
-	public IObterNumViagens getInterfaceObterNumViagens() {
-		return interfaceObterNumViagens;
+	public INumViagensMgt getInterfaceNumViagensMgt() {
+		return interfaceNumViagensMgt;
 	}
 
-	public void setInterfaceObterNumViagens(IObterNumViagens interfaceObterNumViagens) {
-		this.interfaceObterNumViagens = interfaceObterNumViagens;
-	}
+	public void setInterfaceNumViagensMgt(INumViagensMgt interfaceNumViagensMgt) {
+		this.interfaceNumViagensMgt = interfaceNumViagensMgt;
+	}	
 	//******************************************************************
 }

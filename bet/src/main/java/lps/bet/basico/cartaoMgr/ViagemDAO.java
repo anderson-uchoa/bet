@@ -49,13 +49,13 @@ public class ViagemDAO extends HibernateDaoSupport{
 		removerViagem(viagem);
 	}
 	
-	public void registrarViagem(Cartao cartao, Linha linha, int numViagem){
+	public void registrarViagem(Cartao cartao, Linha linha){
 		
 		Viagem viagem = new Viagem();
 		viagem.setHora(Calendar.getInstance());
 		viagem.setLinha(linha);
 		viagem.setCartao(cartao);
-		viagem.setNumViagens(numViagem);
+		viagem.setNumViagens(0);
 		salvarViagem(viagem);
 		System.out.println("Viagem registrada.");
 

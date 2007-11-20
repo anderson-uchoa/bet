@@ -1,6 +1,4 @@
-package lps.bet.variabilidades.controlarViagemNumViagens;
-
-import java.util.Calendar;
+package lps.bet.variabilidades.viagemCtrlNumViagens;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
@@ -12,7 +10,7 @@ import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
 import lps.bet.interfaces.IRegistrarViagem;
-import lps.bet.variabilidades.viacaoNumViagensMgr.IObterNumViagens;
+import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
 
 
 public class ControlarViagemNumViagens implements IProcessarViagem{
@@ -24,7 +22,7 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 	ICartaoMgt interfaceCartaoMgt;
     
 	//VARIABILIDADE de NUMERO DE VIAGENS máximas de INTEGRAÇÃO:
-	IObterNumViagens interfaceObterNumViagens;
+	INumViagensMgt interfaceNumViagensMgt;
 	
 	int numViagem;
 	
@@ -35,14 +33,6 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 		String estado = "IS-OK";
 		float valor=0;
 
-		//1. Verificar se viagem pode ser feita:
-		boolean viagemPermitida = interfaceLinhaMgt.verificarPermissaoViagem(onibusID);
-		System.out.println("Viagem Permitida: " + viagemPermitida);
-		if (!viagemPermitida){
-			estado = "V-NOK";
-			return estado; //Viagem não permitida, pois não há corrida aberta
-		}
-
 		//2. Buscar a linha do ônibus naquele momento:
 		Linha linha = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID);
 
@@ -52,8 +42,8 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 		//*************** VARIABILIDADE - NUMERO DE VIAGENS*****************:
 		//Verificar se está dentro do número permitido de viagens para realizar integração
 
-		int numMaxViagens = interfaceObterNumViagens.obterNumViagens();
-		System.out.println("Obter NumMAXViagens" + interfaceObterNumViagens.obterNumViagens());
+		int numMaxViagens = interfaceNumViagensMgt.buscarMaxNumViagens();
+		System.out.println("Obter NumMAXViagens" + interfaceNumViagensMgt.buscarMaxNumViagens());
 		
 		//De início considera-se que não haverá integração:
 		numViagem = numMaxViagens;
@@ -66,7 +56,9 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 						
 			//Integração
 			if (numViagem < numMaxViagens){
-				numViagem++;
+				//Uma integração é feita para a viagem
+				viagem.setNumViagens(numViagem + 1);
+				interfaceCartaoMgt.alterarViagem(viagem);
 				//Não recebe dinheiro, mas incrementa o número de passageiros
 				interfaceRegistrarArrecadacao.registrarArrecadacao(onibusID, 0);
 				estado="INT-OK";
@@ -106,11 +98,11 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 					estado = "PM-OK";
 				}            
 			}
+			if (estado.matches("\\w+-OK")){
+				//Registrar Viagem:
+				interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
+			} 
 		}	
-		if (estado.matches("\\w+-OK")){
-			//Registrar Viagem:
-			interfaceRegistrarViagem.registrarViagem(cartaoID, linha, numViagem);
-		} 
 		return estado;
 	}
 
@@ -162,15 +154,14 @@ public class ControlarViagemNumViagens implements IProcessarViagem{
 	public void setInterfaceCartaoMgt(ICartaoMgt interfaceCartaoMgt) {
 		this.interfaceCartaoMgt = interfaceCartaoMgt;
 	}
-
 	
 	//VARIABILIDADE de NUMERO DE VIAGENS máximas de INTEGRAÇÃO:
-	public IObterNumViagens getInterfaceObterNumViagens() {
-		return interfaceObterNumViagens;
+	public INumViagensMgt getInterfaceNumViagensMgt() {
+		return interfaceNumViagensMgt;
 	}
 
-	public void setInterfaceObterNumViagens(IObterNumViagens interfaceObterNumViagens) {
-		this.interfaceObterNumViagens = interfaceObterNumViagens;
+	public void setInterfaceNumViagensMgt(INumViagensMgt interfaceNumViagensMgt) {
+		this.interfaceNumViagensMgt = interfaceNumViagensMgt;
 	}
-		
+	
 }

@@ -15,6 +15,6 @@ public interface IRegistrarViagem {
     
 	public void debitarPassagem(int cartaoID, float valor);
 	
-	public void registrarViagem(int cartaoID, Linha linha, int numViagem);
+	public void registrarViagem(int cartaoID, Linha linha);
 	
 }

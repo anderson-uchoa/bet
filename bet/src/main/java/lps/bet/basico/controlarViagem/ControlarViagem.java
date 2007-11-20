@@ -1,12 +1,3 @@
-/*
- * ControlarViagem.java
- *
- * Created on 14 de Junho de 2007, 20:53
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package lps.bet.basico.controlarViagem;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
@@ -79,12 +70,10 @@ public class ControlarViagem implements IProcessarViagem {
         
         if (estado.matches("\\w+-OK")){
        	 	//Registrar Viagem:
-        	int numViagem = 0; //Viagem inicial
-        	interfaceRegistrarViagem.registrarViagem(cartaoID, linha, numViagem);
-        } 
-      
+        	interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
+        }      
                
-       return estado;
+        return estado;
     }
 
     private float calcularValorPassagem(TipoPassageiro tipo){

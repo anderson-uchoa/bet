@@ -28,6 +28,7 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     }
     public Linha buscarLinhaAtualOnibus(int onibusID) {
     	Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);
+    	System.out.println("Corrida ID: " + corrida.getCorridaID());
     	return linhaDAO.buscarLinhaCorrida(corrida);
     }
     public void criarLinha(Linha linha) {

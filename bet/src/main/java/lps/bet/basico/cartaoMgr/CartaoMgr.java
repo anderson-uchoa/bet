@@ -98,9 +98,9 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 		cartaoDAO.debitarPassagem(cartaoID, valor);
 	}
 	
-	public void registrarViagem(int cartaoID, Linha linha, int numViagem){
+	public void registrarViagem(int cartaoID, Linha linha){
 		Cartao cartao = cartaoDAO.buscarCartao(cartaoID);
-		viagemDAO.registrarViagem(cartao, linha, numViagem);
+		viagemDAO.registrarViagem(cartao, linha);
 		
 	}
 	

@@ -2,6 +2,7 @@ package lps.bet.basico.controlValidadorServidor;
 
 import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.controlarCorrida.IRegistrarCorrida;
+import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.interfaces.IProcessarViagem;
 
 public class ControlValidadorServidor implements IProcessarTransacao{
@@ -9,6 +10,7 @@ public class ControlValidadorServidor implements IProcessarTransacao{
 	IRegistrarCorrida interfaceRegistrarCorrida;
 	IProcessarViagem interfaceProcessarViagem;
 	ICartaoMgt interfaceCartaoMgt;
+	ILinhaMgt interfaceLinhaMgt;
 
 	public ControlValidadorServidor() {		
 	}
@@ -28,11 +30,19 @@ public class ControlValidadorServidor implements IProcessarTransacao{
 			
 			//Codigo 3 corresponde a uma viagem sendo realizada
 			else if (cod==3){
-				resposta = interfaceProcessarViagem.processarViagem(cartaoID, onibusID);
-				float saldo = interfaceCartaoMgt.buscarCartao(cartaoID).getSaldo();
-				String strSaldo = Float.toString(saldo);
-				if (resposta.equals("PD-OK")){
-					resposta = resposta + " " + strSaldo;
+				
+				//Verificar se viagem pode ser feita
+				boolean viagemPermitida = interfaceLinhaMgt.verificarPermissaoViagem(onibusID);
+				if (!viagemPermitida){ //Viagem não permitida, pois não há corrida aberta
+					resposta = "V-NOK";
+				}
+				else{//Validar e Processar viagem
+					resposta = interfaceProcessarViagem.processarViagem(cartaoID, onibusID);
+					float saldo = interfaceCartaoMgt.buscarCartao(cartaoID).getSaldo();
+					String strSaldo = Float.toString(saldo);
+					if (resposta.equals("PD-OK")){
+						resposta = resposta + " " + strSaldo;
+					}
 				}
 			}
 			return resposta;
@@ -68,4 +78,12 @@ public class ControlValidadorServidor implements IProcessarTransacao{
 	public void setInterfaceCartaoMgt(ICartaoMgt interfaceCartaoMgt) {
 		this.interfaceCartaoMgt = interfaceCartaoMgt;
 	}
+
+	public ILinhaMgt getInterfaceLinhaMgt() {
+		return interfaceLinhaMgt;
+	}
+
+	public void setInterfaceLinhaMgt(ILinhaMgt interfaceLinhaMgt) {
+		this.interfaceLinhaMgt = interfaceLinhaMgt;
+	}	
 }

@@ -1,4 +1,4 @@
-package lps.bet.variabilidades.controlarViagemTempo;
+package lps.bet.variabilidades.viagemCtrlTempo;
 
 import java.util.Calendar;
 
@@ -12,6 +12,7 @@ import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
 import lps.bet.interfaces.IRegistrarViagem;
+import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 import lps.bet.variabilidades.viacaoTempoMgr.IObterTempo;
 
 public class ControlarViagemTempo implements IProcessarViagem {
@@ -23,20 +24,13 @@ public class ControlarViagemTempo implements IProcessarViagem {
 		ICartaoMgt interfaceCartaoMgt;
 	    
 		//VARIABILIDADE de TEMPO de INTEGRAÇÃO:
-		IObterTempo interfaceObterTempo;
+		ITempoMgt interfaceTempoMgt;
 		
 		long tempoDecorrido;
 		
 	    public String processarViagem(int cartaoID, int onibusID){
 	        String estado = "IS-OK";
 	        float valor=0;
-
-	        //1. Verificar se viagem pode ser feita:
-	        boolean viagemPermitida = interfaceLinhaMgt.verificarPermissaoViagem(onibusID);
-	        if (!viagemPermitida){
-	        	estado = "V-NOK";
-	        	return estado; //Viagem não permitida, pois não há corrida aberta
-	        }
 	        
 	        //2. Buscar a linha do ônibus naquele momento:
 	        Linha linha = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID);
@@ -46,7 +40,7 @@ public class ControlarViagemTempo implements IProcessarViagem {
 
         	//*************** VARIABILIDADE - TEMPO*****************:
 	        //Verificar se está dentro do tempo para realizar integração
-	        int tempoMaxIntegracao = interfaceObterTempo.obterTempo();
+	        int tempoMaxIntegracao = interfaceTempoMgt.buscarTempo();
 	        //De início considera-se que não haverá integração, então o tempo passou do que poderia ser:
 	        tempoDecorrido = tempoMaxIntegracao+1;
 	        
@@ -59,6 +53,10 @@ public class ControlarViagemTempo implements IProcessarViagem {
 	        	if (tempoDecorrido <= tempoMaxIntegracao*1000){
 	        		//Não recebe dinheiro, mas incrementa o numero de passageiros
 	        		interfaceRegistrarArrecadacao.registrarArrecadacao(onibusID, 0);
+	        		
+	        		//Uma integração é feita para a viagem
+	        		viagem.setNumViagens(viagem.getNumViagens()+1);
+	        		interfaceCartaoMgt.alterarViagem(viagem);
 	        		estado="INT-OK";
 	        	}
 	        }
@@ -97,7 +95,7 @@ public class ControlarViagemTempo implements IProcessarViagem {
 	        	if (estado.matches("\\w+-OK")){
 	        		//Registrar Viagem:
 	        		int numViagem = 0; //Viagem inicial
-	        		interfaceRegistrarViagem.registrarViagem(cartaoID, linha, numViagem);
+	        		interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
 	        	} 
 	        }
 
@@ -152,13 +150,15 @@ public class ControlarViagemTempo implements IProcessarViagem {
 			this.interfaceCartaoMgt = interfaceCartaoMgt;
 		}
 		//***********VARIABILIDADE de TEMPO DE INTEGRAÇÃO:***********
-		public IObterTempo getInterfaceObterTempo() {
-			return interfaceObterTempo;
+
+		public ITempoMgt getInterfaceTempoMgt() {
+			return interfaceTempoMgt;
 		}
 
-		public void setInterfaceObterTempo(IObterTempo interfaceObterTempo) {
-			this.interfaceObterTempo = interfaceObterTempo;
-		}		
+		public void setInterfaceTempoMgt(ITempoMgt interfaceTempoMgt) {
+			this.interfaceTempoMgt = interfaceTempoMgt;
+		}
+
 		//************************************************************
 }
 
