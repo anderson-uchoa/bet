@@ -40,11 +40,11 @@ INSERT INTO passageiro VALUES (7, 'Masiero', 8726812032);
 INSERT INTO sist_viario_urbano VALUES (1, 'Basico');
 INSERT INTO empresa_viaria VALUES (1, 'Donegan BET');
 
-INSERT INTO cargo VALUES (1, 'Motorista');
-INSERT INTO cargo VALUES (2, 'Cobrador');
-INSERT INTO cargo VALUES (3, 'Atendente');
-INSERT INTO cargo VALUES (4, 'Gerente');
-INSERT INTO cargo VALUES (5, 'Manutenedor');
+INSERT INTO cargo VALUES (1, 'Motorista', 3);
+INSERT INTO cargo VALUES (2, 'Cobrador', 3);
+INSERT INTO cargo VALUES (3, 'Atendente', 3);
+INSERT INTO cargo VALUES (4, 'Gerente', 5);
+INSERT INTO cargo VALUES (5, 'Manutenedor', 5);
 
 INSERT INTO funcionario VALUES (1, 'Antônio dos Santos', '2000-05-07 10:00:00', 1, 1);
 INSERT INTO funcionario VALUES (2, 'Francisco das Chagas', '2002-05-07 10:00:00', 1, 2);

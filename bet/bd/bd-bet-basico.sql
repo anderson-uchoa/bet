@@ -20,7 +20,7 @@ CREATE DATABASE "BET" WITH TEMPLATE = template0 ENCODING = 'LATIN1';
 
 ALTER DATABASE "BET" OWNER TO root;
 
-\connect "BET"
+--\connect "BET"
 
 SET client_encoding = 'LATIN1';
 SET standard_conforming_strings = off;
@@ -59,7 +59,8 @@ SET default_with_oids = false;
 
 CREATE TABLE cargo (
     cargoid integer NOT NULL,
-    nomecargo character varying(255)
+    nomecargo character varying(255),
+    nivelacessodefault integer DEFAULT 3
 );
 
 
