@@ -503,7 +503,7 @@
 		</property>
 	</bean>
 
-	<bean id="ViagemCtrlTempo" class="lps.bet.variabilidades.viagemCtrlTempo.ControlarViagemTempo">
+	<bean id="ViagemCtrlTempo" class="lps.bet.variabilidades.viagemCtrlTempo.ViagemCtrlTempo">
 		<property name="interfaceRegistrarViagem">
 			<ref bean="CartaoMgr"/>
 		</property> 
@@ -540,7 +540,7 @@
 		</property>
 	</bean>
 
-	<bean id="ViagemCtrlNumViagens" class="lps.bet.variabilidades.viagemCtrlNumViagens.ControlarViagemNumViagens">
+	<bean id="ViagemCtrlNumViagens" class="lps.bet.variabilidades.viagemCtrlNumViagens.ViagemCtrlNumViagens">
 		<property name="interfaceRegistrarViagem">
 			<ref bean="CartaoMgr"/>
 		</property> 
@@ -561,7 +561,7 @@
 		</property> 
 	</bean>
 
-	<bean id="ViagemCtrlTempoNumViagens" class="lps.bet.variabilidades.viagemCtrlTempoNumViagens.ControlarViagemTempoNumViagens">
+	<bean id="ViagemCtrlTempoNumViagens" class="lps.bet.variabilidades.viagemCtrlTempoNumViagens.ViagemCtrlTempoNumViagens">
 		<property name="interfaceRegistrarViagem">
 			<ref bean="CartaoMgr"/>
 		</property> 
@@ -593,6 +593,7 @@
 	</bean>
 	
 	<!--Beans de Aspectos para Variabilidades do sistema BET-->
+	<!--Aspecto para verificar Tempo da Viagem-->
 	<bean id="ViagemTempoCtrlAspecto" class="lps.bet.variabilidades.ViagemTempoCtrl" factory-method="aspectOf">
 		<property name="interfaceTempoMgt">
 			<ref bean="TempoMgr"/>
@@ -605,6 +606,7 @@
 		</property>
 	</bean>
 	
+	<!--Aspecto para verificar NumViagens da Viagem-->
 	<bean id="ViagemNumViagensCtrlAspecto" class="lps.bet.variabilidades.ViagemNumViagensCtrl" factory-method="aspectOf">
 		<property name="interfaceNumViagensMgt">
 			<ref bean="NumViagensMgr"/>
@@ -617,6 +619,7 @@
 		</property>
 	</bean>
 
+	<!--Aspecto para verificar Tempo e NumViagens da Viagem-->
 	<bean id="ViagemTempoNumViagensCtrlAspecto" class="lps.bet.variabilidades.ViagemTempoNumViagensCtrl" factory-method="aspectOf">
 		<property name="interfaceTempoMgt">
 			<ref bean="TempoMgr"/>
@@ -632,6 +635,7 @@
 		</property>
 	</bean>
 
+	<!--Aspecto para verificar Linha Integrada da Viagem-->
 	<bean id="ViagemLinhaIntegradaCtrlAspecto" class="lps.bet.variabilidades.ViagemLinhaIntegradaCtrl" factory-method="aspectOf">
 		<property name="interfaceLinhaIntegradaMgt">
 			<ref bean="LinhaIntegradaMgr"/>
