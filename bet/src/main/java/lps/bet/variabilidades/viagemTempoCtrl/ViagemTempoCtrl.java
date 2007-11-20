@@ -1,4 +1,4 @@
-package lps.bet.variabilidades.viagem__TempoCtrl;
+package lps.bet.variabilidades.viagemTempoCtrl;
 
 import java.util.Calendar;
 
