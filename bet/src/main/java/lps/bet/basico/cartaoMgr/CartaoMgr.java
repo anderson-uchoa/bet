@@ -28,6 +28,7 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 	TipoPassageiroDAO tipoPassageiroDAO;
 	PagamentoDAO pagamentoDAO;
 	IPassageiroMgt interfacePassageiroMgt;
+	private boolean combinarCartoes = false;
 
 	public IPassageiroMgt getInterfacePassageiroMgt() {
 		return interfacePassageiroMgt;
@@ -110,16 +111,23 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 		Cartao cartao = cartaoDAO.buscarCartao(cartaoID);
 		pagamentoDAO.registrarPagamento(cartao, valor);
 	}
-
+	
 	public List buscarTiposPermitidos(Passageiro passageiro) {
-		Collection cartoes = interfacePassageiroMgt.buscarCartoesPorPassageiro(passageiro.getCpf());
-		if (cartoes != null){
-			List tiposJaAdquiridos = cartaoDAO.buscarTiposDosCartoes(cartoes);
-			return tipoPassageiroDAO.buscarTiposPermitidos(tiposJaAdquiridos);
-		}
-		else {
-			return tipoPassageiroDAO.buscarTodosTipos();
-		}
+		return buscarTiposPermitidos(passageiro, null);
+	}
+
+	public List buscarTiposPermitidos(Passageiro passageiro, TipoPassageiro tipoSelecionado) {
+		if (passageiro != null) {
+			Collection cartoes = interfacePassageiroMgt.buscarCartoesPorPassageiro(passageiro.getCpf());
+			if (cartoes != null){
+				List tiposJaAdquiridos = cartaoDAO.buscarTiposDosCartoes(cartoes);
+				tiposJaAdquiridos.remove(tipoSelecionado);
+				return tipoPassageiroDAO
+						.buscarTiposPermitidos(tiposJaAdquiridos);
+			}
+		} 
+
+		return tipoPassageiroDAO.buscarTodosTipos();
 	}
 
 	public Cartao buscarCartao(int cartaoID){
@@ -213,5 +221,13 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 	
 	public void removerViagem(int viagemID){
 		viagemDAO.removerViagem(viagemID);
+	}
+
+	public void setCombinarCartoes(boolean combinarCartoes) {
+		this.combinarCartoes = combinarCartoes;
+	}
+
+	public boolean isCombinarCartoes() {
+		return combinarCartoes;
 	}
 }
