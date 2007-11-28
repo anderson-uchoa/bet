@@ -21,7 +21,15 @@
 					</select>
 				</label><br/>	
 				<label>Desconto(%): <input type="text" name="desconto" #if ($tipo.Desconto) value="$tipo.Desconto" #end class="search"/></label><br/>
-
+				<label>Selecione os tipos incompat&iacute;veis:</label>
+				<br />
+				#if ($listaTipos)
+				  #foreach ($tipoPassageiro in $listaTipos)
+				    <input type="checkbox" name="chkTipo${tipoPassageiro.TipoID}" value="checked" 
+				    #if ($listaTiposIncompativeis.contains($tipoPassageiro)) checked #end /> $tipoPassageiro.NomeTipo
+				    <br />
+				  #end
+				#end
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="submit" class="submit" value="$nomeOperacao"/>
 				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaTipoPassageiro.html')"/>
