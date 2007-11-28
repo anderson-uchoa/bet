@@ -10,7 +10,7 @@ import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.tiposDados.Viagem;
 
 public interface ICartaoMgt {
-    
+	   
 	public boolean validarCartao(int cartaoID);
 	
 	public TipoPassageiro buscarTipoPassagPorCartao(int cartaoID);
@@ -19,7 +19,10 @@ public interface ICartaoMgt {
 	
 	public boolean podeDebitar(int cartaoID, float valor);
 	
+	//Com essa assinatura, e possivel buscar os tipos permitidos no ato da alteracao
+	public Collection buscarTiposPermitidos(Passageiro passageiro, TipoPassageiro tipoSelecionado);
 	public Collection buscarTiposPermitidos(Passageiro passageiro);
+
 	
 	public void carregarCartao(int cartaoID, float valor);
 	
