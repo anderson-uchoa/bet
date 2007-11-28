@@ -277,8 +277,20 @@ CREATE TABLE viagem (
     linha_fk integer NOT NULL
 );
 
-
 ALTER TABLE public.viagem OWNER TO root;
+
+
+-- ALTERACOES PARA A VARIABILIDADE COMBINACAO DE CARTOES (Alex,28.11.07)
+CREATE TABLE tipo_passageiro_restricao
+(
+  tipoid integer NOT NULL,
+  tipoid_incompativel integer NOT NULL
+);
+
+ALTER TABLE public.tipo_passageiro_restricao OWNER TO root;
+-- FIM ALTERACOES PARA A VARIABILIDADE COMBINACAO DE CARTOES (Alex,28.11.07)
+
+
 
 --
 -- TOC entry 1626 (class 2606 OID 50395)
@@ -546,9 +558,24 @@ ALTER TABLE ONLY funcionario
 -- Name: fkd4b22306d319b948; Type: FK CONSTRAINT; Schema: public; Owner: root
 --
 
+
+-- ALTERACOES PARA A VARIABILIDADE COMBINACAO DE CARTOES (Alex,28.11.07)
 ALTER TABLE ONLY pagamento
     ADD CONSTRAINT fkd4b22306d319b948 FOREIGN KEY (cartao_fk) REFERENCES cartao(cartaoid);
 
+ALTER TABLE ONLY tipo_passageiro_restricao
+    ADD CONSTRAINT tipo_passageiro_restricao_pk PRIMARY KEY (tipoid, tipoid_incompativel);
+
+ALTER TABLE ONLY tipo_passageiro_restricao  
+    ADD CONSTRAINT tipo_passageiro_restricao_fk1 FOREIGN KEY (tipoid)
+      REFERENCES tipo_passageiro (tipoid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+ALTER TABLE ONLY tipo_passageiro_restricao      
+    ADD CONSTRAINT tipo_passageiro_restricao_fk2 FOREIGN KEY (tipoid_incompativel)
+      REFERENCES tipo_passageiro (tipoid) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION;
+-- FIM DAS ALTERACOES PARA A VARIABILIDADE COMBINACAO DE CARTOES (Alex,28.11.07)
 
 --
 -- TOC entry 1686 (class 0 OID 0)
