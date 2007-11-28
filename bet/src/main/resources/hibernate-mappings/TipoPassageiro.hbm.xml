@@ -26,6 +26,11 @@
             <one-to-many class="Cartao"/>
 
         </set>
+        
+        <set name="tiposIncompativeis" table="TIPO_PASSAGEIRO_RESTRICAO" lazy="false" cascade="none" sort="unsorted">
+        	<key column="tipoid"/>
+        	<many-to-many column="tipoid_incompativel" class="TipoPassageiro"/>
+    	</set>        
 
     </class>
 
