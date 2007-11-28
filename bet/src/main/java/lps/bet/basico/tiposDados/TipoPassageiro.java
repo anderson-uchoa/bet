@@ -9,6 +9,7 @@ public class TipoPassageiro {
 	private int desconto;
 	private int tipoID;
 	private java.util.Collection cartoes;
+	private java.util.Collection tiposIncompativeis;
 
 	public String getNomeTipo () {
 		return nomeTipo;
@@ -64,11 +65,18 @@ public class TipoPassageiro {
 		return (this.tipoID == tipo.tipoID);
 		
 	}
+	
 
 	public int hashCode() {
 		return tipoID;
 	}
-
 	
+	public void setTiposIncompativeis(java.util.Collection tiposIncompativeis) {
+		this.tiposIncompativeis = tiposIncompativeis;
+	}
+	
+	public java.util.Collection getTiposIncompativeis() {
+		return tiposIncompativeis;
+	}
 	
 }
