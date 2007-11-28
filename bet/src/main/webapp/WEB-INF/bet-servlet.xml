@@ -186,7 +186,12 @@
 	<bean id="GerenciaTipoPassageiro" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaTipoPassageiro">
 		<property name="interfaceCartaoMgt">
 			<ref bean="CartaoMgr"/>
-		</property> 
+		</property>
+		<!-- Alex: ativar variabilidade 'Combinação de cartões'  
+		<property name="combinarCartoes">
+			<value type="java.lang.Boolean">false</value>
+		</property>		
+		-->
 	</bean>
 	
 	<bean id="GerenciaCartao" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaCartao">
@@ -198,7 +203,7 @@
 		</property> 
 		<property name="nivelMinimoAcesso">
 			<value>${config.nivel.GerenciaCartao}</value>
-		</property>
+		</property>	
 	</bean>	
 
 	<bean id="GerenciaPagamento" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaPagamento">
@@ -275,7 +280,7 @@
 		</property> 
 		<property name="interfacePassageiroMgt">
 			<ref bean="PassageiroMgr"/>
-		</property> 
+		</property>
 	</bean>
 
 	<bean id="LinhaMgr" class="lps.bet.basico.linhaMgr.LinhaMgr">
@@ -429,6 +434,12 @@
 		<property name="hqlBuscarTipoPorNome">
 			<value>${config.hql.BuscarTipoPorNome}</value>
 		</property>
+		<!-- Alex: ativar variabilidade 'Combinação de cartões' 
+		<property name="combinarCartoes">
+			<value type="java.lang.Boolean">false</value>
+		</property>
+		-->	 
+		
 	</bean>
 	
 	<bean id="PagamentoDAO" class="lps.bet.basico.cartaoMgr.PagamentoDAO">
