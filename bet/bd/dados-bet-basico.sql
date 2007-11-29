@@ -55,9 +55,9 @@ INSERT INTO linha  VALUES (1, 'linha 1', 'ponto 1', 'ponto 2',1);
 
 INSERT INTO onibus  VALUES (1, false);
 
-INSERT INTO corrida  VALUES (3, 3, '2007-01-01 09:00:00', '2007-01-01 10:00:00', NULL, NULL, false, false, 1, 1, 0);
-INSERT INTO corrida  VALUES (2, 2, '2007-01-01 08:00:00', '2007-01-01 09:00:00', NULL, NULL, false, false, 1, 1, 0);
-INSERT INTO corrida  VALUES (1, 1, '2007-01-01 07:00:00', '2007-01-01 08:00:00', NULL, NULL, false, false, 1, 1, 0);
+INSERT INTO corrida  VALUES (3, 3, '2007-01-01 09:00:00', '2007-01-01 10:00:00', NULL, NULL, false, false, 1, 1, 0, 0, 0);
+INSERT INTO corrida  VALUES (2, 2, '2007-01-01 08:00:00', '2007-01-01 09:00:00', NULL, NULL, false, false, 1, 1, 0, 0, 0);
+INSERT INTO corrida  VALUES (1, 1, '2007-01-01 07:00:00', '2007-01-01 08:00:00', NULL, NULL, false, false, 1, 1, 0, 0, 0);
 
 INSERT INTO tarifa VALUES (1, 'Passagem', 2.50, '2007-01-01 08:00:00', 1);
 
