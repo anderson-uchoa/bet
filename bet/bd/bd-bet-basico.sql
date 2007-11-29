@@ -101,7 +101,9 @@ CREATE TABLE corrida (
     encerrado boolean,
     linha_fk integer NOT NULL,
     onibus_fk integer NOT NULL,
-    arrecadacao real
+    arrecadacao real,
+    qtdpassageiros integer NOT NULL DEFAULT 0,
+    credito real NOT NULL DEFAULT 0
 );
 
 
