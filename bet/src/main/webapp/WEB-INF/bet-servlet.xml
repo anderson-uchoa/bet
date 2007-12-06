@@ -346,7 +346,7 @@
 			<value>${config.db.password}</value>
 		</property> 
 		<property name="driverClassName">
-			<value>org.postgresql.Driver</value>
+			<value>${config.db.driverClassName}</value>
 		</property> 
 	</bean>
 	
@@ -362,6 +362,8 @@
 	  <property name="hibernateProperties">
 	    <props>
 	      <prop key="hibernate.dialect">${config.hibernate.dialect}</prop>
+	      <prop key="hibernate.hbm2ddl.auto">update</prop>
+	      <prop key="hibernate.show_sql">true</prop>
 	    </props>
 	  </property>
 	</bean>

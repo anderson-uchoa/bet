@@ -4,7 +4,7 @@
 <beans>
 	<bean id="ControlValidadorServidor" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
 	  <property name="serviceUrl">
-		<value>http://localhost:7691/bet/tratarCartao.html</value>
+		<value>http://localhost:8080/bet/tratarCartao.html</value>
 	  </property> 
 	  <property name="serviceInterface">
 		<value>lps.bet.basico.controlValidadorServidor.IProcessarTransacao</value>

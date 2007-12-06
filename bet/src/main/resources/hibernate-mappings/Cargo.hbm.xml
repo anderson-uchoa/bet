@@ -4,26 +4,19 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="lps.bet.basico.tiposDados"
->
-    <class name="Cargo" table="CARGO">
+<hibernate-mapping package="lps.bet.basico.tiposDados">
+	<class name="Cargo" table="cargo">
+		<id name="cargoID" type="int" column="cargoId">
+			<generator class="increment" />
+		</id>
 
-        <id name="cargoID" column="cargoID" type="int">
-            <generator class="increment">
-            </generator>
-        </id>
+		<property name="nomeCargo" type="java.lang.String" update="true" insert="true" column="nomeCargo" />
 
-        <property name="nomeCargo" type="java.lang.String" update="true" insert="true" column="nomeCargo"/>
+		<property name="nivelAcessoDefault" type="int" update="true" insert="true" column="nivelAcessoDefault" />
 
-		<property name="nivelAcessoDefault" type="int" update="true" insert="true" column="nivelAcessoDefault"/>
-				
-        <set name="funcionarios" lazy="false" cascade="none" sort="unsorted">
-
-            <key column="CARGO_FK"></key>
-            <one-to-many class="Funcionario"/>
-
-        </set>
-
-    </class>
-
+		<set name="funcionarios" lazy="false" cascade="none" sort="unsorted">
+			<key column="cargo_fk" />
+			<one-to-many class="Funcionario" />
+		</set>
+	</class>
 </hibernate-mapping>

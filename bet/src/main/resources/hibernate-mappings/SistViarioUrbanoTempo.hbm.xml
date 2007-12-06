@@ -4,16 +4,13 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="lps.bet.variabilidades.tiposDados"
->
-    <class name="SistViarioUrbanoTempo" table="VAR_TEMPO">
+<hibernate-mapping package="lps.bet.variabilidades.tiposDados">
+	<class name="SistViarioUrbanoTempo" table="var_tempo">
 
-        <id name="tempoID" column="tempoID" type="int">
-            <generator class="increment"></generator>
-        </id>
+		<id name="tempoID" type="int" column="tempoId">
+			<generator class="increment" />
+		</id>
 
-        <property name="tempoMaxIntegracao" type="int" update="true" insert="true" column="tempoMaxIntegracao"/>
-		
-    </class>
-
+		<property name="tempoMaxIntegracao" type="int" update="true" insert="true" column="tempoMaxIntegracao" />
+	</class>
 </hibernate-mapping>

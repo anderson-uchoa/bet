@@ -4,65 +4,42 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="lps.bet.basico.tiposDados"
->
-    <class name="Usuario" table="USUARIO">
+<hibernate-mapping package="lps.bet.basico.tiposDados">
+	<class name="Usuario" table="usuario">
+		<id name="usuarioID" type="int" column="usuarioId">
+			<generator class="increment" />
+		</id>
 
-        <id name="usuarioID" column="usuarioID" type="int">
-            <generator class="increment"></generator>
-        </id>
+		<property name="login" type="java.lang.String" update="true" insert="true" column="login" />
 
-		<property name="login" type="java.lang.String" update="true" insert="true" column="login"/>
+		<property name="senha" type="java.lang.String" update="true" insert="true" column="senha" />
 
-		<property name="senha" type="java.lang.String" update="true" insert="true" column="senha"/>
+		<property name="nivelAcesso" type="int" update="true" insert="true" column="nivelAcesso" />
 
-		<property name="nivelAcesso" type="int" update="true" insert="true" column="nivelAcesso"/>
+		<joined-subclass name="Funcionario" table="funcionario">
+			<key column="usuarioId" />
+			<property name="nomeFuncionario" type="java.lang.String" update="true" insert="true" column="nomeFuncionario" />
+			<property name="dtAdmissao" type="java.util.Calendar" update="true" insert="true" column="dtAdmissao" />
 
-		
-		<joined-subclass name="Funcionario" table="FUNCIONARIO">
-			<key column="usuarioID"></key>
-			<property name="nomeFuncionario" type="java.lang.String" update="true" insert="true" column="nomeFuncionario"/>
-			<property name="dtAdmissao" type="java.util.Calendar" update="true" insert="true" column="dtAdmissao"/>
-			
-			<many-to-one
-				name="empresaViaria"
-				class="EmpresaViaria"
-				cascade="none"
-				outer-join="auto"
-				update="true"
-				insert="true"
-				column="EMPRESAVIARIA_FK"
-				not-null="true"
-				lazy="false"
+			<many-to-one name="empresaViaria" class="EmpresaViaria" cascade="none" outer-join="auto" update="true" insert="true"
+				not-null="true" lazy="false" column="empresaviaria_fk" 
 			/>
-			
-			<many-to-one
-				name="cargo"
-				class="Cargo"
-				cascade="none"
-				outer-join="auto"
-				update="true"
-				insert="true"
-				column="CARGO_FK"
-				not-null="true"
-				lazy="false"
+
+			<many-to-one name="cargo" class="Cargo" cascade="none" outer-join="auto" update="true" insert="true" 
+				not-null="true" lazy="false" column="cargo_fk"
 			/>
 		</joined-subclass>
 
-		<joined-subclass name="Passageiro" table="PASSAGEIRO">
-			<key column="passageiroID"></key>
+		<joined-subclass name="Passageiro" table="passageiro">
+			<key column="passageiroId"></key>
 
-	        <property name="nomePassageiro" type="java.lang.String" update="true" insert="true" column="nomePassageiro"/>
-	        <property name="cpf" type="long" update="true" insert="true" column="cpf"/>
+			<property name="nomePassageiro" type="java.lang.String" update="true" insert="true" column="nomePassageiro" />
+			<property name="cpf" type="long" update="true" insert="true" column="cpf" />
 
-	        <set name="cartoes" lazy="false" cascade="none" sort="unsorted">
-	            <key column="PASSAGEIRO_FK"></key>
-	            <one-to-many class="Cartao"/>
-	        </set>
+			<set name="cartoes" lazy="false" cascade="none" sort="unsorted">
+				<key column="passageiro_fk"></key>
+				<one-to-many class="Cartao" />
+			</set>
 		</joined-subclass>
-
-	
-		
-    </class>
-
+	</class>
 </hibernate-mapping>

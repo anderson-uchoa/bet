@@ -16,8 +16,6 @@ import lps.bet.basico.web.ControladorBet;
 import org.aspectj.org.eclipse.jdt.core.dom.ArrayCreation;
 import org.springframework.web.servlet.ModelAndView;
 
-import sun.text.CompactShortArray.Iterator;
-
 public class GerenciaTipoPassageiro extends ControladorBet {
 
 	ICartaoMgt interfaceCartaoMgt;
@@ -39,7 +37,7 @@ public class GerenciaTipoPassageiro extends ControladorBet {
 		TipoPassageiro tipo = interfaceCartaoMgt.buscarTipoPassageiro(tipoID);
 		ModelAndView mav = new ModelAndView("gerenciaTipoPassageiro");
 		if (tipo == null) {
-			mav.addObject("mensagem", "Tipo de Passageiro não encontrado.");
+			mav.addObject("mensagem", "Tipo de Passageiro nï¿½o encontrado.");
 		} else {
 			List tipos = new ArrayList();
 			tipos.add(tipo);
@@ -85,11 +83,11 @@ public class GerenciaTipoPassageiro extends ControladorBet {
 		String operacao = request.getParameter("operacao");
 		TipoPassageiro tipo;
 
-		// Operação de Criação
+		// Operaï¿½ï¿½o de Criaï¿½ï¿½o
 		if (request.getParameter("tipoID") == null) {
 			tipo = new TipoPassageiro();
 		}
-		// Senão precisa buscar
+		// Senï¿½o precisa buscar
 		else {
 			tipo = interfaceCartaoMgt.buscarTipoPassageiro(Integer
 					.parseInt(request.getParameter("tipoID")));
@@ -128,7 +126,7 @@ public class GerenciaTipoPassageiro extends ControladorBet {
 		String operacao = request.getParameter("operacao");
 
 		if (request.getServletPath().equals("/gerenciaTipoPassageiro.html")) {
-			// Quando é chamado pela primeira vez a URL não possui o parâmetro
+			// Quando ï¿½ chamado pela primeira vez a URL nï¿½o possui o parï¿½metro
 			// 'operacao'
 			if (operacao == null)
 				return buscarTiposPassageiros();

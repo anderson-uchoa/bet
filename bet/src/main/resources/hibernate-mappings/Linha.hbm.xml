@@ -4,43 +4,29 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="lps.bet.basico.tiposDados"
->
-    <class name="Linha" table="LINHA">
+<hibernate-mapping package="lps.bet.basico.tiposDados">
+	<class name="Linha" table="linha">
 
-        <id name="linhaID" column="linhaID" type="int">
-            <generator class="increment"></generator>
-        </id>
+		<id name="linhaID" column="linhaId" type="int">
+			<generator class="increment" />
+		</id>
 
-        <property name="nomeLinha" type="java.lang.String" update="true" insert="true" column="nomeLinha"/>
-        <property name="pontoSaida" type="java.lang.String" update="true" insert="true" column="pontoSaida"/>
-        <property name="pontoChegada" type="java.lang.String" update="true" insert="true" column="pontoChegada"/>
+		<property name="nomeLinha" type="java.lang.String" update="true" insert="true" column="nomeLinha" />
+		<property name="pontoSaida" type="java.lang.String" update="true" insert="true" column="pontoSaida" />
+		<property name="pontoChegada" type="java.lang.String" update="true" insert="true" column="pontoChegada" />
 
-        <set name="corridas" lazy="false" cascade="none" sort="unsorted">
-            <key column="LINHA_FK"></key>
-            <one-to-many class="Corrida"/>
-        </set>
+		<set name="corridas" lazy="false" cascade="none" sort="unsorted">
+			<key column="linha_fk" />
+			<one-to-many class="Corrida" />
+		</set>
 
+		<many-to-one name="sistViarioUrbano" class="SistViarioUrbano" cascade="none" outer-join="auto" update="true" insert="true"
+			not-null="true" column="sistviariourbano_fk" 
+		/>
 
-        <many-to-one
-            name="sistViarioUrbano"
-            class="SistViarioUrbano"
-            cascade="none"
-            outer-join="auto"
-            update="true"
-            insert="true"
-            column="SISTVIARIOURBANO_FK"
-            not-null="true"
-        />
-		
-		
-        <set name="viagems" lazy="false" cascade="none" sort="unsorted">
-            <key column="LINHA_FK"></key>
-
-            <one-to-many class="Viagem"/>
-
-        </set>
-		
-    </class>
-
+		<set name="viagems" lazy="false" cascade="none" sort="unsorted">
+			<key column="linha_fk" />
+			<one-to-many class="Viagem" />
+		</set>
+	</class>
 </hibernate-mapping>

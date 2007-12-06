@@ -5,41 +5,22 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="lps.bet.basico.tiposDados">
-    <class name="Viagem" table="VIAGEM">
+	<class name="Viagem" table="viagem">
 
-        <id name="viagemID" column="viagemID" type="int">
-            <generator class="increment">
-            </generator>
-        </id>
+		<id name="viagemID" type="int" column="viagemId">
+			<generator class="increment" />
+		</id>
 
-        <property name="hora" type="java.util.Calendar" update="true" insert="true" column="hora"/>
-		
-		<property name="numViagens" type="int" update="true" insert="true" column="numViagens"/>
+		<property name="hora" type="java.util.Calendar" update="true" insert="true" column="hora" />
 
-        <many-to-one
-            name="cartao"
-            class="Cartao"
-            cascade="none"
-            outer-join="auto"
-            update="true"
-            insert="true"
-            column="CARTAO_FK"
-            not-null="true"
-			lazy="false"
-        />
-		
-		<many-to-one
-            name="linha"
-            class="Linha"
-            cascade="none"
-            outer-join="auto"
-            update="true"
-            insert="true"
-            column="LINHA_FK"
-            not-null="true"
-			lazy="false"
-        />
+		<property name="numViagens" type="int" update="true" insert="true" column="numViagens" />
 
-    </class>
+		<many-to-one name="cartao" class="Cartao" cascade="none" outer-join="auto" update="true" insert="true" 
+			not-null="true" lazy="false" column="cartao_fk"
+		/>
 
+		<many-to-one name="linha" class="Linha" cascade="none" outer-join="auto" update="true" insert="true" 
+			not-null="true" lazy="false" column="linha_fk"
+		/>
+	</class>
 </hibernate-mapping>

@@ -4,18 +4,15 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="lps.bet.variabilidades.tiposDados"
->
-    <class name="LinhaIntegrada" table="VAR_LINHA_INTEGRADA">
-        
-		<id name="integracaoID" column="integracaoID" type="int">
-            <generator class="increment"></generator>
-        </id>
+<hibernate-mapping package="lps.bet.variabilidades.tiposDados">
+	<class name="LinhaIntegrada" table="var_linha_integrada">
 
-		<property name="linhaIntegradaID" type="int" update="true" insert="true" column="linhaIntegradaID"/>
+		<id name="integracaoID" type="int" column="integracaoId">
+			<generator class="increment" />
+		</id>
 
-        <property name="linhaOriginalID" type="int" update="true" insert="true" column="linhaOriginalID"/>
-		
-    </class>
+		<property name="linhaIntegradaID" type="int" update="true" insert="true" column="linhaIntegradaId" />
 
+		<property name="linhaOriginalID" type="int" update="true" insert="true" column="linhaOriginalId" />
+	</class>
 </hibernate-mapping>

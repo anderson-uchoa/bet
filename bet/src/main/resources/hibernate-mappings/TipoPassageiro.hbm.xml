@@ -4,34 +4,29 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="lps.bet.basico.tiposDados"
->
-    <class name="TipoPassageiro" table="TIPO_PASSAGEIRO">
+<hibernate-mapping package="lps.bet.basico.tiposDados">
+	<class name="TipoPassageiro" table="tipo_passageiro">
 
-        <id name="tipoID" column="tipoID" type="int">
-            <generator class="increment"></generator>
-        </id>
+		<id name="tipoID" type="int" column="tipoId" >
+			<generator class="increment" />
+		</id>
 
-        <property name="nomeTipo" type="java.lang.String" update="true" insert="true" column="nomeTipo" />
+		<property name="nomeTipo" type="java.lang.String" update="true" insert="true" column="nomeTipo" />
 
-        <property name="descricaoTipo" type="java.lang.String" update="true" insert="true" column="descricaoTipo" />
+		<property name="descricaoTipo" type="java.lang.String" update="true" insert="true" column="descricaoTipo" />
 
-        <property name="formaPgtoPassagem" type="java.lang.String" update="true" insert="true" column="formaPgtoPassagem" />
-		
+		<property name="formaPgtoPassagem" type="java.lang.String" update="true" insert="true" column="formaPgtoPassagem" />
+
 		<property name="desconto" type="int" update="true" insert="true" column="desconto" />
 
-        <set name="cartoes" lazy="false" cascade="none" sort="unsorted">
+		<set name="cartoes" lazy="false" cascade="none" sort="unsorted">
+			<key column="tipopassageiro_fk"></key>
+			<one-to-many class="Cartao" />
+		</set>
 
-            <key column="TIPOPASSAGEIRO_FK"> </key>
-            <one-to-many class="Cartao"/>
-
-        </set>
-        
-        <set name="tiposIncompativeis" table="TIPO_PASSAGEIRO_RESTRICAO" lazy="false" cascade="none" sort="unsorted">
-        	<key column="tipoid"/>
-        	<many-to-many column="tipoid_incompativel" class="TipoPassageiro"/>
-    	</set>        
-
-    </class>
-
+		<set name="tiposIncompativeis" table="tipo_passageiro_restricao" lazy="false" cascade="none" sort="unsorted">
+			<key column="tipoid" />
+			<many-to-many column="tipoid_incompativel" class="TipoPassageiro" />
+		</set>
+	</class>
 </hibernate-mapping>
