@@ -490,12 +490,6 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property> 
-		<property name="hqlBuscarPassageiroPorCPF">
-			<value>${config.hql.BuscarPassageiroPorCPF}</value>
-		</property>
-		<property name="hqlBuscarPassageiroPorNome">
-			<value>${config.hql.BuscarPassageiroPorNome}</value>
-		</property>
 	</bean>
 
 	<!-- Variabilidades da LPS BET -->
