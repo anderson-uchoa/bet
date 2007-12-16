@@ -1,55 +1,47 @@
 package lps.bet.basico.funcionarioMgr;
 
-import java.util.List;
-
 import lps.bet.basico.tiposDados.Cargo;
-
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.util.List;
+
 public class CargoDAO extends HibernateDaoSupport {
-	
-	String hqlBuscarCargoPorNome;
-	
-	public void salvarCargo(Cargo cargo) {
-		getHibernateTemplate().saveOrUpdate(cargo);
+
+    public void salvarCargo(Cargo cargo) {
+        getHibernateTemplate().saveOrUpdate(cargo);
     }
 
-	public Cargo buscarCargo(int cargoID){
-		return (Cargo) getHibernateTemplate().get(Cargo.class, new Integer(cargoID));
-	}
-	
-	public Cargo buscarCargo(String nomeCargo){
-		List cargos = getHibernateTemplate().findByNamedParam(hqlBuscarCargoPorNome, "nomeCargo", nomeCargo);
-		//List cargos = getHibernateTemplate().find(hqlBuscarCargoPorNome, nomeCargo);
-		return (Cargo) cargos.get(0);
-	}
-	
-	public List buscarCargos(){
-		return getHibernateTemplate().loadAll(Cargo.class);
-	}
-		
-	public void alterarCargo(Cargo cargo) {
-		salvarCargo(cargo);		
-	}
+    public Cargo buscarCargo(int cargoID) {
+        return (Cargo) getHibernateTemplate().get(Cargo.class, cargoID);
+    }
 
-	public void criarCargo(Cargo cargo) {
-		salvarCargo(cargo);		
-	}
+    public Cargo buscarCargo(String nomeCargo) {
+        DetachedCriteria cargoPorNome = DetachedCriteria.forClass(Cargo.class);
+        cargoPorNome.add(Restrictions.eq("nomeCargo", nomeCargo));
+        List cargos = getHibernateTemplate().findByCriteria(cargoPorNome);
+        return (Cargo) cargos.get(0);
+    }
 
-	public void removerCargo(Cargo cargo){
-		getHibernateTemplate().delete(cargo);
-	}
+    public List buscarCargos() {
+        return getHibernateTemplate().loadAll(Cargo.class);
+    }
 
-	public void removerCargo(int cargoID) {
-		Cargo cargo = buscarCargo(cargoID);
-		removerCargo(cargo);
-	}
+    public void alterarCargo(Cargo cargo) {
+        salvarCargo(cargo);
+    }
 
-	public String getHqlBuscarCargoPorNome() {
-		return hqlBuscarCargoPorNome;
-	}
+    public void criarCargo(Cargo cargo) {
+        salvarCargo(cargo);
+    }
 
-	public void setHqlBuscarCargoPorNome(String hqlBuscarCargoPorNome) {
-		this.hqlBuscarCargoPorNome = hqlBuscarCargoPorNome;
-	}
+    public void removerCargo(Cargo cargo) {
+        getHibernateTemplate().delete(cargo);
+    }
+
+    public void removerCargo(int cargoID) {
+        Cargo cargo = buscarCargo(cargoID);
+        removerCargo(cargo);
+    }
 }
