@@ -430,12 +430,6 @@
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
         </property>
-        <property name="hqlBuscarTipoPassagPorCartao">
-            <value>${config.hql.BuscarTipoPassagPorCartao}</value>
-        </property>
-        <property name="hqlBuscarTipoPorNome">
-            <value>${config.hql.BuscarTipoPorNome}</value>
-        </property>
         <!-- Alex: ativar variabilidade 'Combinação de cartões'
           <property name="combinarCartoes">
               <value type="java.lang.Boolean">false</value>
