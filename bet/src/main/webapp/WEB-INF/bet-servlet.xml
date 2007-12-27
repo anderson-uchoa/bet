@@ -363,7 +363,7 @@
             <props>
                 <prop key="hibernate.dialect">${config.hibernate.dialect}</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
     </bean>
@@ -414,9 +414,6 @@
     <bean id="ViagemDAO" class="lps.bet.basico.cartaoMgr.ViagemDAO">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
-        </property>
-        <property name="hqlBuscarViagensPorCartao">
-            <value>${config.hql.BuscarViagensPorCartao}</value>
         </property>
     </bean>
 

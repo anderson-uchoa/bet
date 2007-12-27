@@ -1,70 +1,70 @@
 package lps.bet.basico.linhaMgr;
 
-import java.util.List;
-
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
-
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class LinhaDAO extends HibernateDaoSupport{ 
-    
-	String hqlBuscarLinhaCorrida;
-	String hqlBuscarLinhaPorNome;
-	
-	public String getHqlBuscarLinhaPorNome() {
-		return hqlBuscarLinhaPorNome;
-	}
+import java.util.List;
 
-	public void setHqlBuscarLinhaPorNome(String hqlBuscarLinhaPorNome) {
-		this.hqlBuscarLinhaPorNome = hqlBuscarLinhaPorNome;
-	}
+public class LinhaDAO extends HibernateDaoSupport {
 
-	public String getHqlBuscarLinhaCorrida() {
-		return hqlBuscarLinhaCorrida;
-	}
+    String hqlBuscarLinhaCorrida;
+    String hqlBuscarLinhaPorNome;
 
-	public void setHqlBuscarLinhaCorrida(String hqlBuscarLinhaCorrida) {
-		this.hqlBuscarLinhaCorrida = hqlBuscarLinhaCorrida;
-	}
+    public String getHqlBuscarLinhaPorNome() {
+        return hqlBuscarLinhaPorNome;
+    }
 
-	public void salvarLinha(Linha linha) {
-    	getHibernateTemplate().saveOrUpdate(linha);
-    }    
-        
-    public void removerLinha(Linha linha){
-    	getHibernateTemplate().delete(linha);
+    public void setHqlBuscarLinhaPorNome(String hqlBuscarLinhaPorNome) {
+        this.hqlBuscarLinhaPorNome = hqlBuscarLinhaPorNome;
     }
-    
-    public void removerLinha(int linhaID){
-    	Linha linha = buscarLinha(linhaID);
-    	getHibernateTemplate().delete(linha);
+
+    public String getHqlBuscarLinhaCorrida() {
+        return hqlBuscarLinhaCorrida;
     }
-    
-    public List buscarLinhas(){
-    	return getHibernateTemplate().loadAll(Linha.class);
+
+    public void setHqlBuscarLinhaCorrida(String hqlBuscarLinhaCorrida) {
+        this.hqlBuscarLinhaCorrida = hqlBuscarLinhaCorrida;
     }
-    
-    public Linha buscarLinha(int linhaID){
-    	return (Linha) getHibernateTemplate().get(Linha.class, new Integer(linhaID));
+
+    public void salvarLinha(Linha linha) {
+        getHibernateTemplate().saveOrUpdate(linha);
     }
-    
-    public Linha buscarLinha(String nomeLinha){
-		List linhas = getHibernateTemplate().findByNamedParam(hqlBuscarLinhaPorNome, "nomeLinha", nomeLinha);
-    	return (Linha) linhas.get(0);    	
+
+    public void removerLinha(Linha linha) {
+        getHibernateTemplate().delete(linha);
     }
-    
+
+    public void removerLinha(int linhaID) {
+        Linha linha = buscarLinha(linhaID);
+        getHibernateTemplate().delete(linha);
+    }
+
+    public List buscarLinhas() {
+        return getHibernateTemplate().loadAll(Linha.class);
+    }
+
+    public Linha buscarLinha(int linhaID) {
+        logger.debug("Linha buscada: " + linhaID);
+        return (Linha) getHibernateTemplate().get(Linha.class, linhaID);
+    }
+
+    public Linha buscarLinha(String nomeLinha) {
+        List linhas = getHibernateTemplate().findByNamedParam(hqlBuscarLinhaPorNome, "nomeLinha", nomeLinha);
+        return (Linha) linhas.get(0);
+    }
+
     public Linha buscarLinhaCorrida(Corrida corrida) {
-    	List linhas = getHibernateTemplate().find(hqlBuscarLinhaCorrida, new Integer(corrida.getCorridaID()));
-    	return (Linha) linhas.get(0);
+        List linhas = getHibernateTemplate().find(hqlBuscarLinhaCorrida, corrida.getCorridaID());
+        return (Linha) linhas.get(0);
     }
 
-    public void criarLinha(Linha linha){
-    	salvarLinha(linha);
+    public void criarLinha(Linha linha) {
+        salvarLinha(linha);
     }
-    
-    public void alterarLinha(Linha linha){
-    	salvarLinha(linha);
+
+    public void alterarLinha(Linha linha) {
+        salvarLinha(linha);
     }
-            
+
 }

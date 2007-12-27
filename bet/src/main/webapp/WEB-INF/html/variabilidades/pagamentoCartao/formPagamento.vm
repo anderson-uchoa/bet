@@ -1,0 +1,43 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+
+	<h3>$nomeOperacao Pagamento</h3>
+		<div class="left_box">
+			<form id="formPagamento" action="gerenciaPagamento.html">
+				#if ($pgtoID)<label>Identificador do Pagamento: <input type="text" name="pgtoID" value="$pgtoID" readonly="readonly" class="search_tiny"/></label><br/>#end 
+				
+				<label>Valor Pagamento: <input type="text" name="valorPgto" #if ($pagamento.ValorPgto) value="$pagamento.ValorPgto" #end class="search_small"/></label><br/>
+				<label>Número do Cartão:
+					<select name="cartaoID">
+					#if ($pgtoID)
+						#foreach ($cartao in $cartoes)
+							#if ($cartao.CartaoID==$pagamento.Cartao.CartaoID)
+							<option value="$cartao.CartaoID" selected="selected">$cartao.CartaoID</option>
+							#else <option value="$cartao.CartaoID">$cartao.CartaoID</option>
+							#end
+						#end
+					#else	
+						#foreach ($cartao in $cartoes)
+							<option value="$cartao.CartaoID">$cartao.CartaoID</option>
+						#end
+					#end
+					</select>
+				</label><br/>				
+				<label>Data de Pagamento: <input id="dtPgto" type="text" name="dtPgto" class="search_small" #if ($pagamento.DtPgto) value="$sdf.format($pagamento.DtPgto.Time)" #else value="$sdf.format($data.Time)" #end"/></label><br/>
+				#if ($pagarCartoes)
+ 				  <label>Tipo de Pagamento: <input id="tipoPagto" type="text" name="tipoPagto" class="search_small" value="$tipoPagto"/></label><br/>
+ 				#end 				
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaPagamento.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")

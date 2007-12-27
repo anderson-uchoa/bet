@@ -1,0 +1,50 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+	<h3>$nomeOperacao Tipo de Passageiro</h3>
+		<div class="left_box">
+			<form id="formTipoPassageiro" action="gerenciaTipoPassageiro.html">
+				#if ($tipoID)<label>Identificador do Tipo de Passageiro: <input type="text" name="tipoID" value="$tipoID" readonly="readonly" class="search_tiny"/></label><br/>#end 
+				
+				<label>Tipo: <input type="text" name="nomeTipo" #if ($tipo.NomeTipo) value="$tipo.NomeTipo" #end class="search_small"/></label><br/>
+				<label>Descrição: <input type="text" name="descricaoTipo" #if ($tipo.DescricaoTipo) value="$tipo.DescricaoTipo" #end class="search"/></label><br/>
+				<label>Forma de Pagamento da Passagem: 	
+					<select name="formaPgtoPassagem">
+						<option value="debito" #if ($tipoID) #if ($tipo.FormaPgtoPassagem=="debito") selected="selected" #end #end>Débito</option>
+						<option value="manual" #if ($tipoID) #if ($tipo.FormaPgtoPassagem=="manual") selected="selected" #end #end>Manual</option>
+						<option value="isento" #if ($tipoID) #if ($tipo.FormaPgtoPassagem=="isento") selected="selected" #end #end>Isento</option>
+					</select>
+				</label><br/>	
+				<label>Desconto(%): <input type="text" name="desconto" #if ($tipo.Desconto) value="$tipo.Desconto" #end class="search"/></label><br/>
+				#if ($pagarCartoes)
+				  <label>Pagto. da Aquisição do Cartão: 	
+					  <select name="pagtoAquisicaoCartao">
+						  <option value="true" #if ($pagtoAquisicaoCartao) selected="selected" #end>Sim</option>
+						  <option value="false" #if (! $pagtoAquisicaoCartao) selected="selected" #end>Não</option>						
+					  </select>
+				  </label><br/>
+		          <label>Valor da Aquisição: <input type="text" name="valorAquisicao" value="$valorAquisicao" class="search"/></label><br/>
+		        #end						
+				<label>Selecione os tipos incompat&iacute;veis:</label>
+				<br />
+				#if ($listaTipos)
+				  #foreach ($tipoPassageiro in $listaTipos)
+				    <input type="checkbox" name="chkTipo${tipoPassageiro.TipoID}" value="checked" 
+				    #if ($listaTiposIncompativeis.contains($tipoPassageiro)) checked #end /> $tipoPassageiro.NomeTipo
+				    <br />
+				  #end
+				#end
+				
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaTipoPassageiro.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="lps.bet.variabilidades.tiposDados"
+>
+    <class name="PagamentoPagtoCartao" table="VAR_PGTO_CARTAO_PAGAMENTO">
+
+        <id name="pagtoID" column="pgtoID" type="int">
+            <generator class="assigned"></generator>
+        </id>
+
+        <property name="tipoPagto" type="java.lang.String" update="true" insert="true" column="tipoPagto"/>
+		
+    </class>
+
+</hibernate-mapping>
