@@ -5,7 +5,7 @@ import java.util.Calendar;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 
-public aspect ViagemTempoCtrl extends ViagemIntegracaoCtrl{
+public aspect ViagemTempoCtrl /*extends ViagemIntegracaoCtrl*/{
 
 	ITempoMgt interfaceTempoMgt;
 	
@@ -16,7 +16,7 @@ public aspect ViagemTempoCtrl extends ViagemIntegracaoCtrl{
 		this.interfaceTempoMgt = interfaceTempoMgt;
 	}
 	
-	public String verificarIntegracao(int cartaoID, int onibusID){
+/*	public String verificarIntegracao(int cartaoID, int onibusID){
 		
 		System.out.println("ASPECTO Validar Tempo");
 		String estado = "INT-NOK";
@@ -42,5 +42,6 @@ public aspect ViagemTempoCtrl extends ViagemIntegracaoCtrl{
 			}
 		}
 		return estado;		
-	}	
+	}
+	*/	
 }

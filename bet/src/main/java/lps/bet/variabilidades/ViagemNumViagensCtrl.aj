@@ -3,7 +3,7 @@ package lps.bet.variabilidades;
 import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
 import lps.bet.basico.tiposDados.Viagem;
 
-public aspect ViagemNumViagensCtrl extends ViagemIntegracaoCtrl{
+public aspect ViagemNumViagensCtrl /*extends ViagemIntegracaoCtrl*/{
 
 	INumViagensMgt interfaceNumViagensMgt;
 	
@@ -15,7 +15,7 @@ public aspect ViagemNumViagensCtrl extends ViagemIntegracaoCtrl{
 		this.interfaceNumViagensMgt = interfaceNumViagensMgt;
 	}
 
-	public String verificarIntegracao(int cartaoID, int onibusID){
+/*	public String verificarIntegracao(int cartaoID, int onibusID){
 
 		System.out.println("ASPECTO Validar Num Viagens");
 		
@@ -41,5 +41,5 @@ public aspect ViagemNumViagensCtrl extends ViagemIntegracaoCtrl{
 		}
 		return estado;		
 	}
-	
+	*/
 }

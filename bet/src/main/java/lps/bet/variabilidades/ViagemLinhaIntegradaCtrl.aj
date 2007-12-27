@@ -4,7 +4,7 @@ import lps.bet.variabilidades.linhaIntegradaMgr.ILinhaIntegradaMgt;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Viagem;
 
-public aspect ViagemLinhaIntegradaCtrl extends ViagemIntegracaoCtrl{
+public aspect ViagemLinhaIntegradaCtrl /*extends ViagemIntegracaoCtrl*/{
 
 	ILinhaIntegradaMgt interfaceLinhaIntegradaMgt;
 	ILinhaMgt interfaceLinhaMgt;
@@ -24,7 +24,7 @@ public aspect ViagemLinhaIntegradaCtrl extends ViagemIntegracaoCtrl{
 		this.interfaceLinhaMgt = interfaceLinhaMgt;
 	}
 
-	public String verificarIntegracao(int cartaoID, int onibusID){
+/*	public String verificarIntegracao(int cartaoID, int onibusID){
 
 		String estado = "INT-NOK";
 
@@ -47,5 +47,5 @@ public aspect ViagemLinhaIntegradaCtrl extends ViagemIntegracaoCtrl{
 		}
 		return estado;		
 	}
-		
+	*/	
 }
