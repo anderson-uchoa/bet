@@ -480,7 +480,82 @@
         </property>
     </bean>
 
+
+	<bean id="ViagemCtrlTempoNumViagens" class="lps.bet.variabilidades.viagemCtrlTempoNumViagens.ViagemCtrlTempoNumViagens">
+		<property name="interfaceRegistrarViagem">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property> 
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property> 
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property> 
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property> 
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property> 
+	</bean>
+	
+	<!--LINHA DE INTEGRACAO para integracao:-->
+	<bean id="LinhaIntegradaMgr" class="lps.bet.variabilidades.linhaIntegradaMgr.LinhaIntegradaDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!--Beans de Aspectos para Variabilidades do sistema BET-->
+	<!--Aspecto para verificar Tempo da Viagem-->
+	<!--bean id="ViagemTempoCtrlAspecto" class="lps.bet.variabilidades.ViagemTempoCtrl" factory-method="aspectOf">
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+	</bean-->
+	
+	<!--Aspecto para verificar NumViagens da Viagem-->
+	<!--bean id="ViagemNumViagensCtrlAspecto" class="lps.bet.variabilidades.ViagemNumViagensCtrl" factory-method="aspectOf">
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+	</bean-->
+
     <!-- Variabilidades da LPS BET -->
+
+	<!--Aspecto para verificar Tempo e NumViagens da Viagem-->
+	<!--bean id="ViagemTempoNumViagensCtrlAspecto" class="lps.bet.variabilidades.ViagemTempoNumViagensCtrl" factory-method="aspectOf">
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property>
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+	</bean-->
 
     <!--TEMPO de integracao:-->
     <bean id="ViacaoTempoMgr" class="lps.bet.variabilidades.viacaoTempoMgr.ViacaoTempoMgr">
@@ -491,6 +566,38 @@
             <ref bean="TempoMgr"/>
         </property>
     </bean>
+
+	<!--Aspecto para verificar Linha Integrada da Viagem-->
+	<!--bean id="ViagemLinhaIntegradaCtrlAspecto" class="lps.bet.variabilidades.ViagemLinhaIntegradaCtrl" factory-method="aspectOf">
+		<property name="interfaceLinhaIntegradaMgt">
+			<ref bean="LinhaIntegradaMgr"/>
+		</property>
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+	</bean-->
+	
+	<!--Alternativa para o ControlarViagemTempo, usando ainda o ControlarViagem-->
+	<bean id="ViagemTempoCtrl" class="lps.bet.variabilidades.viagemTempoCtrl.ViagemTempoCtrl">
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceProcessarViagem">
+			<ref bean="ControlarViagem"/>
+		</property>
+	</bean>
 
     <bean id="TempoMgr" class="lps.bet.variabilidades.tempoMgr.TempoDAO">
         <property name="sessionFactory">
@@ -518,6 +625,93 @@
             <ref bean="TempoMgr"/>
         </property>
     </bean>
+
+
+	<!--LinhaIntegrada, usando ainda o ControlarViagem-->
+	<bean id="ViagemLinhaIntegradaCtrl" class="lps.bet.variabilidades.viagemLinhaIntegradaCtrl.ViagemLinhaIntegradaCtrl">
+		<property name="interfaceLinhaIntegradaMgt">
+			<ref bean="LinhaIntegradaMgr"/>
+		</property>
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceProcessarViagem">
+			<ref bean="ControlarViagem"/>
+		</property>
+	</bean>
+	
+	<!--Alternativa para o ControlarViagemTempoNumViagens, usando ainda o ControlarViagem-->
+	<bean id="ViagemTempoNumViagensCtrl" class="lps.bet.variabilidades.viagemTempoNumViagensCtrl.ViagemTempoNumViagensCtrl">
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property>
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceProcessarViagem">
+			<ref bean="ControlarViagem"/>
+		</property>
+	</bean>
+		
+	<!--Alternativa para as variabilidades NumViagens e Linha Integrando, usando ainda o ControlarViagem-->
+	<bean id="ViagemNumViagensLinhaIntegradaCtrl" class="lps.bet.variabilidades.viagemNumViagensLinhaIntegradaCtrl.ViagemNumViagensLinhaIntegradaCtrl">
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property>
+		<property name="interfaceLinhaIntegradaMgt">
+			<ref bean="LinhaIntegradaMgr"/>
+		</property>
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceProcessarViagem">
+			<ref bean="ControlarViagem"/>
+		</property>
+	</bean>
+		
+	<!--Alternativa para as variabilidades Tempo, NumViagens e Linha Integrando, usando ainda o ControlarViagem-->
+	<bean id="ViagemTempoNumViagensLinhaIntegradaCtrl" class="lps.bet.variabilidades.viagemTempoNumViagensLinhaIntegradaCtrl.ViagemTempoNumViagensLinhaIntegradaCtrl">
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property>
+		<property name="interfaceNumViagensMgt">
+			<ref bean="NumViagensMgr"/>
+		</property>
+		<property name="interfaceLinhaIntegradaMgt">
+			<ref bean="LinhaIntegradaMgr"/>
+		</property>
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceCartaoMgt">
+			<ref bean="CartaoMgr"/>
+		</property>
+		<property name="interfaceRegistrarArrecadacao">
+			<ref bean="LinhaMgr"/>
+		</property>
+		<property name="interfaceProcessarViagem">
+			<ref bean="ControlarViagem"/>
+		</property>
+	</bean>
+	
 
     <!--NUMERO DE VIAGENS para integracao:-->
     <bean id="ViacaoNumViagensMgr" class="lps.bet.variabilidades.viacaoNumViagensMgr.ViacaoNumViagensMgr">
