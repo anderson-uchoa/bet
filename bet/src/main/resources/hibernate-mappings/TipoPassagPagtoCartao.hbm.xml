@@ -9,11 +9,14 @@
     <class name="TipoPassagPagtoCartao" table="var_pgto_cartao_tipo_passageiro">
 
         <id name="tipoID" column="tipoid" type="int">
-            <generator class="assigned"></generator>
+            <generator class="increment"></generator>
         </id>
 
         <property name="valorAquisicao" type="float" update="true" insert="true" column="valorAquisicao"/>
 		<property name="pagtoAquisicaoCartao" type="boolean" update="true" insert="true" column="pgtoAquisicaoCartao"/>
+
+		<one-to-one name="tipoPassageiro" class="lps.bet.basico.tiposDados.TipoPassageiro" lazy="false" cascade="save-update" constrained="true"/>
+		
     </class>
 
 </hibernate-mapping>

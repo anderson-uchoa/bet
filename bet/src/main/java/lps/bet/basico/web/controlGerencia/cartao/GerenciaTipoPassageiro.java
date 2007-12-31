@@ -15,7 +15,6 @@ import java.util.List;
 public class GerenciaTipoPassageiro extends ControladorBet {
 
     ICartaoMgt interfaceCartaoMgt;
-    private Boolean combinarCartoes = false;
 
     protected void criarTipoPassageiro(TipoPassageiro tipo) {
         interfaceCartaoMgt.criarTipoPassageiro(tipo);
@@ -33,7 +32,7 @@ public class GerenciaTipoPassageiro extends ControladorBet {
         TipoPassageiro tipo = interfaceCartaoMgt.buscarTipoPassageiro(tipoID);
         ModelAndView mav = new ModelAndView("gerenciaTipoPassageiro");
         if (tipo == null) {
-            mav.addObject("mensagem", "Tipo de Passageiro n�o encontrado.");
+            mav.addObject("mensagem", "Tipo de Passageiro nso encontrado.");
         } else {
             List tipos = new ArrayList();
             tipos.add(tipo);
@@ -57,14 +56,6 @@ public class GerenciaTipoPassageiro extends ControladorBet {
             mav.addObject("nomeOperacao", "Alterar");
             tipo = interfaceCartaoMgt.buscarTipoPassageiro(Integer
                     .parseInt(tipoID));
-            if (combinarCartoes)
-                mav.addObject("listaTiposIncompativeis", tipo
-                        .getTiposIncompativeis());
-        }
-        if (combinarCartoes) {
-            Collection tipos = interfaceCartaoMgt.buscarTiposPermitidos(null);
-            tipos.remove(tipo);
-            mav.addObject("listaTipos", tipos);
         }
 
         mav.addObject("tipo", tipo);
@@ -79,11 +70,11 @@ public class GerenciaTipoPassageiro extends ControladorBet {
         String operacao = request.getParameter("operacao");
         TipoPassageiro tipo;
 
-        // Opera��o de Cria��o
+        // Operacao de Criacao
         if (request.getParameter("tipoID") == null) {
             tipo = new TipoPassageiro();
         }
-        // Sen�o precisa buscar
+        // Senao precisa buscar
         else {
             tipo = interfaceCartaoMgt.buscarTipoPassageiro(Integer
                     .parseInt(request.getParameter("tipoID")));
@@ -94,25 +85,6 @@ public class GerenciaTipoPassageiro extends ControladorBet {
         tipo.setFormaPgtoPassagem(request.getParameter("formaPgtoPassagem"));
         tipo.setDesconto(Integer.parseInt(request.getParameter("desconto")
                 .trim()));
-
-        if (getCombinarCartoes()) {
-            Collection todosTipos = interfaceCartaoMgt.buscarTiposPassageiros();
-            Collection tiposIncompativeis = tipo.getTiposIncompativeis();
-            if (tiposIncompativeis == null) {
-                tiposIncompativeis = new HashSet();
-                tipo.setTiposIncompativeis(tiposIncompativeis);
-            }
-            tiposIncompativeis.clear();
-            java.util.Iterator itTipos = todosTipos.iterator();
-            while (itTipos.hasNext()) {
-                TipoPassageiro tipoIncompativel = (TipoPassageiro) itTipos
-                        .next();
-                String checkTipoIncompativel = request.getParameter("chkTipo"
-                        + tipoIncompativel.getTipoID());
-                if (checkTipoIncompativel != null)
-                    tiposIncompativeis.add(tipoIncompativel);
-            }
-        }
 
         return tipo;
     }
@@ -160,14 +132,6 @@ public class GerenciaTipoPassageiro extends ControladorBet {
 
     public void setInterfaceCartaoMgt(ICartaoMgt interfaceCartaoMgt) {
         this.interfaceCartaoMgt = interfaceCartaoMgt;
-    }
-
-    public void setCombinarCartoes(Boolean combinarCartoes) {
-        this.combinarCartoes = combinarCartoes;
-    }
-
-    public Boolean getCombinarCartoes() {
-        return combinarCartoes;
     }
 
 }

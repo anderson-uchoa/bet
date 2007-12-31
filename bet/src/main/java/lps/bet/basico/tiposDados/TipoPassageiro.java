@@ -62,10 +62,8 @@ public class TipoPassageiro {
 			return false;
 		
 		TipoPassageiro tipo = (TipoPassageiro) obj;
-		return (this.tipoID == tipo.tipoID);
-		
-	}
-	
+		return (this.tipoID == tipo.tipoID);		
+	}	
 
 	public int hashCode() {
 		return tipoID;

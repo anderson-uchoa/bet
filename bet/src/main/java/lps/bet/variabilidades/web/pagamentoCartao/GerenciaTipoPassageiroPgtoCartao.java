@@ -28,9 +28,12 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 
 	protected ModelAndView buscarTiposPassageiros() {
 		List tipos = interfaceCartaoMgt.buscarTiposPassageiros();
-
+		Collection<TipoPassagPagtoCartao> tiposPagamentos = interfacePagtoCartaoMgt.buscarTodosTipos();
+		
 		ModelAndView mav = new ModelAndView("gerenciaTipoPassageiro");
 		mav.addObject("tipos", tipos);
+		mav.addObject("tiposPagamentos", tiposPagamentos);
+		
 		return mav;
 	}
 
@@ -53,38 +56,21 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		mav.addObject("tipoID", tipoID);
 
 		TipoPassageiro tipo = null;
-
+		TipoPassagPagtoCartao tipoPagamento = null;
+		
 		if (tipoID == null) {
 			mav.addObject("operacao", "criar");
 			mav.addObject("nomeOperacao", "Criar");
 		} else {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
-			tipo = interfaceCartaoMgt.buscarTipoPassageiro(Integer
-					.parseInt(tipoID));
-			if (combinarCartoes)
-				mav.addObject("listaTiposIncompativeis", tipo
-						.getTiposIncompativeis());
-		}
-		if (combinarCartoes) {
-			Collection tipos = interfaceCartaoMgt.buscarTiposPermitidos(null);
-			tipos.remove(tipo);
-			mav.addObject("listaTipos", tipos);
+			tipo = interfaceCartaoMgt.buscarTipoPassageiro(Integer.parseInt(tipoID));
+			tipoPagamento = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(Integer.parseInt(tipoID));
 		}
 
 		mav.addObject("tipo", tipo);		
-		
-		TipoPassagPagtoCartao tipoPassagPagtoCartao = null;
-		float valorAquisicao = 0;
-		boolean pagtoAquisicaoCartao = false;
-		if (tipoID != null){
-			tipoPassagPagtoCartao = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(tipo.getTipoID());
-			valorAquisicao = tipoPassagPagtoCartao.getValorAquisicao();
-			pagtoAquisicaoCartao = tipoPassagPagtoCartao.isPagtoAquisicaoCartao();				
-		}
-		mav.addObject("valorAquisicao", valorAquisicao);
-		mav.addObject("pagtoAquisicaoCartao", pagtoAquisicaoCartao);
-		mav.addObject("pagarCartoes", true);			
+		mav.addObject("tipoPagamento", tipoPagamento);
+	
 
 		return mav;
 	}
@@ -93,6 +79,28 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		interfaceCartaoMgt.alterarTipoPassageiro(tipo);
 	}
 
+	protected TipoPassagPagtoCartao montarTipoPassagPagtoCartao(HttpServletRequest request, TipoPassageiro tipoPassageiro){
+		String operacao = request.getParameter("operacao");
+
+		TipoPassagPagtoCartao tipoPagamento;
+		
+		// Operação de Criação
+		if (request.getParameter("tipoID") == null) {
+			tipoPagamento = new TipoPassagPagtoCartao();
+		}
+		// Senão precisa buscar
+		else {
+			tipoPagamento = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(Integer.parseInt(request.getParameter("tipoID")));
+		}
+		
+		tipoPagamento.setPagtoAquisicaoCartao(Boolean.parseBoolean(request.getParameter("pagtoAquisicaoCartao")));
+
+		tipoPagamento.setValorAquisicao(Float.parseFloat(request.getParameter("valorAquisicao")));
+		tipoPagamento.setTipoPassageiro(tipoPassageiro);
+
+		return tipoPagamento;
+	}
+	
 	protected TipoPassageiro montarTipoPassageiro(HttpServletRequest request) {
 		String operacao = request.getParameter("operacao");
 		TipoPassageiro tipo;
@@ -113,25 +121,6 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		tipo.setDesconto(Integer.parseInt(request.getParameter("desconto")
 				.trim()));
 
-		if (getCombinarCartoes()) {
-			Collection todosTipos = interfaceCartaoMgt.buscarTiposPassageiros();
-			Collection tiposIncompativeis = tipo.getTiposIncompativeis();
-			if (tiposIncompativeis == null) {
-				tiposIncompativeis = new HashSet();
-				tipo.setTiposIncompativeis(tiposIncompativeis);
-			}
-			tiposIncompativeis.clear();
-			java.util.Iterator itTipos = todosTipos.iterator();
-			while (itTipos.hasNext()) {
-				TipoPassageiro tipoIncompativel = (TipoPassageiro) itTipos
-						.next();
-				String checkTipoIncompativel = request.getParameter("chkTipo"
-						+ tipoIncompativel.getTipoID());
-				if (checkTipoIncompativel != null)
-					tiposIncompativeis.add(tipoIncompativel);
-			}
-		}
-
 		return tipo;
 	}
 
@@ -145,14 +134,10 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 			if (operacao == null)
 				return buscarTiposPassageiros();
 
-			if (operacao.equals("criar")) {
-				criarTipoPassageiro(montarTipoPassageiro(request));
-				interfacePagtoCartaoMgt.registrarTipoPassagPagtoCartao(interfacePagtoCartaoMgt.buscarUltimoTipoPassageiro(), Boolean.parseBoolean(request.getParameter("pagtoAquisicaoCartao")) ,Float.parseFloat(request.getParameter("valorAquisicao")));				
-			}
-
-			else if (operacao.equals("alterar")) {
-				alterarTipoPassageiro(montarTipoPassageiro(request));
-				interfacePagtoCartaoMgt.registrarTipoPassagPagtoCartao(Integer.parseInt(request.getParameter("tipoID")), Boolean.parseBoolean(request.getParameter("pagtoAquisicaoCartao")),Float.parseFloat(request.getParameter("valorAquisicao")));				
+			if (operacao.equals("criar") || operacao.equals("alterar")) {
+				//criarTipoPassageiro(montarTipoPassageiro(request));
+				TipoPassagPagtoCartao tipoPagamento = montarTipoPassagPagtoCartao(request, montarTipoPassageiro(request));
+				interfacePagtoCartaoMgt.registrarTipoPassagPagtoCartao(tipoPagamento);				
 			}
 			
 			if (operacao.equals("remover")) {

@@ -1,9 +1,8 @@
 package lps.bet.variabilidades;
 
-import lps.bet.basico.cartaoMgr.ICartaoMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
 import lps.bet.basico.tiposDados.Viagem;
-
+import lps.bet.interfaces.ICartaoMgt;
 
 public abstract aspect ViagemIntegracaoCtrl {
 	
@@ -24,7 +23,7 @@ public abstract aspect ViagemIntegracaoCtrl {
 		this.interfaceRegistrarArrecadacao = interfaceRegistrarArrecadacao;
 	}
 
-	pointcut validarIntegracao(): call(String lps.bet.interfaces.IProcessarViagem.*(..));
+/*	pointcut validarIntegracao(): call(String lps.bet.interfaces.IProcessarViagem.*(..));
 	
 	String around(): validarIntegracao(){
 		
@@ -62,4 +61,5 @@ public abstract aspect ViagemIntegracaoCtrl {
 	}
 	
 	public abstract String verificarIntegracao(int cartaoID, int onibusID);
+*/
 }

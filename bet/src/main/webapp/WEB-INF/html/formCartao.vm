@@ -12,29 +12,31 @@
 			<form id="formCartao" action="gerenciaCartao.html">
 				#if ($cartaoID)<label>Identificador do Cartão: <input type="text" name="cartaoID" value="$cartaoID" readonly="readonly" class="search_tiny"/></label><br/>#end 
 				<label>Tipo de Passageiro: 
-					<select name="nomeTipo">
+					<select name="nomeTipo" id="nomeTipo">
 					#if ($cartaoID)
-						#foreach ($tipo in $tipos)
-							#if ($tipo.NomeTipo==$cartao.TipoPassageiro.NomeTipo)
-								<option value="$tipo.NomeTipo" selected="selected">$tipo.NomeTipo</option>
-							#else <option value="$tipo.NomeTipo">$tipo.NomeTipo</option>
+						#foreach ($tipoPagamento in $tiposPagamento)
+							#if ($tipoPagamento.TipoPassageiro.NomeTipo==$cartao.TipoPassageiro.NomeTipo)
+								<option value="$tipoPagamento.TipoPassageiro.NomeTipo" selected="selected">$tipoPagamento.TipoPassageiro.NomeTipo -> $tipoPagamento.ValorAquisicao reais</option>
+							#else <option value="$tipoPagamento.TipoPassageiro.NomeTipo">$tipoPagamento.TipoPassageiro.NomeTipo -> $tipoPagamento.ValorAquisicao reais</option>
 							#end
 						#end
 					#else	
-						#foreach ($tipo in $tipos)
-							<option value="$tipo.NomeTipo">$tipo.NomeTipo</option>
+						#foreach ($tipoPagamento in $tiposPagamento)
+							<option value="$tipoPagamento.TipoPassageiro.NomeTipo">$tipoPagamento.TipoPassageiro.NomeTipo -> $tipoPagamento.ValorAquisicao reais</option>
 						#end
 					#end
 					</select>
 				</label><br/>
+				
 				<label>Passageiro: <input id="nomePassageiro" type="text" name="nomePassageiro" class="search" #if ($cartao.Passageiro.NomePassageiro) value="$cartao.Passageiro.NomePassageiro" #else value="$passageiro.NomePassageiro" #end/></label><br/>
-				<label>Data de Aquisição: <input id="dtAquisicao" type="text" name="dtAquisicao" class="search_small" #if ($cartao.DtAquisicao) value="$sdf.format($cartao.DtAquisicao.Time)" #else value="$sdf.format($dtAquisicao.Time)" #end readonly="readonly"/></label><br/>
-				<label>Data de Validade: <input id="dtValidade" type="text" name="dtValidade" class="search_small" #if ($cartao.DtValidade) value="$sdf.format($cartao.DtValidade.Time)" #else value="$sdf.format($dtValidade.Time)" #end/></label><br/>
+				<label>Data de Aquisição: <input id="dtAquisicao" type="text" name="dtAquisicao" class="search_small" #if ($cartao.DtAquisicao) value="$sdf.format($cartao.DtAquisicao.Time)" #else value="$sdf.format($data.Time)" #end /></label><br/>
+				<label>Data de Validade: <input id="dtValidade" type="text" name="dtValidade" class="search_small" #if ($cartao.DtValidade) value="$sdf.format($cartao.DtValidade.Time)" #else value="$sdf.format($data.Time)" #end/></label><br/>
 				<label>Saldo: <input type="text" name="saldo" #if ($cartao.Saldo) value="$cartao.Saldo" #end class="search_small"/></label><br/>
-
+		
+				             
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="submit" class="submit" value="$nomeOperacao"/>
-				<input type="button" class="submit" value="Cancelar" #if ($cartaoID) onclick="redireciona('gerenciaCartao.html')" #else onclick="redireciona('gerenciaPassageiro.html')" #end/>
+				<input type="button" class="submit" value="Cancelar" #if ($cartaoID) onclick="redireciona('gerenciaCartao.html')" #else onclick="redireciona('gerenciaPassageiro.html')" #end/><br/>				
 			</form>
 		#else
 			<label>$mensagem</label>

@@ -1,21 +1,25 @@
 package lps.bet.variabilidades.web.pagamentoCartao;
 
-import lps.bet.interfaces.ICartaoMgt;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import lps.bet.basico.passageiroMgr.IPassageiroMgt;
 import lps.bet.basico.tiposDados.Cartao;
-import lps.bet.basico.tiposDados.Pagamento;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.web.ControladorBet;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
+import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.variabilidades.pagamentoCartaoMgr.IPagtoCartaoMgt;
 import lps.bet.variabilidades.tiposDados.TipoPassagPagtoCartao;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import org.springframework.web.servlet.ModelAndView;
 
 public class GerenciaCartaoPgtoCartao extends ControladorBet {
 
@@ -29,27 +33,14 @@ public class GerenciaCartaoPgtoCartao extends ControladorBet {
 		sdf = new SimpleDateFormat("dd/MM/yyyy");
 	}
 	
-	protected void criarPagamento(Cartao cartao, TipoPassagPagtoCartao passageiroPagtoCartao){
-		Pagamento pagamento = new Pagamento();
-		pagamento.setCartao(cartao);
-		pagamento.setDtPgto(cartao.getDtAquisicao());
-		pagamento.setValorPgto(passageiroPagtoCartao.getValorAquisicao());
-		interfaceCartaoMgt.criarPagamento(pagamento);		
-		interfacePagtoCartaoMgt.registrarPagtoCartao(interfacePagtoCartaoMgt.buscarUltimoPagamento(), "Aquisição");		
-	}
-
 	protected void criarCartao(Cartao cartao) {
 		interfaceCartaoMgt.criarCartao(cartao);		
-		TipoPassagPagtoCartao passageiroPagtoCartao = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(cartao.getTipoPassageiro().getTipoID());
-		if (passageiroPagtoCartao.isPagtoAquisicaoCartao()){
-			criarPagamento(cartao, passageiroPagtoCartao);			
-		}
 	}
 	
-	protected void criarPagamento(Pagamento pagamento) {
-		interfaceCartaoMgt.criarPagamento(pagamento);
-	}	
-
+	protected void alterarCartao(Cartao cartao) {
+		interfaceCartaoMgt.alterarCartao(cartao);
+	}
+	
 	protected ModelAndView buscarCartoes() {
 		List cartoes = interfaceCartaoMgt.buscarCartoes();
 
@@ -83,66 +74,45 @@ public class GerenciaCartaoPgtoCartao extends ControladorBet {
 
 		ModelAndView mav = new ModelAndView("formCartao");
 		mav.addObject("cartaoID", cartaoID);
-
-		// SimpleDateFormat sdf = new SimpleDateFormat();
 		mav.addObject("sdf", sdf);
 
-		Cartao cartao = null;
-		Calendar dtAquisicao;
-		Calendar dtValidade;
-		List passageiros = interfacePassageiroMgt.buscarPassageiros();
-		mav.addObject("passageiros", passageiros);
-		List valores = new ArrayList<Float>();
-		Collection tipos;
+		Cartao cartao;
+		Collection tipos;		
+		String nomeOperacao, operacao;
 
 		if (cartaoID == null) {
-			mav.addObject("operacao", "criar");
-			mav.addObject("nomeOperacao", "Criar");
-			dtAquisicao = Calendar.getInstance();
-			dtValidade = Calendar.getInstance();
-			Passageiro passageiro = interfacePassageiroMgt
-					.buscarPassageiroPorID(Integer.parseInt(passageiroID));
+			operacao = "criar";
+			nomeOperacao = "Criar";
+			cartao = null;
+			Calendar data = Calendar.getInstance();
+			mav.addObject("data", data);	
+			
+			Passageiro passageiro = interfacePassageiroMgt.buscarPassageiroPorID(Integer.parseInt(passageiroID));
+			mav.addObject("passageiro", passageiro);
 			tipos = interfaceCartaoMgt.buscarTiposPermitidos(passageiro);		
 			
 			if (tipos.size() == 0) 
-				mav.addObject("mensagem", "Não há tipos compatíveis disponíveis.");			
-			mav.addObject("passageiro", passageiro);
+				mav.addObject("mensagem", "Não há tipos disponíveis.");			
+			
 
-		} else {
-			mav.addObject("operacao", "alterar");
-			mav.addObject("nomeOperacao", "Alterar");
-			cartao = interfaceCartaoMgt
-					.buscarCartao(Integer.parseInt(cartaoID));
-			tipos = interfaceCartaoMgt.buscarTiposPermitidos(cartao
-					.getPassageiro(), cartao.getTipoPassageiro());
-			// Na alteração pode-se optar por não mudar o tipo, então ele tb
-			// deve ser uma opção:
-			//tipos.add(cartao.getTipoPassageiro());
-			dtAquisicao = cartao.getDtAquisicao();
-			dtValidade = cartao.getDtValidade();		
+		} 
+		else {
+			operacao = "alterar";
+			nomeOperacao = "Alterar";
+			cartao = interfaceCartaoMgt.buscarCartao(Integer.parseInt(cartaoID));
+			tipos = interfaceCartaoMgt.buscarTiposPermitidos(cartao.getPassageiro(), cartao.getTipoPassageiro());
+			// Na alteração pode-se optar por não mudar o tipo, então ele tb deve ser uma opção:
+			tipos.add(cartao.getTipoPassageiro());
 		}
-		for (Iterator it = tipos.iterator(); it.hasNext();) {
-			TipoPassageiro tipo = (TipoPassageiro) it.next();
-			TipoPassagPagtoCartao passagPagtoCartao = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(tipo.getTipoID());			
-			if (passagPagtoCartao.isPagtoAquisicaoCartao()){
-			valores.add(passagPagtoCartao.getValorAquisicao());	
-			}
-			else
-				valores.add(0);						
-			}
-			mav.addObject("primValor", valores.get(0));
-			mav.addObject("pagarCartoes", true);
-			mav.addObject("valores", valores);			
 		
-		mav.addObject("tipos", tipos);
-		mav.addObject("cartao", cartao);
-		mav.addObject("dtAquisicao", dtAquisicao);
-		mav.addObject("dtValidade", dtValidade);		
-		return mav;
-	}
+		Collection<TipoPassagPagtoCartao> tiposPagamento = interfacePagtoCartaoMgt.buscarTiposPagtosPermitidos(tipos);
 
-	protected void alterarCartao(Cartao cartao) {
-		interfaceCartaoMgt.alterarCartao(cartao);
+		mav.addObject("operacao", operacao);
+		mav.addObject("nomeOperacao", nomeOperacao);
+		mav.addObject("tiposPagamento", tiposPagamento);
+		mav.addObject("cartao", cartao);
+	
+		return mav;
 	}
 
 	protected Cartao montarCartao(HttpServletRequest request) {
@@ -156,31 +126,25 @@ public class GerenciaCartaoPgtoCartao extends ControladorBet {
 		}
 		// Senão precisa buscar
 		else {
-			cartao = interfaceCartaoMgt.buscarCartao(Integer.parseInt(request
-					.getParameter("cartaoID")));
+			cartao = interfaceCartaoMgt.buscarCartao(Integer.parseInt(request.getParameter("cartaoID")));
 		}
 
-		Calendar dtValidade = UtilsGerencia.calendarFromStrings(request
-				.getParameter("dtValidade").trim(), "23:59");
+		Calendar dtValidade = UtilsGerencia.calendarFromStrings(request.getParameter("dtValidade").trim(), "23:59");
 		cartao.setDtValidade(dtValidade);
 
 		String strSaldo = request.getParameter("saldo").trim();
-		float saldo = strSaldo.matches("[0-9]*\\.?[0-9]+") ? Float
-				.parseFloat(strSaldo) : 0;
+		float saldo = strSaldo.matches("[0-9]*\\.?[0-9]+") ? Float.parseFloat(strSaldo) : 0;
 		cartao.setSaldo(saldo);
-		Passageiro passageiro = interfacePassageiroMgt.buscarPassageiro(request
-				.getParameter("nomePassageiro").trim());
+		Passageiro passageiro = interfacePassageiroMgt.buscarPassageiro(request.getParameter("nomePassageiro").trim());
 		cartao.setPassageiro(passageiro);
 
-		TipoPassageiro tipoRequisitado = interfaceCartaoMgt
-				.buscarTipoPassageiro(request.getParameter("nomeTipo").trim());
+		TipoPassageiro tipoRequisitado = interfaceCartaoMgt.buscarTipoPassageiro(request.getParameter("nomeTipo").trim());
 		cartao.setTipoPassageiro(tipoRequisitado);
 
 		return cartao;
 	}
 
-	protected ModelAndView handleRequestInternal(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	protected ModelAndView handleRequestInternal(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		String operacao = request.getParameter("operacao");
 
 		if (request.getServletPath().equals("/gerenciaCartao.html")) {
@@ -189,12 +153,14 @@ public class GerenciaCartaoPgtoCartao extends ControladorBet {
 			if (operacao == null)
 				return buscarCartoes();
 
-			if (operacao.equals("criar")) {
-				criarCartao(montarCartao(request));				
-			}
-
-			else if (operacao.equals("alterar")) {
-				alterarCartao(montarCartao(request));
+			if ((operacao.equals("criar")) || (operacao.equals("alterar"))){
+				Cartao cartao = montarCartao(request);
+				if (operacao.equals("criar")) {
+					criarCartao(cartao);				
+				}
+				else {
+					alterarCartao(cartao);
+				}
 			}
 
 			if (operacao.equals("remover")) {
@@ -207,14 +173,12 @@ public class GerenciaCartaoPgtoCartao extends ControladorBet {
 
 			// mostrando um cartão ou todos, dependendo da operacao requisitada
 			if (operacao.equals("buscar")) {
-				return buscarCartao(Integer.parseInt(request
-						.getParameter("cartaoID")));
+				return buscarCartao(Integer.parseInt(request.getParameter("cartaoID")));
 			} else {
 				return buscarCartoes();
 			}
 		} else {
-			return mostrarForm(request.getParameter("cartaoID"), request
-					.getParameter("usuarioID"));
+			return mostrarForm(request.getParameter("cartaoID"), request.getParameter("usuarioID"));
 		}
 	}
 	

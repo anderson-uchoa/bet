@@ -19,7 +19,7 @@ public interface ICartaoMgt {
     public Collection buscarTiposPermitidos(Passageiro passageiro, TipoPassageiro tipoSelecionado);
 
     public Collection buscarTiposPermitidos(Passageiro passageiro);
-
+    public Collection buscarTiposPermitidos(Cartao cartao);
 
     public void carregarCartao(int cartaoID, float valor);
 
@@ -49,7 +49,7 @@ public interface ICartaoMgt {
 
     public Pagamento buscarPagamento(int pgtoID);
 
-    public void criarPagamento(Pagamento pagamento);
+    public int criarPagamento(Pagamento pagamento);
 
     public void alterarPagamento(Pagamento pagamento);
 

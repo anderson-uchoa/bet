@@ -6,7 +6,7 @@ import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
 import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 
-public aspect ViagemTempoNumViagensCtrl /*extends ViagemIntegracaoCtrl*/{
+public aspect ViagemTempoNumViagensCtrl extends ViagemIntegracaoCtrl{
 
 	ITempoMgt interfaceTempoMgt;
 	INumViagensMgt interfaceNumViagensMgt;

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 public class GerenciaPagamentoPgtoCartao extends ControladorBet{
@@ -24,8 +25,7 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 	protected IPagtoCartaoMgt interfacePagtoCartaoMgt;	
 	
 	public GerenciaPagamentoPgtoCartao(){
-		sdf = new SimpleDateFormat();
-		sdf.applyPattern("dd/MM/yyyy");
+		sdf = new SimpleDateFormat("dd/MM/yyyy");
 	}
 	
 	public ICartaoMgt getInterfaceCartaoMgt() {
@@ -38,14 +38,14 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 
 	protected ModelAndView buscarPagamentos(){
 		List pagamentos = interfaceCartaoMgt.buscarPagamentos();
-		//List cartoes = interfaceCartaoMgt.buscarCartoes();
+		Collection<PagamentoPagtoCartao> pagtosCartoes = interfacePagtoCartaoMgt.buscarPagtosCartao();		
 		
 		Calendar data = Calendar.getInstance();
 
 		ModelAndView mav = new ModelAndView("gerenciaPagamento");
 		
 		mav.addObject("pagamentos", pagamentos);
-		//mav.addObject("cartoes", cartoes);
+		mav.addObject("pagtosCartoes", pagtosCartoes);
 		mav.addObject("sdf", sdf);
 		mav.addObject("data",data);
 		return mav;		
@@ -68,31 +68,44 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 		return mav;
 	}
 	
-	protected void criarPagamento(Pagamento pagamento){
-		interfaceCartaoMgt.criarPagamento(pagamento);
+	protected void criarPagamento(Pagamento pagamento, HttpServletRequest request){
+		int pagtoID = interfaceCartaoMgt.criarPagamento(pagamento);
+		
+        PagamentoPagtoCartao pgtoCartao = new PagamentoPagtoCartao();
+        pgtoCartao.setPagtoID(pagtoID);        
+		pgtoCartao.setTipoPagto(request.getParameter("tipoPagto").trim());
+		
+        interfacePagtoCartaoMgt.criarPagtoCartao(pgtoCartao);
 	}
 	
-	protected void alterarPagamento(Pagamento pagamento){
+	protected void alterarPagamento(Pagamento pagamento, HttpServletRequest request){
 		interfaceCartaoMgt.alterarPagamento(pagamento);
+		
+        PagamentoPagtoCartao pgtoCartao;
+	    pgtoCartao = interfacePagtoCartaoMgt.buscarPagamentoPagtoCartao(pagamento.getPgtoID());
+        pgtoCartao.setTipoPagto(request.getParameter("tipoPagto").trim());
+        
+		interfacePagtoCartaoMgt.alterarPagtoCartao(pgtoCartao);
 	}
 
 	protected Pagamento montarPagamento(HttpServletRequest request){
 		String operacao = request.getParameter("operacao");
-        int pgtoID = Integer.parseInt(request.getParameter("pgtoID"));
+        
         Pagamento pagamento;
 
-        PagamentoPagtoCartao pgtoCartao;
+        //PagamentoPagtoCartao pgtoCartao;
 
         //Operação de Criação
 		if (request.getParameter("pgtoID")==null){
 			pagamento = new Pagamento();
-            pgtoCartao = new PagamentoPagtoCartao();
+            //pgtoCartao = new PagamentoPagtoCartao();
 
         }
 		//Senão precisa buscar
 		else {
-            pagamento = interfaceCartaoMgt.buscarPagamento(pgtoID);
-            pgtoCartao = interfacePagtoCartaoMgt.buscarPagamentoPagtoCartao(pagamento.getPgtoID());
+			int pgtoID = Integer.parseInt(request.getParameter("pgtoID").trim());
+			pagamento = interfaceCartaoMgt.buscarPagamento(pgtoID);
+            //pgtoCartao = interfacePagtoCartaoMgt.buscarPagamentoPagtoCartao(pagamento.getPgtoID());
         }
 
 		Cartao cartao = interfaceCartaoMgt.buscarCartao(Integer.parseInt(request.getParameter("cartaoID"))); 
@@ -103,8 +116,9 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 		String strValorPgto = request.getParameter("valorPgto").trim();
 		float valorPgto = strValorPgto.matches("[0-9]*\\.?[0-9]+") ? Float.parseFloat(strValorPgto) : 0;
 		pagamento.setValorPgto(valorPgto);
-
-        interfacePagtoCartaoMgt.registrarPagtoCartao(pagamento.getPgtoID(), request.getParameter("tipoPagto").trim());
+		//pgtoCartao.setTipoPagto(request.getParameter("tipoPagto").trim());
+		
+        //interfacePagtoCartaoMgt.registrarPagtoCartao(pgtoCartao);
 
         return pagamento;
 	}
@@ -117,8 +131,10 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 		mav.addObject("sdf", sdf);
 		
 		Pagamento pagamento = null;		
+		PagamentoPagtoCartao pagtoCartao = null;
+		TipoPassagPagtoCartao tipoPassagPagtoCartao = null;
+
     	Calendar data;
-		String tipoPagto = " ";
 		
 		if (pgtoID == null){
 			mav.addObject("operacao", "criar");
@@ -129,24 +145,15 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
 			pagamento = interfaceCartaoMgt.buscarPagamento(Integer.parseInt(pgtoID));			
+			//Buscar dados complementares de pagamento de cartão
+			pagtoCartao = interfacePagtoCartaoMgt.buscarPagamentoPagtoCartao(pagamento.getPgtoID());
 			data = pagamento.getDtPgto();		
-			
 		}
 		mav.addObject("pagamento",pagamento);		
 		mav.addObject("data",data);		
 		List cartoes = interfaceCartaoMgt.buscarCartoes();
 		mav.addObject("cartoes", cartoes);
-		
-		PagamentoPagtoCartao pagtoCartao = null;
-		TipoPassagPagtoCartao tipoPassagPagtoCartao = null;
-		if (pgtoID == null)
-			tipoPagto = "Cartão";
-		else {
-			pagtoCartao = interfacePagtoCartaoMgt.buscarPagamentoPagtoCartao(pagamento.getPgtoID());
-			tipoPagto = pagtoCartao.getTipoPagto();				
-		}
-		mav.addObject("tipoPagto", tipoPagto);
-		mav.addObject("pagarCartoes", "pagarCartoes");
+		mav.addObject("pagtoCartao", pagtoCartao);
 		
 		return mav;		
 	}
@@ -161,12 +168,15 @@ public class GerenciaPagamentoPgtoCartao extends ControladorBet{
 			if (operacao == null)
 				return buscarPagamentos();
 
-			if (operacao.equals("criar")){
-				criarPagamento(montarPagamento(request));
-			}
-			else if (operacao.equals("alterar")){
-				alterarPagamento(montarPagamento(request));
-			}
+			if ((operacao.equals("criar"))||(operacao.equals("alterar"))){
+				Pagamento pagamento = montarPagamento(request);
+				if (operacao.equals("criar")){
+					criarPagamento(pagamento,request);
+				}
+				else if (operacao.equals("alterar")){
+					alterarPagamento(pagamento,request);
+				}
+			}	
 			
 			//Código do if a ser tirado posteriormente (não existe remover no Tarifa):
 			if (operacao.equals("remover")){

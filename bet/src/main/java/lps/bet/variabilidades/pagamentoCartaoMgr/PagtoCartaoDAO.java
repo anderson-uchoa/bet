@@ -3,6 +3,7 @@ package lps.bet.variabilidades.pagamentoCartaoMgr;
 import lps.bet.variabilidades.tiposDados.PagamentoPagtoCartao;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.util.Collection;
 import java.util.List;
 
 public class PagtoCartaoDAO extends HibernateDaoSupport {
@@ -13,13 +14,14 @@ public class PagtoCartaoDAO extends HibernateDaoSupport {
         getHibernateTemplate().saveOrUpdate(pagamento);
     }
 
-    public void registrarPagtoCartao(int pagtoID, String tipoPagto) {
-        PagamentoPagtoCartao pagamento = new PagamentoPagtoCartao();
-        pagamento.setPagtoID(pagtoID);
-        pagamento.setTipoPagto(tipoPagto);
-        salvarPagamentoPagtoCartao(pagamento);
+    public void criarPagtoCartao(PagamentoPagtoCartao pgtoCartao) {
+        salvarPagamentoPagtoCartao(pgtoCartao);
     }
 
+    public void alterarPagtoCartao(PagamentoPagtoCartao pgtoCartao) {
+        salvarPagamentoPagtoCartao(pgtoCartao);
+    }
+    
     public PagamentoPagtoCartao buscarPagamentoPagtoCartao(int pgtoID) {
         return (PagamentoPagtoCartao) getHibernateTemplate().get(PagamentoPagtoCartao.class, new Integer(pgtoID));
     }
@@ -35,6 +37,10 @@ public class PagtoCartaoDAO extends HibernateDaoSupport {
             ultimo = pagamentos.size();
             return ((PagamentoPagtoCartao) pagamentos.get(ultimo - 1)).getPagtoID();
         }
+    }
+    
+    public Collection<PagamentoPagtoCartao> buscarPagtosCartao() {
+    	return getHibernateTemplate().loadAll(PagamentoPagtoCartao.class);
     }
 
     public String getHqlBuscarUltimoPagamento() {

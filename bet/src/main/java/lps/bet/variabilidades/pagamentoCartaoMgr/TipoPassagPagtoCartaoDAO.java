@@ -1,9 +1,15 @@
 package lps.bet.variabilidades.pagamentoCartaoMgr;
 
-import lps.bet.variabilidades.tiposDados.TipoPassagPagtoCartao;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
+import java.util.Collection;
 import java.util.List;
+
+import lps.bet.basico.tiposDados.TipoPassageiro;
+import lps.bet.basico.tiposDados.Usuario;
+import lps.bet.variabilidades.tiposDados.TipoPassagPagtoCartao;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class TipoPassagPagtoCartaoDAO extends HibernateDaoSupport {
     String hqlBuscarUltimoTipoPassageiro;
@@ -12,17 +18,19 @@ public class TipoPassagPagtoCartaoDAO extends HibernateDaoSupport {
         getHibernateTemplate().saveOrUpdate(tipoPassageiro);
     }
 
-    public void registrarTipoPassagPagtoCartao(int tipoID, boolean pagtoAquisicaoCartao, float valorAquisicao) {
-        TipoPassagPagtoCartao tipoPassageiro = new TipoPassagPagtoCartao();
-        tipoPassageiro.setTipoID(tipoID);
-        tipoPassageiro.setPagtoAquisicaoCartao(pagtoAquisicaoCartao);
-        tipoPassageiro.setValorAquisicao(valorAquisicao);
-        salvarTipoPassagPagtoCartao(tipoPassageiro);
+    public void registrarTipoPassagPagtoCartao(TipoPassagPagtoCartao tipoPagamento) {
+        salvarTipoPassagPagtoCartao(tipoPagamento);
     }
 
     public TipoPassagPagtoCartao buscarTipoPassagPagtoCartao(int tipoID) {
         return (TipoPassagPagtoCartao) getHibernateTemplate().get(TipoPassagPagtoCartao.class, new Integer(tipoID));
-
+    }
+    
+    public TipoPassagPagtoCartao buscarTipoPagtoPorTipoPassageiro(TipoPassageiro tipoPassageiro){
+    	DetachedCriteria criteria = DetachedCriteria.forClass(TipoPassagPagtoCartao.class);
+		criteria.add(Restrictions.eq("tipoPassageiro", tipoPassageiro));
+		List tiposPagamentos = getHibernateTemplate().findByCriteria(criteria);
+    	return (TipoPassagPagtoCartao) tiposPagamentos.get(0);
     }
 
     public int buscarUltimoTipoPassageiro() {
@@ -46,5 +54,9 @@ public class TipoPassagPagtoCartaoDAO extends HibernateDaoSupport {
     public void setHqlBuscarUltimoTipoPassageiro(
             String hqlBuscarUltimoTipoPassageiro) {
         this.hqlBuscarUltimoTipoPassageiro = hqlBuscarUltimoTipoPassageiro;
+    }
+    
+    public Collection<TipoPassagPagtoCartao> buscarTodosTipos(){
+    	return getHibernateTemplate().loadAll(TipoPassagPagtoCartao.class);
     }
 }

@@ -14,8 +14,9 @@ public class PagamentoDAO extends HibernateDaoSupport{
 		getHibernateTemplate().saveOrUpdate(pagamento);
 	}
 	
-	public void criarPagamento(Pagamento pagamento){
+	public int criarPagamento(Pagamento pagamento){
 		salvarPagamento(pagamento);
+		return pagamento.getPgtoID();
 	}
 	
 	public void alterarPagamento(Pagamento pagamento){

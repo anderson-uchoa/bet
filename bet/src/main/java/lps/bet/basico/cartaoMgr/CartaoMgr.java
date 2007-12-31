@@ -24,7 +24,7 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
     TipoPassageiroDAO tipoPassageiroDAO;
     PagamentoDAO pagamentoDAO;
     IPassageiroMgt interfacePassageiroMgt;
-    private boolean combinarCartoes = false;
+//  private boolean combinarCartoes = false;
 
     public IPassageiroMgt getInterfacePassageiroMgt() {
         return interfacePassageiroMgt;
@@ -127,6 +127,20 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
         return tipoPassageiroDAO.buscarTodosTipos();
     }
 
+    public Collection buscarTiposPermitidos(Cartao cartao) {
+        if (cartao != null) {
+            
+        	Collection cartoes = interfacePassageiroMgt.buscarCartoesPorPassageiro(cartao.getPassageiro().getCpf());
+            if (cartoes != null) {
+                List tiposJaAdquiridos = cartaoDAO.buscarTiposDosCartoes(cartoes);
+                tiposJaAdquiridos.remove(cartao.getTipoPassageiro());
+                return tipoPassageiroDAO.buscarTiposPermitidos(tiposJaAdquiridos);
+            }
+        }
+
+        return tipoPassageiroDAO.buscarTodosTipos();
+    }
+    
     public Cartao buscarCartao(int cartaoID) {
         return cartaoDAO.buscarCartao(cartaoID);
     }
@@ -136,6 +150,11 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
     }
 
     public void alterarCartao(Cartao cartao) {
+        Cartao cartaoDadosAnteriores = cartaoDAO.buscarCartao(cartao.getCartaoID());
+        float carga = cartao.getSaldo() - cartaoDadosAnteriores.getSaldo();
+        if (carga > 0){
+        	pagamentoDAO.registrarPagamento(cartao, carga);
+        }
         cartaoDAO.alterarCartao(cartao);
     }
 
@@ -145,6 +164,9 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 
     public void criarCartao(Cartao cartao) {
         cartaoDAO.criarCartao(cartao);
+        if (cartao.getSaldo() != 0){
+        	pagamentoDAO.registrarPagamento(cartao, cartao.getSaldo());
+        }
     }
 
     public List buscarTiposPassageiros() {
@@ -183,8 +205,8 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
         return pagamentoDAO.buscarPagamentos();
     }
 
-    public void criarPagamento(Pagamento pagamento) {
-        pagamentoDAO.criarPagamento(pagamento);
+    public int criarPagamento(Pagamento pagamento) {
+        return pagamentoDAO.criarPagamento(pagamento);
     }
 
     public void removerPagamento(int pgtoID) {
@@ -220,11 +242,11 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
         viagemDAO.removerViagem(viagemID);
     }
 
-    public void setCombinarCartoes(boolean combinarCartoes) {
-        this.combinarCartoes = combinarCartoes;
-    }
-
-    public boolean isCombinarCartoes() {
-        return combinarCartoes;
-    }
+//    public void setCombinarCartoes(boolean combinarCartoes) {
+//        this.combinarCartoes = combinarCartoes;
+//    }
+//
+//    public boolean isCombinarCartoes() {
+//        return combinarCartoes;
+//    }
 }

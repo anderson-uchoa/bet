@@ -4,7 +4,7 @@ import lps.bet.variabilidades.linhaIntegradaMgr.ILinhaIntegradaMgt;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Viagem;
 
-public aspect ViagemLinhaIntegradaCtrl /*extends ViagemIntegracaoCtrl*/{
+public aspect ViagemLinhaIntegradaCtrl extends ViagemIntegracaoCtrl{
 
 	ILinhaIntegradaMgt interfaceLinhaIntegradaMgt;
 	ILinhaMgt interfaceLinhaMgt;

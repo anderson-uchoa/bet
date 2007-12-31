@@ -5,7 +5,7 @@ import java.util.Calendar;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 
-public aspect ViagemTempoCtrl /*extends ViagemIntegracaoCtrl*/{
+public aspect ViagemTempoCtrl extends ViagemIntegracaoCtrl{
 
 	ITempoMgt interfaceTempoMgt;
 	

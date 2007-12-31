@@ -3,7 +3,7 @@ package lps.bet.variabilidades;
 import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
 import lps.bet.basico.tiposDados.Viagem;
 
-public aspect ViagemNumViagensCtrl /*extends ViagemIntegracaoCtrl*/{
+public aspect ViagemNumViagensCtrl extends ViagemIntegracaoCtrl{
 
 	INumViagensMgt interfaceNumViagensMgt;
 	

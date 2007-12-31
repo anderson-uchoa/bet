@@ -6,12 +6,13 @@
 		</div>
 
 <div class="left">
+
 	<h3>$nomeOperacao Pagamento</h3>
 		<div class="left_box">
 			<form id="formPagamento" action="gerenciaPagamento.html">
 				#if ($pgtoID)<label>Identificador do Pagamento: <input type="text" name="pgtoID" value="$pgtoID" readonly="readonly" class="search_tiny"/></label><br/>#end 
 				
-				<label>Valor Pagamento: <input type="text" name="valorPgto" #if ($pagamento.ValorPgto) value="$pagamento.ValorPgto" #end class="search_small"/></label><br/>
+				<label>Valor do Pagamento: <input type="text" name="valorPgto" #if ($pagamento.ValorPgto) value="$pagamento.ValorPgto" #end class="search_small"/></label><br/>
 				<label>Número do Cartão:
 					<select name="cartaoID">
 					#if ($pgtoID)
@@ -28,8 +29,14 @@
 					#end
 					</select>
 				</label><br/>				
-				<label>Data de Pagamento: <input id="dtPgto" type="text" name="dtPgto" class="search_small" #if ($pagamento.DtPgto) value="$sdf.format($pagamento.DtPgto.Time)" #else value="$sdf.format($data.Time)" #end"/></label><br/>
-
+				<label>Data de Pagamento: <input id="dtPgto" type="text" name="dtPgto" class="search_small" #if ($pagamento.DtPgto) value="$sdf.format($pagamento.DtPgto.Time)" #else value="$sdf.format($data.Time)" #end"/>
+				</label><br/>
+				<label>Tipo de Pagamento:
+					<select name="tipoPagto">
+						<option value="Aquisição" #if ($pgtoID) #if ($pagtoCartao.TipoPagto=="Aquisicao") selected="selected" #end #end>Aquisição</option>
+						<option value="Carga" #if ($pgtoID) #if ($pagtoCartao.TipoPagto=="Carga") selected="selected" #end #end>Carga</option>
+					</select>
+				</label><br/>
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="submit" class="submit" value="$nomeOperacao"/>
 				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaPagamento.html')"/>

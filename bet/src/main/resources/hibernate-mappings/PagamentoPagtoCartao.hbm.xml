@@ -14,6 +14,8 @@
 
         <property name="tipoPagto" type="java.lang.String" update="true" insert="true" column="tipoPagto"/>
 		
+		<one-to-one name="pagamento" class="lps.bet.basico.tiposDados.Pagamento" lazy="false"/>
+		
     </class>
 
 </hibernate-mapping>
