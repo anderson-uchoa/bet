@@ -21,24 +21,14 @@
 					</select>
 				</label><br/>	
 				<label>Desconto(%): <input type="text" name="desconto" #if ($tipo.Desconto) value="$tipo.Desconto" #end class="search"/></label><br/>
-				#if ($pagarCartoes)
-				  <label>Pagto. da Aquisição do Cartão: 	
+				<label>Pagto. da Aquisição do Cartão: 	
 					  <select name="pagtoAquisicaoCartao">
-						  <option value="true" #if ($pagtoAquisicaoCartao) selected="selected" #end>Sim</option>
-						  <option value="false" #if (! $pagtoAquisicaoCartao) selected="selected" #end>Não</option>						
+						  <option value="true" #if ($tipoPagamento) #if ($tipoPagamento.pagtoAquisicaoCartao) selected="selected" #end #end>Sim</option>
+						  <option value="false" #if (!$tipoPagamento) selected="selected" #end #if ($tipoPagamento.pagtoAquisicaoCartao=="false") selected="selected" #end>Não</option>						
 					  </select>
 				  </label><br/>
-		          <label>Valor da Aquisição: <input type="text" name="valorAquisicao" value="$valorAquisicao" class="search"/></label><br/>
-		        #end						
-				<label>Selecione os tipos incompat&iacute;veis:</label>
-				<br />
-				#if ($listaTipos)
-				  #foreach ($tipoPassageiro in $listaTipos)
-				    <input type="checkbox" name="chkTipo${tipoPassageiro.TipoID}" value="checked" 
-				    #if ($listaTiposIncompativeis.contains($tipoPassageiro)) checked #end /> $tipoPassageiro.NomeTipo
-				    <br />
-				  #end
-				#end
+		        <label>Valor da Aquisição: <input type="text" name="valorAquisicao" #if ($tipoPagamento) value="$tipoPagamento.ValorAquisicao" #else value="0.0" #end class="search"/></label><br/>	
+				<br/>
 				
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="submit" class="submit" value="$nomeOperacao"/>
