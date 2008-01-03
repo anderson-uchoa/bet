@@ -18,7 +18,7 @@ public aspect Autenticacao {
 		this.autenticacaoDAO = autenticacaoDAO;
 	}
 
-	pointcut acesso(): execution(* lps.bet.basico.web..*.handleRequestInternal(..)) && !execution(* lps.bet.basico.web.autenticacao.GerenciaLogin.handleRequestInternal(..));
+	pointcut acesso(): execution(* lps.bet..*.handleRequestInternal(..)) && !execution(* lps.bet.basico.web.autenticacao.GerenciaLogin.handleRequestInternal(..));
 	
 	before() : acesso (){
 		Object[] args = thisJoinPoint.getArgs();

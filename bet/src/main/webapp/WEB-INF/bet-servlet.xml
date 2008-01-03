@@ -79,6 +79,11 @@
 				<prop key="/formCartao.html">GerenciaCartaoPgtoCartao</prop>
 				<!--Fim da parte web do Pagamento de Cartao -->
 				
+				<!--Empresa Usuária-->
+				<prop key="/gerenciaEmprUsuaria.html">GerenciaEmpresaUsuaria</prop>
+				<prop key="/formEmprUsuaria.html">GerenciaEmpresaUsuaria</prop>
+				<!--Fim da parte web de Empresa Usuária-->
+				
             </props>
         </property>
     </bean>
@@ -848,5 +853,29 @@
 		</property>
 	</bean>
 	<!--Fim de Pagamento de Cartao-->
+	
+	<!-- Empresa Usuaria-->
+	<bean id="GerenciaEmpresaUsuaria" class="lps.bet.variabilidades.web.empresaUsuaria.GerenciaEmpresaUsuaria">
+		<property name="interfaceEmpresaUsuariaMgr">
+			<ref bean="EmpresaUsuariaMgr"/>
+		</property>
+		<property name="nivelMinimoAcesso">
+            <value>${config.nivel.GerenciaPassageiro}</value>
+        </property>
+	</bean>
+
+	<bean id="EmpresaUsuariaDAO" class="lps.bet.variabilidades.empresaUsuariaMgr.EmpresaUsuariaDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<bean id="EmpresaUsuariaMgr" class="lps.bet.variabilidades.empresaUsuariaMgr.EmpresaUsuariaMgr">
+		<property name="empresaUsuariaDAO">
+			<ref bean="EmpresaUsuariaDAO"/>
+		</property>
+	</bean>	
+	
+	<!--Fim de Empresa Usuária-->
 
 </beans>
