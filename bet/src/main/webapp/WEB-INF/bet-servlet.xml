@@ -51,7 +51,7 @@
                 <prop key="/aquisicaoCartao.html">AquisicaoCartao</prop>
                 <!--prop key="/cargaCartao.html">CargaCartao</prop-->
 
-                <prop key="/acessoBasico.html">AcessoBasico</prop>
+                <!--prop key="/acessoBasico.html">AcessoBasico</prop-->
                 <prop key="/login.html">GerenciaLogin</prop>
                 <prop key="/logout.html">GerenciaLogin</prop>
 
@@ -85,6 +85,8 @@
 				<prop key="/cargaCartao.html">CargaCartaoEmpresaUsuaria</prop>
 				<prop key="/gerenciaPassageiro.html">GerenciaPassageiroEmpresaUsuaria</prop>
 				<prop key="/formPassageiro.html">GerenciaPassageiroEmpresaUsuaria</prop>
+				<prop key="/acessoBasico.html">AcessoBasicoEmpresaUsuaria</prop>
+				<prop key="/formCartoesEmpresaUsuaria.html">AcessoBasicoEmpresaUsuaria</prop>
 				<!--Fim da parte web de Empresa Usuária-->
 				
 				<!--Terminal-->
@@ -893,6 +895,21 @@
 		</property>
         <property name="nivelMinimoAcesso">
             <value>${config.nivel.CargaCartao}</value>
+        </property>
+    </bean>
+	
+	<bean id="AcessoBasicoEmpresaUsuaria" class="lps.bet.variabilidades.web.empresaUsuaria.AcessoBasicoEmpresaUsuaria">
+        <property name="interfaceCartaoMgt">
+            <ref bean="CartaoPgtoCartaoCtrl"/>
+        </property>
+        <property name="interfacePassageiroMgt">
+            <ref bean="PassageiroMgr"/>
+        </property>
+        <property name="interfaceEmpresaUsuariaMgt">
+			<ref bean="EmpresaUsuariaMgr"/>
+		</property>
+		<property name="nivelMinimoAcesso">
+            <value>${config.nivel.AcessoBasico}</value>
         </property>
     </bean>
 	

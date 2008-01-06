@@ -18,6 +18,7 @@ public interface IEmpresaUsuariaMgt {
 	
 	public EmpresaUsuaria buscarEmpresaPorPassageiro(Passageiro passageiro);
 	public EmpresaUsuaria buscarEmpresaUsuaria(String nomeFantasia);
+	public EmpresaUsuaria buscarEmpresaUsuariaPorCNPJ(String cnpj);
 	
 	public void atribuirEmpresaAoPassageiro(EmpresaUsuaria empresaNova, Passageiro passageiro);
 }

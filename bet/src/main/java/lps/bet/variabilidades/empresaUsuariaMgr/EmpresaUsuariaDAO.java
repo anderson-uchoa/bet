@@ -2,7 +2,6 @@ package lps.bet.variabilidades.empresaUsuariaMgr;
 
 import java.util.List;
 
-import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.variabilidades.tiposDados.EmpresaUsuaria;
 
@@ -37,6 +36,13 @@ public class EmpresaUsuariaDAO extends HibernateDaoSupport{
         empresaUsuariaPorNome.add(Restrictions.eq("nomeFantasia", nomeFantasia));
         List empresas = getHibernateTemplate().findByCriteria(empresaUsuariaPorNome);
     	return (EmpresaUsuaria) empresas.get(0);  
+	}
+	
+	public EmpresaUsuaria buscarEmpresaUsuariaPorCNPJ(String cnpj){
+		DetachedCriteria empresaUsuariaPorCNPJ = DetachedCriteria.forClass(EmpresaUsuaria.class);
+        empresaUsuariaPorCNPJ.add(Restrictions.eq("cnpj", cnpj));
+        List empresas = getHibernateTemplate().findByCriteria(empresaUsuariaPorCNPJ);
+    	return (EmpresaUsuaria) empresas.get(0);
 	}
 	
 	public EmpresaUsuaria buscarEmpresaPorPassageiro(Passageiro passageiro){

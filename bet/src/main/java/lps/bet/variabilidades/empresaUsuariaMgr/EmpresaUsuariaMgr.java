@@ -56,6 +56,10 @@ public class EmpresaUsuariaMgr implements IEmpresaUsuariaMgt{
 	public EmpresaUsuaria buscarEmpresaUsuaria(String nomeFantasia){
 		return empresaUsuariaDAO.buscarEmpresa(nomeFantasia);
 	}
+	
+	public EmpresaUsuaria buscarEmpresaUsuariaPorCNPJ(String cnpj) {
+		return empresaUsuariaDAO.buscarEmpresaUsuariaPorCNPJ(cnpj);
+	}
 
 	public EmpresaUsuariaDAO getEmpresaUsuariaDAO() {
 		return empresaUsuariaDAO;
