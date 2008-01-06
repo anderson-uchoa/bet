@@ -23,8 +23,7 @@ public class AcessoBasico extends ControladorBet {
     SimpleDateFormat sdf;
 
     public AcessoBasico() {
-        sdf = new SimpleDateFormat();
-        sdf.applyPattern("dd/MM/yyyy");
+        sdf = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     protected ModelAndView buscarCartoesPorPassageiro(long cpf) {
