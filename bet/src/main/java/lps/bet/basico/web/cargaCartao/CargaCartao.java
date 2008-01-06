@@ -20,8 +20,7 @@ public class CargaCartao extends ControladorBet implements ISolicitarCarga {
     SimpleDateFormat sdf;
 
     public CargaCartao() {
-        sdf = new SimpleDateFormat();
-        sdf.applyPattern("dd/MM/yyyy");
+    	sdf = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     public void solicitarCarga(int cartaoID, float valor) {

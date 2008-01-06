@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.variabilidades.empresaUsuariaMgr.IEmpresaUsuariaMgr;
+import lps.bet.variabilidades.empresaUsuariaMgr.IEmpresaUsuariaMgt;
 import lps.bet.variabilidades.tiposDados.EmpresaUsuaria;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -15,20 +15,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class GerenciaEmpresaUsuaria extends ControladorBet{
 	
-	public IEmpresaUsuariaMgr interfaceEmpresaUsuariaMgr;
+	public IEmpresaUsuariaMgt interfaceEmpresaUsuariaMgt;
 	
 	public GerenciaEmpresaUsuaria(){
 		nivelMinimoAcesso = 10;
 	}
 
 	protected void criarEmprUsuaria(EmpresaUsuaria empresa){
-		interfaceEmpresaUsuariaMgr.criarEmpresa(empresa);
+		interfaceEmpresaUsuariaMgt.criarEmpresa(empresa);
 		
 	
 	}
 
 	protected ModelAndView buscarEmprUsuaria(){
-		List empresasUsuarias = interfaceEmpresaUsuariaMgr.buscarEmpUsu();
+		List empresasUsuarias = interfaceEmpresaUsuariaMgt.buscarEmpresasUsuarias();
 		
 		ModelAndView mav = new ModelAndView("gerenciaEmprUsuaria");
 		
@@ -37,7 +37,7 @@ public class GerenciaEmpresaUsuaria extends ControladorBet{
 	}
 	
 	protected ModelAndView buscarEmprUsuaria(int empresaID){
-		EmpresaUsuaria empresaUsuaria = interfaceEmpresaUsuariaMgr.buscarEmpUsu(empresaID);
+		EmpresaUsuaria empresaUsuaria = interfaceEmpresaUsuariaMgt.buscarEmpUsu(empresaID);
 		ModelAndView mav = new ModelAndView("gerenciaEmprUsuaria");
 		if (empresaUsuaria==null){
 			mav.addObject("mensagem", "Empresa Usuária não encontrada.");
@@ -54,7 +54,7 @@ public class GerenciaEmpresaUsuaria extends ControladorBet{
 	}
 	
 	protected void alterarEmprUsuaria(EmpresaUsuaria empresa){
-		interfaceEmpresaUsuariaMgr.alterarEmpresa(empresa);
+		interfaceEmpresaUsuariaMgt.alterarEmpresa(empresa);
 	}
 
 	protected EmpresaUsuaria montarEmprUsuaria(HttpServletRequest request){
@@ -67,7 +67,7 @@ public class GerenciaEmpresaUsuaria extends ControladorBet{
 		}
 		//Senão precisa buscar
 		else {
-			empresa = interfaceEmpresaUsuariaMgr.buscarEmpUsu(Integer.parseInt(request.getParameter("usuarioID")));
+			empresa = interfaceEmpresaUsuariaMgt.buscarEmpUsu(Integer.parseInt(request.getParameter("usuarioID")));
 		}
 		empresa.setNomeFantasia(request.getParameter("nomeFantasia").trim());
 		empresa.setContato(request.getParameter("contato").trim());
@@ -99,7 +99,7 @@ public class GerenciaEmpresaUsuaria extends ControladorBet{
 		else {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
-			empresa = interfaceEmpresaUsuariaMgr.buscarEmpUsu(Integer.parseInt(empresaID));
+			empresa = interfaceEmpresaUsuariaMgt.buscarEmpUsu(Integer.parseInt(empresaID));
 		}
 		mav.addObject("empresa",empresa);		
 		return mav;		
@@ -127,7 +127,7 @@ public class GerenciaEmpresaUsuaria extends ControladorBet{
 					int usuarioID = Integer.parseInt(empresasIDs[i]);
 					EmpresaUsuaria emp = new EmpresaUsuaria();
 					emp.setUsuarioID(usuarioID);
-					interfaceEmpresaUsuariaMgr.removerEmpresa(emp);
+					interfaceEmpresaUsuariaMgt.removerEmpresa(emp);
 				}
 			}
 
@@ -147,13 +147,13 @@ public class GerenciaEmpresaUsuaria extends ControladorBet{
 		}
 	}
 
-	public IEmpresaUsuariaMgr getInterfaceEmpresaUsuariaMgr() {
-		return interfaceEmpresaUsuariaMgr;
+	public IEmpresaUsuariaMgt getInterfaceEmpresaUsuariaMgt() {
+		return interfaceEmpresaUsuariaMgt;
 	}
 
-	public void setInterfaceEmpresaUsuariaMgr(
-			IEmpresaUsuariaMgr interfaceEmpresaUsuariaMgr) {
-		this.interfaceEmpresaUsuariaMgr = interfaceEmpresaUsuariaMgr;
+	public void setInterfaceEmpresaUsuariaMgt(
+			IEmpresaUsuariaMgt interfaceEmpresaUsuariaMgt) {
+		this.interfaceEmpresaUsuariaMgt = interfaceEmpresaUsuariaMgt;
 	}
 	
 }

@@ -1,19 +1,30 @@
 package lps.bet.variabilidades.empresaUsuariaMgr;
 
 import java.util.List;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import lps.bet.basico.tiposDados.Corrida;
+import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.variabilidades.tiposDados.EmpresaUsuaria;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 public class EmpresaUsuariaDAO extends HibernateDaoSupport{
+	
+	String hqlBuscarEmpresaPorPassageiro;	
+
+	public void setHqlBuscarEmpresaPorPassageiro(String hqlBuscarEmpresaPorPassageiro) {
+		this.hqlBuscarEmpresaPorPassageiro = hqlBuscarEmpresaPorPassageiro;
+	}
 
 	public void salvarEmpresaUsuaria(EmpresaUsuaria empresa) {		
 		getHibernateTemplate().saveOrUpdate(empresa);
 		
     }
 	
-	public List getEmpresa(){		
-		List empresasUsuarias = getHibernateTemplate().loadAll(EmpresaUsuaria.class);
-		return empresasUsuarias;
+	public List buscarEmpresas(){		
+		return getHibernateTemplate().loadAll(EmpresaUsuaria.class);
 		
 	}
 	
@@ -21,6 +32,21 @@ public class EmpresaUsuariaDAO extends HibernateDaoSupport{
 		return (EmpresaUsuaria) getHibernateTemplate().get(EmpresaUsuaria.class, new Integer(empresaID));
 	}
 	
+	public EmpresaUsuaria buscarEmpresa(String nomeFantasia){
+		DetachedCriteria empresaUsuariaPorNome = DetachedCriteria.forClass(EmpresaUsuaria.class);
+        empresaUsuariaPorNome.add(Restrictions.eq("nomeFantasia", nomeFantasia));
+        List empresas = getHibernateTemplate().findByCriteria(empresaUsuariaPorNome);
+    	return (EmpresaUsuaria) empresas.get(0);  
+	}
+	
+	public EmpresaUsuaria buscarEmpresaPorPassageiro(Passageiro passageiro){
+		List empresas = getHibernateTemplate().find(hqlBuscarEmpresaPorPassageiro, passageiro);
+		if (empresas.isEmpty()) 
+			return null;
+		else 
+			return (EmpresaUsuaria) empresas.get(0);	
+	}
+
 	public void inserirEmpresa(EmpresaUsuaria empresa){
 		salvarEmpresaUsuaria(empresa);		
 	}

@@ -1,11 +1,13 @@
 
 package lps.bet.basico.tiposDados;
 
+import java.util.Collection;
+
 public class Cargo {
 
 	private int cargoID;
 	private String nomeCargo;
-	private java.util.Collection funcionarios;
+	private Collection funcionarios;
 	private int nivelAcessoDefault;
 
 	public String getNomeCargo () {

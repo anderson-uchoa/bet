@@ -32,6 +32,20 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
-	
+	@Override
+	public boolean equals(Object arg0) {
+		if (this == arg0)
+			return true;
+		
+		if (arg0 == null || arg0.getClass() != this.getClass()){
+			return false;
+		}
+		return this.usuarioID == ((Usuario) arg0).usuarioID;
+	}
+
+	@Override
+	public int hashCode() {
+		return usuarioID;
+	}
 	
 }

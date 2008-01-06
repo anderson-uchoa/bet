@@ -24,7 +24,7 @@ public aspect Autorizacao {
 
 	declare precedence: Autenticacao, Autorizacao;
 
-	pointcut acesso(): execution(ModelAndView lps.bet.basico.web..*.handleRequestInternal(HttpServletRequest, HttpServletResponse))
+	pointcut acesso(): execution(* lps.bet..*.handleRequestInternal(..))
 					&& !execution(* lps.bet.basico.web.autenticacao.GerenciaLogin.handleRequestInternal(..));
 	
 	pointcut login(): execution(* lps.bet.basico.web.autenticacao.GerenciaLogin.doLogin(..));

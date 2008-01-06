@@ -20,8 +20,7 @@ public class GerenciaPagamento extends ControladorBet {
     SimpleDateFormat sdf;
 
     public GerenciaPagamento() {
-        sdf = new SimpleDateFormat();
-        sdf.applyPattern("dd/MM/yyyy");
+    	sdf = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     public ICartaoMgt getInterfaceCartaoMgt() {

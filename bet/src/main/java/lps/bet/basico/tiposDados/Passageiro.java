@@ -10,7 +10,6 @@ public class Passageiro extends Usuario{
 	private long cpf;
 	private Collection cartoes;
 
-
 	public Passageiro(){
 	}
 
@@ -37,6 +36,5 @@ public class Passageiro extends Usuario{
 	}
 	public void setCpf(long cpf) {
 		this.cpf = cpf;
-	}
-
+	}	
 }

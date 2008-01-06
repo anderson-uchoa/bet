@@ -25,8 +25,7 @@ public class GerenciaCartao extends ControladorBet {
     SimpleDateFormat sdf;
 
     public GerenciaCartao() {
-        sdf = new SimpleDateFormat();
-        sdf.applyPattern("dd/MM/yyyy");
+    	sdf = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     protected void criarCartao(Cartao cartao) {

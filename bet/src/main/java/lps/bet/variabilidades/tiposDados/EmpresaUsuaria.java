@@ -17,6 +17,12 @@ public class EmpresaUsuaria extends Usuario{
 	private String email;
 	private Collection<Passageiro> passageiros;
 
+	
+	
+	public EmpresaUsuaria() {
+		
+	}
+	
 	public String getContato() {
 		return contato;
 	}
@@ -72,5 +78,14 @@ public class EmpresaUsuaria extends Usuario{
 
 	public void setPassageiros(Collection<Passageiro> passageiros) {
 		this.passageiros = passageiros;
-	}	
+	}
+	
+	public void adicionarPassageiro(Passageiro passageiro){
+		passageiros.add(passageiro);
+	}
+	
+	public void removerPassageiro(Passageiro passageiro){
+		passageiros.remove(passageiro);
+	}
+	
 }

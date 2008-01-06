@@ -1,4 +1,4 @@
-package lps.bet.basico.web.controlGerencia.passageiro;
+package lps.bet.variabilidades.web.empresaUsuaria;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,14 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import lps.bet.basico.passageiroMgr.IPassageiroMgt;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.web.ControladorBet;
+import lps.bet.variabilidades.empresaUsuariaMgr.IEmpresaUsuariaMgt;
+import lps.bet.variabilidades.tiposDados.EmpresaUsuaria;
 
 import org.springframework.web.servlet.ModelAndView;
 
-public class GerenciaPassageiro extends ControladorBet{
+public class GerenciaPassageiroEmpresaUsuaria extends ControladorBet{
 
 	IPassageiroMgt interfacePassageiroMgt;
+	IEmpresaUsuariaMgt interfaceEmpresaUsuariaMgt;
 
-	public GerenciaPassageiro() {
+	public GerenciaPassageiroEmpresaUsuaria() {
 		nivelMinimoAcesso = 10;
 	}
 
@@ -27,6 +30,15 @@ public class GerenciaPassageiro extends ControladorBet{
 
 	public void setInterfacePassageiroMgt(IPassageiroMgt interfacePassageiroMgt) {
 		this.interfacePassageiroMgt = interfacePassageiroMgt;
+	}	
+
+	public IEmpresaUsuariaMgt getInterfaceEmpresaUsuariaMgt() {
+		return interfaceEmpresaUsuariaMgt;
+	}
+
+	public void setInterfaceEmpresaUsuariaMgt(
+			IEmpresaUsuariaMgt interfaceEmpresaUsuariaMgt) {
+		this.interfaceEmpresaUsuariaMgt = interfaceEmpresaUsuariaMgt;
 	}
 
 	protected void criarPassageiro(Passageiro passageiro){
@@ -51,7 +63,16 @@ public class GerenciaPassageiro extends ControladorBet{
 		passageiro.setLogin(request.getParameter("login").trim());
 		passageiro.setSenha(request.getParameter("senha").trim());
 		passageiro.setNivelAcesso(1);
+				
 		return passageiro;
+	}
+
+	private void atribuirEmpresaAoPassageiro(String nomeFantasia, Passageiro passageiro) {
+		EmpresaUsuaria empresaNova = null;
+		if (!nomeFantasia.equals("nenhuma")){
+			empresaNova = interfaceEmpresaUsuariaMgt.buscarEmpresaUsuaria(nomeFantasia);			
+		}		
+		interfaceEmpresaUsuariaMgt.atribuirEmpresaAoPassageiro(empresaNova, passageiro);
 	}
 	
 	protected ModelAndView buscarPassageiros(){
@@ -87,6 +108,7 @@ public class GerenciaPassageiro extends ControladorBet{
 		mav.addObject("usuarioID",usuarioID);
 		
 		Passageiro passageiro = null;
+		EmpresaUsuaria empresaUsuaria = null;
 		
 		if (usuarioID == null){
 			mav.addObject("operacao", "criar");
@@ -96,8 +118,16 @@ public class GerenciaPassageiro extends ControladorBet{
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
 			passageiro = interfacePassageiroMgt.buscarPassageiroPorID(Integer.parseInt(usuarioID));
+			empresaUsuaria = interfaceEmpresaUsuariaMgt.buscarEmpresaPorPassageiro(passageiro);
 		}
-		mav.addObject("passageiro",passageiro);		
+		mav.addObject("passageiro",passageiro);
+		mav.addObject("empresaUsuaria", empresaUsuaria);
+		
+		//Para poder selecionar alguma empresa na criação ou alteração
+		List empresas = interfaceEmpresaUsuariaMgt.buscarEmpresasUsuarias();
+		mav.addObject("empresas", empresas);
+		
+		
 		return mav;		
 	}
 
@@ -109,18 +139,24 @@ public class GerenciaPassageiro extends ControladorBet{
 	
 	public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String operacao = request.getParameter("operacao");
-		
+				
 		if (request.getServletPath().equals("/gerenciaPassageiro.html")){
 			//Quando é chamado pela primeira vez a URL não possui o parâmetro 'operacao'
 			if (operacao == null)
 				return buscarPassageiros();
 			
 			if (operacao.equals("criar")){
-				criarPassageiro(montarPassageiro(request));
+				Passageiro passageiro = montarPassageiro(request);
+				criarPassageiro(passageiro);
+				String nomeFantasia = request.getParameter("nomeFantasia").trim();
+				atribuirEmpresaAoPassageiro(nomeFantasia, passageiro); 
 			}
 			
 			else if (operacao.equals("alterar")){
-				alterarPassageiro(montarPassageiro(request));
+				Passageiro passageiro = montarPassageiro(request);
+				alterarPassageiro(passageiro);
+				String nomeFantasia = request.getParameter("nomeFantasia").trim();
+				atribuirEmpresaAoPassageiro(nomeFantasia, passageiro); 
 			}
 			
 			if (operacao.equals("remover")){

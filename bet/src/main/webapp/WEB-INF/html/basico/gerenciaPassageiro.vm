@@ -31,7 +31,7 @@
 						<td>$passageiro.NomePassageiro</td>
 						<td>$passageiro.Login</td>
 						<td>$passageiro.Cpf</td>						
-						<td><a href="formPassageiro.html?passageiroID=$passageiro.UsuarioID">Alterar</a></td>
+						<td><a href="formPassageiro.html?usuarioID=$passageiro.UsuarioID">Alterar</a></td>
 						<td><a href="formCartao.html?usuarioID=$passageiro.UsuarioID">Criar Cartão</a></td>
 					</tr>
 					#end
@@ -43,7 +43,6 @@
 			<a href="formPassageiro.html">Inserir Novo Passageiro</a>
 		</div>
 	</div>
-	
 	
 	
 	<div class="right">

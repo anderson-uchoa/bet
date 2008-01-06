@@ -49,14 +49,14 @@
                 <prop key="/gerenciaViagem.html">GerenciaViagem</prop>
 
                 <prop key="/aquisicaoCartao.html">AquisicaoCartao</prop>
-                <prop key="/cargaCartao.html">CargaCartao</prop>
+                <!--prop key="/cargaCartao.html">CargaCartao</prop-->
 
                 <prop key="/acessoBasico.html">AcessoBasico</prop>
                 <prop key="/login.html">GerenciaLogin</prop>
                 <prop key="/logout.html">GerenciaLogin</prop>
 
                 <prop key="/formTarifa.html">GerenciaTarifa</prop>
-                <prop key="/formPassageiro.html">GerenciaPassageiro</prop>
+                <!--prop key="/formPassageiro.html">GerenciaPassageiro</prop-->
                 <!--prop key="/formTipoPassageiro.html">GerenciaTipoPassageiro</prop>
 				<prop key="/formCartao.html">GerenciaCartao</prop>
 				<prop key="/formPagamento.html">GerenciaPagamento</prop-->
@@ -82,7 +82,15 @@
 				<!--Empresa Usuária-->
 				<prop key="/gerenciaEmprUsuaria.html">GerenciaEmpresaUsuaria</prop>
 				<prop key="/formEmprUsuaria.html">GerenciaEmpresaUsuaria</prop>
+				<prop key="/cargaCartao.html">CargaCartaoEmpresaUsuaria</prop>
+				<prop key="/gerenciaPassageiro.html">GerenciaPassageiroEmpresaUsuaria</prop>
+				<prop key="/formPassageiro.html">GerenciaPassageiroEmpresaUsuaria</prop>
 				<!--Fim da parte web de Empresa Usuária-->
+				
+				<!--Terminal-->
+				<prop key="/gerenciaTerminal.html">GerenciaTerminal</prop>
+				<prop key="/formTerminal.html">GerenciaTerminal</prop>
+				<!--Fim da parte web de Terminal-->
 				
             </props>
         </property>
@@ -854,28 +862,74 @@
 	</bean>
 	<!--Fim de Pagamento de Cartao-->
 	
-	<!-- Empresa Usuaria-->
+	<!-- Empresa Usuaria com Pagto de Cartao-->
 	<bean id="GerenciaEmpresaUsuaria" class="lps.bet.variabilidades.web.empresaUsuaria.GerenciaEmpresaUsuaria">
-		<property name="interfaceEmpresaUsuariaMgr">
+		<property name="interfaceEmpresaUsuariaMgt">
 			<ref bean="EmpresaUsuariaMgr"/>
 		</property>
 		<property name="nivelMinimoAcesso">
             <value>${config.nivel.GerenciaPassageiro}</value>
         </property>
 	</bean>
+	
+	<bean id="GerenciaPassageiroEmpresaUsuaria" class="lps.bet.variabilidades.web.empresaUsuaria.GerenciaPassageiroEmpresaUsuaria">
+        <property name="interfacePassageiroMgt">
+            <ref bean="PassageiroMgr"/>
+        </property>
+		<property name="interfaceEmpresaUsuariaMgt">
+            <ref bean="EmpresaUsuariaMgr"/>
+        </property>
+        <property name="nivelMinimoAcesso">
+            <value>${config.nivel.GerenciaPassageiro}</value>
+        </property>
+    </bean>
 
+	<bean id="CargaCartaoEmpresaUsuaria" class="lps.bet.variabilidades.web.empresaUsuaria.CargaCartaoEmpresaUsuaria">
+        <property name="interfaceCartaoMgt">
+            <ref bean="CartaoPgtoCartaoCtrl"/>
+        </property>
+		<property name="interfaceEmpresaUsuariaMgt">
+			<ref bean="EmpresaUsuariaMgr"/>
+		</property>
+        <property name="nivelMinimoAcesso">
+            <value>${config.nivel.CargaCartao}</value>
+        </property>
+    </bean>
+	
 	<bean id="EmpresaUsuariaDAO" class="lps.bet.variabilidades.empresaUsuariaMgr.EmpresaUsuariaDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
+		<property name="hqlBuscarEmpresaPorPassageiro">
+            <value>${config.hql.BuscarEmpresaPorPassageiro}</value>
+        </property>		
 	</bean>
 	
 	<bean id="EmpresaUsuariaMgr" class="lps.bet.variabilidades.empresaUsuariaMgr.EmpresaUsuariaMgr">
 		<property name="empresaUsuariaDAO">
 			<ref bean="EmpresaUsuariaDAO"/>
 		</property>
-	</bean>	
-	
+	</bean>		
 	<!--Fim de Empresa Usuária-->
+	
+	<!--Terminal-->
+	<bean id="GerenciaTerminal" class="lps.bet.variabilidades.web.terminal.GerenciaTerminal">
+		<property name="interfaceTerminalMgr">
+			<ref bean="TerminalMgr"/>
+		</property>
+	</bean>
+
+	<bean id="TerminalMgr" class="lps.bet.variabilidades.terminalMgr.TerminalMgr">
+		<property name="terminalDAO">
+			<ref bean="TerminalDAO"/>
+		</property>
+	</bean>
+
+	<bean id="TerminalDAO" class="lps.bet.variabilidades.terminalMgr.TerminalDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<!--Fim de Terminal-->
 
 </beans>
