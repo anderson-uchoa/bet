@@ -12,7 +12,7 @@ import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
-import lps.bet.basico.tiposDados.Onibus;
+import lps.bet.basico.tiposDados.Validador;
 import lps.bet.basico.web.ControladorBet;
 import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 import lps.bet.basico.web.controlGerencia.linha.projecao.IteradorProjecao;
@@ -31,10 +31,8 @@ public class GerenciaCorrida extends ControladorBet{
 	SimpleDateFormat sdfHora;
 	
 	public GerenciaCorrida(){
-		sdfData = new SimpleDateFormat();
-		sdfData.applyPattern("dd/MM/yyyy");
-		sdfHora = new SimpleDateFormat();
-		sdfHora.applyPattern("hh:mm");
+		sdfData = new SimpleDateFormat("dd/MM/yyyy");
+		sdfHora = new SimpleDateFormat("hh:mm");
 	}
 	
 	
@@ -44,9 +42,9 @@ public class GerenciaCorrida extends ControladorBet{
 		dados.setCorridaID(Integer.parseInt(request.getParameter("corridaID")));
 		
 		Linha linha = interfaceLinhaMgt.buscarLinha(request.getParameter("nomeLinha"));
-		Onibus onibus = interfaceLinhaMgt.buscarOnibus(Integer.parseInt(request.getParameter("onibusID")));
+		Validador onibus = interfaceLinhaMgt.buscarValidador(Integer.parseInt(request.getParameter("validadorID")));
 		dados.setLinha(linha);
-		dados.setOnibus(onibus);
+		dados.setValidador(onibus);
 		dados.setEncerrado(Boolean.parseBoolean(request.getParameter("encerrado")));
 		dados.setSaida(Boolean.parseBoolean(request.getParameter("saida")));
 		if (request.getParameter("inicioDtCorrida") != null){
@@ -127,7 +125,6 @@ public class GerenciaCorrida extends ControladorBet{
 			}
 			Calendar hora = (Calendar) iteradorSaida.next();
 			if (hora != null){
-				//Calendar horaSaidaPrevista = (Calendar) iteradorSaida.next();
 				Calendar horaSaidaPrevista = hora;
 				Calendar horaChegadaPrevista = (Calendar) iteradorChegada.next();
 				corrida.setHoraSaidaPrevista(horaSaidaPrevista);
@@ -139,7 +136,7 @@ public class GerenciaCorrida extends ControladorBet{
 				corrida.setEncerrado(false);
 				corrida.setSaida(false);
 				corrida.setLinha(interfaceLinhaMgt.buscarLinha(request.getParameter("nomeLinha")));
-				corrida.setOnibus(interfaceLinhaMgt.buscarOnibus(Integer.parseInt(request.getParameter("onibusID"))));
+				corrida.setValidador(interfaceLinhaMgt.buscarValidador(Integer.parseInt(request.getParameter("validadorID"))));
 				
 				corridas.add(corrida);
 			}
@@ -155,7 +152,7 @@ public class GerenciaCorrida extends ControladorBet{
 	
 	protected ModelAndView buscarCorridas(){
 		List corridas = interfaceLinhaMgt.buscarCorridas();
-		List todosOnibus = interfaceLinhaMgt.buscarTodosOnibus();
+		List validadores = interfaceLinhaMgt.buscarValidadores();
 		List linhas = interfaceLinhaMgt.buscarLinhas();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat();
@@ -163,7 +160,7 @@ public class GerenciaCorrida extends ControladorBet{
 
 		ModelAndView mav = new ModelAndView("gerenciaCorrida");
 		mav.addObject("corridas", corridas);
-		mav.addObject("todosOnibus", todosOnibus);
+		mav.addObject("validadores", validadores);
 		mav.addObject("linhas", linhas);
 		mav.addObject("sdf", sdf);
 		mav.addObject("data",data);
@@ -202,27 +199,25 @@ public class GerenciaCorrida extends ControladorBet{
 		mav.addObject("corridaID",corridaID);
 		
 		Corrida corrida = null;
-		//Calendar data;
 		
 		if (corridaID == null){
 			mav.addObject("operacao", "criar");
 			mav.addObject("nomeOperacao", "Criar");						
-			//data = Calendar.getInstance();
 		}
 		else {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
 			corrida = interfaceLinhaMgt.buscarCorrida(Integer.parseInt(corridaID));
-			//data = pagamento.getDtPgto();
 		}
+
 		mav.addObject("corrida",corrida);		
-		//mav.addObject("data",data);
 		List linhas = interfaceLinhaMgt.buscarLinhas();
-		List todosOnibus = interfaceLinhaMgt.buscarTodosOnibus();
+		List validadores = interfaceLinhaMgt.buscarValidadores();
 		mav.addObject("linhas", linhas);
-		mav.addObject("todosOnibus", todosOnibus);
+		mav.addObject("validadores", validadores);
 		mav.addObject("sdfData", sdfData);
 		mav.addObject("sdfHora", sdfHora);
+		
 		return mav;		
 	}
 	
@@ -230,9 +225,9 @@ public class GerenciaCorrida extends ControladorBet{
 
 		ModelAndView mav = new ModelAndView("formBuscaAvancadaCorrida");
 		List linhas = interfaceLinhaMgt.buscarLinhas();
-		List todosOnibus = interfaceLinhaMgt.buscarTodosOnibus();
+		List validadores = interfaceLinhaMgt.buscarValidadores();
 		mav.addObject("linhas", linhas);
-		mav.addObject("todosOnibus", todosOnibus);
+		mav.addObject("validadores", validadores);
 		return mav;		
 	}
 

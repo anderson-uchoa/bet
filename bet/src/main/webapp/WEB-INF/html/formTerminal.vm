@@ -11,7 +11,8 @@
 			<form id="formTerminal" action="gerenciaTerminal.html">
 				#if ($terminalID)<label>Identificador do Terminal: <input type="text" name="terminalID" readonly="readonly" value="$terminalID" class="search_tiny"/></label><br/>#end 
 				
-				<label>Nome: <input type="text" name="nomeTerminal" #if ($terminal.nomeTerminal) value="$terminal.nomeTerminal" #end class="search"/></label><br/>
+				<label>Nome: <input type="text" name="nomeTerminal" #if ($terminal.NomeTerminal) value="$terminal.NomeTerminal" #end class="search"/></label><br/>
+				<label>Qtde de Validadores: <input type="text" name="qtdValidadores" #if ($terminal.QtdValidadores) value="$terminal.QtdValidadores" #end class="search"/></label><br/>
 				<br/>				
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="button" class="submit" value="$nomeOperacao" onclick="submit()"/>

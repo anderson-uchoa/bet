@@ -35,7 +35,7 @@ public class ViagemLinhaIntegradaCtrl implements IProcessarViagem {
 
         System.out.println("Componente Validar Linha Integrada");
 
-        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID).getLinhaID();
+        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID).getLinhaID();
         System.out.println("LinhaID: " + linhaViagemID);
 
         Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);

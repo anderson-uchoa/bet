@@ -1,8 +1,8 @@
-package lps.bet.basico.tiposDados ;
+package lps.bet.basico.tiposDados;
 
-public class Onibus {
+public class Validador {
 
-	private int onibusID;
+	private int validadorID;
 	private boolean emCorrida = false;
 	private java.util.Collection corridas;
 
@@ -18,11 +18,11 @@ public class Onibus {
 	public void setEmCorrida(boolean emCorrida) {
 		this.emCorrida = emCorrida;
 	}
-	public int getOnibusID() {
-		return onibusID;
+	public int getValidadorID() {
+		return validadorID;
 	}
-	public void setOnibusID(int onibusID) {
-		this.onibusID = onibusID;
+	public void setValidadorID(int validadorID) {
+		this.validadorID = validadorID;
 	}
 
 }

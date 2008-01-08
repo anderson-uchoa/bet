@@ -5,13 +5,14 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="lps.bet.variabilidades.tiposDados">
-    <class name="Terminal" table="TERMINAL">
+    <class name="Terminal" table="var_terminal">
 
         <id name="terminalID" column="terminalID" type="int">
             <generator class="increment"> </generator>
         </id>
 
         <property name="nomeTerminal" type="java.lang.String" update="true" insert="true" column="nomeTerminal"/>
+		<property name="qtdValidadores" type="int" update="true" insert="true" column="qtdValidadores"/>
        			
     </class>
 

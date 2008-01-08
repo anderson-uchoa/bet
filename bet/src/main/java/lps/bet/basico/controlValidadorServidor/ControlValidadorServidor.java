@@ -15,7 +15,7 @@ public class ControlValidadorServidor implements IProcessarTransacao {
     public ControlValidadorServidor() {
     }
 
-    public String processarTransacao(int cod, int cartaoID, int onibusID) {
+    public String processarTransacao(int cod, int cartaoID, int validadorID) {
 
         String resposta = new String();
 
@@ -25,18 +25,18 @@ public class ControlValidadorServidor implements IProcessarTransacao {
             //Codigo 2 corresponde a registro de corrida
             if (cod == 2) {
                 System.out.println("Vai chamar registrar corrida");
-                resposta = interfaceRegistrarCorrida.registrarCorrida(onibusID);
+                resposta = interfaceRegistrarCorrida.registrarCorrida(validadorID);
             }
 
             //Codigo 3 corresponde a uma viagem sendo realizada
             else if (cod == 3) {
 
                 //Verificar se viagem pode ser feita
-                boolean viagemPermitida = interfaceLinhaMgt.verificarPermissaoViagem(onibusID);
+                boolean viagemPermitida = interfaceLinhaMgt.verificarPermissaoViagem(validadorID);
                 if (!viagemPermitida) { //Viagem não permitida, pois não há corrida aberta
                     resposta = "V-NOK";
                 } else {//Validar e Processar viagem
-                    resposta = interfaceProcessarViagem.processarViagem(cartaoID, onibusID);
+                    resposta = interfaceProcessarViagem.processarViagem(cartaoID, validadorID);
                     float saldo = interfaceCartaoMgt.buscarCartao(cartaoID).getSaldo();
                     String strSaldo = Float.toString(saldo);
                     if (resposta.equals("PD-OK")) {

@@ -17,7 +17,7 @@ public class Corrida {
 	private float credito;
 	private int qtdPassageiros;
 	private Linha linha;
-	private Onibus onibus;
+	private Validador validador;
 	
 	public float getArrecadacao() {
 		return arrecadacao;
@@ -82,11 +82,11 @@ public class Corrida {
 		this.numCorridaDia = numCorridaDia;
 	}
 	
-	public Onibus getOnibus() {
-		return onibus;
+	public Validador getValidador() {
+		return validador;
 	}
-	public void setOnibus(Onibus onibus) {
-		this.onibus = onibus;
+	public void setValidador(Validador validador) {
+		this.validador = validador;
 	}
 	
 	public boolean isSaida() {

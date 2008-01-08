@@ -34,7 +34,7 @@ public class ViagemCtrlNumViagens implements IProcessarViagem {
         float valor = 0;
 
         //2. Buscar a linha do ônibus naquele momento:
-        Linha linha = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID);
+        Linha linha = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID);
 
         //3. Buscar o tipo de passageiro:
         TipoPassageiro tipo = interfaceCartaoMgt.buscarTipoPassagPorCartao(cartaoID);

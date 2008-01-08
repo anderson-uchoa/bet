@@ -1,9 +1,9 @@
 package lps.bet.basico.onibus.validadorMgr;
 
-public class Validador implements IValidadorMgt{
+public class ValidadorMgr implements IValidadorMgt{
 	int validadorID=0, onibusID=0;
 	
-	public Validador(){}
+	public ValidadorMgr(){}
 	
 	public int getValidadorID(){
 		return validadorID;

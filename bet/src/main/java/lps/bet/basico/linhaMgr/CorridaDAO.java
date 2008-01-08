@@ -14,7 +14,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 public class CorridaDAO extends HibernateDaoSupport{
 	
 	String hqlBuscarCorridasPrevistas;
-	String hqlBuscarCorridaAtualOnibus;
+	String hqlBuscarCorridaAtualValidador;
 	
 	public String getHqlBuscarCorridasPrevistas() {
 		return hqlBuscarCorridasPrevistas;
@@ -24,12 +24,12 @@ public class CorridaDAO extends HibernateDaoSupport{
 		this.hqlBuscarCorridasPrevistas = hqlBuscarProximaCorridaPrevista;
 	}
 
-	public String getHqlBuscarCorridaAtualOnibus() {
-		return hqlBuscarCorridaAtualOnibus;
+	public String getHqlBuscarCorridaAtualValidador() {
+		return hqlBuscarCorridaAtualValidador;
 	}
 
-	public void setHqlBuscarCorridaAtualOnibus(String hqlBuscarCorridaAtualOnibus) {
-		this.hqlBuscarCorridaAtualOnibus = hqlBuscarCorridaAtualOnibus;
+	public void setHqlBuscarCorridaAtualValidador(String hqlBuscarCorridaAtualValidador) {
+		this.hqlBuscarCorridaAtualValidador = hqlBuscarCorridaAtualValidador;
 	}	
 	
 	// -------------------------------------------------------------------------
@@ -61,8 +61,8 @@ public class CorridaDAO extends HibernateDaoSupport{
     	if (dados.getCorridaID()!= 0){
     		criteriosCorridas.add(Restrictions.eq("corridaID", dados.getCorridaID()));	
     	}
-    	if (dados.getOnibus() != null){
-    		criteriosCorridas.add(Restrictions.eq("onibus", dados.getOnibus()));	
+    	if (dados.getValidador() != null){
+    		criteriosCorridas.add(Restrictions.eq("validador", dados.getValidador()));	
     	}
     	if (dados.getLinha() != null){
     		criteriosCorridas.add(Restrictions.eq("linha", dados.getLinha()));	
@@ -91,17 +91,17 @@ public class CorridaDAO extends HibernateDaoSupport{
 		return getHibernateTemplate().findByCriteria(criteriosCorridas);
     }
     
-    public List buscarCorridasPrevistas(int onibusID) {
-    	return getHibernateTemplate().find(hqlBuscarCorridasPrevistas, new Integer(onibusID));     	
+    public List buscarCorridasPrevistas(int validadorID) {
+    	return getHibernateTemplate().find(hqlBuscarCorridasPrevistas, new Integer(validadorID));     	
     }
     
-    public Corrida buscarCorridaAtualOnibus(int onibusID){
-     	List corridas = getHibernateTemplate().find(hqlBuscarCorridaAtualOnibus, new Integer(onibusID));
+    public Corrida buscarCorridaAtualOnibus(int validadorID){
+     	List corridas = getHibernateTemplate().find(hqlBuscarCorridaAtualValidador, new Integer(validadorID));
     	return (Corrida) corridas.get(0);
     }
     
-    public boolean verificarPermissaoViagem(int onibusID){
-    	List corridas = getHibernateTemplate().find(hqlBuscarCorridaAtualOnibus, new Integer(onibusID));
+    public boolean verificarPermissaoViagem(int validadorID){
+    	List corridas = getHibernateTemplate().find(hqlBuscarCorridaAtualValidador, new Integer(validadorID));
     	if (corridas.get(0) == null){
     		return false;
     	}
@@ -117,15 +117,14 @@ public class CorridaDAO extends HibernateDaoSupport{
     }
     
     public String iniciarCorrida(Corrida corrida){
-        //corrida.setHoraSaida(new Time(System.currentTimeMillis()));
     	corrida.setHoraSaida(Calendar.getInstance());
         corrida.setSaida(true);
         salvarCorrida(corrida);
         return "CO-I";
     }
     
-    public void registrarArrecadacao(int onibusID, float valor){
-    	Corrida corrida = buscarCorridaAtualOnibus(onibusID);
+    public void registrarArrecadacao(int validadorID, float valor){
+    	Corrida corrida = buscarCorridaAtualOnibus(validadorID);
     	corrida.setArrecadacao(corrida.getArrecadacao()+ valor);
     	
     	//Incrementar em uma unidade a qtd de passageiros para a corrida:
@@ -134,8 +133,8 @@ public class CorridaDAO extends HibernateDaoSupport{
     	salvarCorrida(corrida);
     }
     
-    public void registrarCredito(int onibusID, float valor){
-    	Corrida corrida = buscarCorridaAtualOnibus(onibusID);
+    public void registrarCredito(int validadorID, float valor){
+    	Corrida corrida = buscarCorridaAtualOnibus(validadorID);
     	corrida.setCredito(corrida.getCredito()+ valor);
     	
     	//Incrementar em uma unidade a qtd de passageiros para a corrida:

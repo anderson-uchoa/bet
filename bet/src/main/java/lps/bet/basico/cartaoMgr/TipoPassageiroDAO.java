@@ -1,15 +1,27 @@
 package lps.bet.basico.cartaoMgr;
 
+import java.util.List;
+
+import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.TipoPassageiro;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import java.util.List;
-
 public class TipoPassageiroDAO extends HibernateDaoSupport {
 
-    public void salvarTipoPassageiro(TipoPassageiro tipo) {
+    String hqlBuscarTipoPassagPorCartao;
+    	
+	public String getHqlBuscarTipoPassagPorCartao() {
+		return hqlBuscarTipoPassagPorCartao;
+	}
+
+	public void setHqlBuscarTipoPassagPorCartao(String hqlBuscarTipoPassagPorCartao) {
+		this.hqlBuscarTipoPassagPorCartao = hqlBuscarTipoPassagPorCartao;
+	}
+
+	public void salvarTipoPassageiro(TipoPassageiro tipo) {
         getHibernateTemplate().saveOrUpdate(tipo);
     }
 
@@ -39,13 +51,14 @@ public class TipoPassageiroDAO extends HibernateDaoSupport {
     public void removerTipoPassageiro(TipoPassageiro tipo) {
         getHibernateTemplate().delete(tipo);
     }
-
-    public TipoPassageiro buscarTipoPassagPorCartao(int cartaoID) {
-        DetachedCriteria tipoPorCartao = DetachedCriteria.forClass(TipoPassageiro.class);
-        tipoPorCartao.add(Restrictions.eq("cartaoID", cartaoID));
-        List tipos = getHibernateTemplate().findByCriteria(tipoPorCartao);
-        return (TipoPassageiro) tipos.get(0);
-    }
+ 
+	public TipoPassageiro buscarTipoPassagPorCartao(Cartao cartao){
+		List tipos = getHibernateTemplate().find(hqlBuscarTipoPassagPorCartao, cartao);
+		if (tipos.isEmpty()) 
+			return null;
+		else 
+			return (TipoPassageiro) tipos.get(0);	
+	}
 
     public List buscarTodosTipos() {
         return getHibernateTemplate().loadAll(TipoPassageiro.class);

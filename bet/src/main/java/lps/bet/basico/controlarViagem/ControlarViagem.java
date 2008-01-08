@@ -34,7 +34,7 @@ public class ControlarViagem implements IProcessarViagem {
         }
 
         //2. Buscar a linha do ônibus naquele momento:
-        Linha linha = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID);
+        Linha linha = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID);
 
         //3. Buscar o tipo de passageiro:
         TipoPassageiro tipo = interfaceCartaoMgt.buscarTipoPassagPorCartao(cartaoID);

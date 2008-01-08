@@ -40,7 +40,7 @@
 
 	<bean id="Visor" class="lps.bet.basico.onibus.visor.Visor"/>
 
-	<bean id="ValidadorMgr" class="lps.bet.basico.onibus.validadorMgr.Validador"/>
+	<bean id="ValidadorMgr" class="lps.bet.basico.onibus.validadorMgr.ValidadorMgr"/>
 	
 	<bean id="Gui" class="lps.bet.basico.onibus.gui.ValidadorGUI">
 		<constructor-arg><ref bean="Catraca"/></constructor-arg>

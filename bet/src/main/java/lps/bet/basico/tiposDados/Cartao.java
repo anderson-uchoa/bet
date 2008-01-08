@@ -1,8 +1,7 @@
-
 package lps.bet.basico.tiposDados ;
 
 import java.util.Calendar;
-
+import java.util.Collection;
 
 public class Cartao {
 
@@ -11,8 +10,8 @@ public class Cartao {
 	private float saldo;
 	private int cartaoID;
 	private TipoPassageiro tipoPassageiro;
-	private java.util.Collection viagems;
-	private java.util.Collection pagamentos;
+	private Collection viagems;
+	private Collection pagamentos;
 	private Passageiro passageiro;
 
 	public Calendar getDtAquisicao() {
@@ -52,15 +51,15 @@ public class Cartao {
 		this.tipoPassageiro = tipoPassageiro;
 	}
 
-	public java.util.Collection getViagems() {
+	public Collection getViagems() {
 		return this.viagems;
 	}
 
-	public void setViagems(java.util.Collection viagems) {
+	public void setViagems(Collection viagems) {
 		this.viagems = viagems;
 	}
 
-	public java.util.Collection getPagamentos() {
+	public Collection getPagamentos() {
 		return this.pagamentos;
 	}
 
@@ -76,4 +75,19 @@ public class Cartao {
 		this.passageiro = passageiro;
 	}
 
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		if((obj == null) || (obj.getClass() != this.getClass()))
+			return false;
+		
+		Cartao cartao = (Cartao) obj;
+		return (this.cartaoID == cartao.cartaoID);		
+	}	
+
+	public int hashCode() {
+		return cartaoID;
+	}
+	
 }

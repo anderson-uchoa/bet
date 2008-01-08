@@ -26,7 +26,7 @@
 			not-null="true" lazy="false"
 		/>
 
-		<many-to-one name="onibus" class="Onibus" cascade="none" outer-join="auto" update="true" insert="true" column="onibus_fk"
+		<many-to-one name="validador" class="Validador" cascade="none" outer-join="auto" update="true" insert="true" column="onibus_fk"
 			not-null="true" lazy="false"
 		/>
 	</class>

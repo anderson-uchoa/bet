@@ -5,13 +5,13 @@ import java.util.List;
 import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
-import lps.bet.basico.tiposDados.Onibus;
+import lps.bet.basico.tiposDados.Validador;
 
 public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecadacao{
     
     LinhaDAO linhaDAO;
     CorridaDAO corridaDAO;
-    OnibusDAO onibusDAO;
+    ValidadorDAO validadorDAO;
         
     public LinhaMgr() {         
     }
@@ -26,8 +26,8 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     public Linha buscarLinha(String nomeLinha){
     	return linhaDAO.buscarLinha(nomeLinha);
     }
-    public Linha buscarLinhaAtualOnibus(int onibusID) {
-    	Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);
+    public Linha buscarLinhaAtualValidador(int validadorID) {
+    	Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(validadorID);
     	System.out.println("Corrida ID: " + corrida.getCorridaID());
     	return linhaDAO.buscarLinhaCorrida(corrida);
     }
@@ -63,43 +63,43 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
         corridaDAO.removerCorrida(corridaID);    
     }
     
-    public boolean verificarPermissaoViagem(int onibusID){
-    	return corridaDAO.verificarPermissaoViagem(onibusID);
+    public boolean verificarPermissaoViagem(int validadorID){
+    	return corridaDAO.verificarPermissaoViagem(validadorID);
     }
 
     //Métodos delegados para o OnibusDAO:
-	public Onibus buscarOnibus(int onibusID) {
-		return onibusDAO.buscarOnibus(onibusID);
+	public Validador buscarValidador(int validadorID) {
+		return validadorDAO.buscarValidador(validadorID);
 	}
-	public List buscarTodosOnibus() {
-		return onibusDAO.buscarTodosOnibus();
+	public List buscarValidadores() {
+		return validadorDAO.buscarValidadores();
 	} 
-    public void criarOnibus(Onibus onibus) {
-    	onibusDAO.criarOnibus(onibus);
+    public void criarValidador(Validador validador) {
+    	validadorDAO.criarValidador(validador);
     }
-    public void alterarOnibus(Onibus onibus) {
-    	onibusDAO.alterarOnibus(onibus);
+    public void alterarValidador(Validador validador) {
+    	validadorDAO.alterarValidador(validador);
     }
-    public void removerOnibus(int onibusID) {
-    	onibusDAO.removerOnibus(onibusID);
+    public void removerValidador(int validadorID) {
+    	validadorDAO.removerValidador(validadorID);
     }
 
     //Método da interface IAtualizarCorrida
-    public String atualizarCorrida(int onibusID){
+    public String atualizarCorrida(int validadorID){
         
-        Onibus onibus = onibusDAO.buscarOnibus(onibusID);
+        Validador onibus = validadorDAO.buscarValidador(validadorID);
         
         if (onibus.isEmCorrida()){
-            Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(onibusID);       
-            onibusDAO.alterarEmCorrida(onibus);
+            Corrida corrida = corridaDAO.buscarCorridaAtualOnibus(validadorID);       
+            validadorDAO.alterarEmCorrida(onibus);
             String resposta = corridaDAO.encerrarCorrida(corrida);
             
             return resposta;
         }
         else{
-        	List corridas = corridaDAO.buscarCorridasPrevistas(onibusID);
+        	List corridas = corridaDAO.buscarCorridasPrevistas(validadorID);
             Corrida corrida = (Corrida) corridas.get(0);
-            onibusDAO.alterarEmCorrida(onibus);
+            validadorDAO.alterarEmCorrida(onibus);
             String resposta = corridaDAO.iniciarCorrida(corrida);
             
             return resposta;
@@ -107,12 +107,12 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     }
     
     //Método da interface IRegistrarArrencadacao
-    public void registrarArrecadacao(int onibusID, float valor){
-    	corridaDAO.registrarArrecadacao(onibusID, valor);
+    public void registrarArrecadacao(int validadorID, float valor){
+    	corridaDAO.registrarArrecadacao(validadorID, valor);
     }
            
-    public void registrarCredito(int onibusID, float valor) {
-		corridaDAO.registrarCredito(onibusID, valor);		
+    public void registrarCredito(int validadorID, float valor) {
+		corridaDAO.registrarCredito(validadorID, valor);		
 	}
 
 	//Getters e Setters    
@@ -128,11 +128,11 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
 	public void setLinhaDAO(LinhaDAO linhaDAO) {
 		this.linhaDAO = linhaDAO;
 	}
-	public OnibusDAO getOnibusDAO() {
-		return onibusDAO;
+	public ValidadorDAO getValidadorDAO() {
+		return validadorDAO;
 	}
-	public void setOnibusDAO(OnibusDAO onibusDAO) {
-		this.onibusDAO = onibusDAO;
+	public void setValidadorDAO(ValidadorDAO validadorDAO) {
+		this.validadorDAO = validadorDAO;
 	}
     
 }

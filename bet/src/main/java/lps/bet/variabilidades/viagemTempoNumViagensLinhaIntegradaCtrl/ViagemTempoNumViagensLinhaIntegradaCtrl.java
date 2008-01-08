@@ -49,7 +49,7 @@ public class ViagemTempoNumViagensLinhaIntegradaCtrl implements IProcessarViagem
         int numMaxViagens = interfaceNumViagensMgt.buscarMaxNumViagens();
         int numViagem = 0;
 
-        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualOnibus(onibusID).getLinhaID();
+        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID).getLinhaID();
         System.out.println("LinhaID: " + linhaViagemID);
 
         Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);

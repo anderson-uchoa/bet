@@ -22,7 +22,7 @@
 			<form id="formListaEmprUsuaria">
 			<table id="tabelaEmprUsuaria">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Nome Fantasia</th><th>CNPJ</th><th>Contato</th</tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome Fantasia</th><th>Razão Social</th><th>CNPJ</th><th>Contato</th><th>Login</th></tr>
 				</thead>
 				<tbody>
 					#foreach($empresa in $empresaUsuaria)
@@ -30,8 +30,10 @@
 						<td><input type="checkbox" name="chkUsuarioID" value="$empresa.UsuarioID"/></td>
 						<td>$empresa.UsuarioID</td>
 						<td>$empresa.NomeFantasia</td>
+						<td>$empresa.RazaoSocial</td>
 						<td>$empresa.Cnpj</td>
 						<td>$empresa.Contato</td>
+						<td>$empresa.Login</td>
 						<td><a href="formEmprUsuaria.html?usuarioID=$empresa.UsuarioID">Alterar</a></td>
 					</tr>
 					#end

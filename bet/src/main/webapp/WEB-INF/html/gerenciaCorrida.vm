@@ -22,7 +22,7 @@
 			<form id="formListaCorridas">
 			<table id="tabelaListaCorridas">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Hora Prevista Saída</th><th>Hora Prevista Chegada</th><th>Hora Saída</th><th>Hora Chegada</th><th>Nome Linha</th><th>ID Bus</th><th>Saída</th><th>Encerrado</th><th>Arrecadação</th><th>Crédito</th><th>Qtd. Passageiros</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Hora Prevista Saída</th><th>Hora Prevista Chegada</th><th>Hora Saída</th><th>Hora Chegada</th><th>Nome Linha</th><th>Validador</th><th>Saída</th><th>Encerrado</th><th>Arrecadação</th><th>Crédito</th><th>Qtd. Passageiros</th></tr>
 				</thead>
 				<tbody>
 					#foreach($corrida in $corridas)
@@ -34,7 +34,7 @@
 						<td>#if($corrida.HoraSaida.Time) $sdf.format($corrida.HoraSaida.Time) #else -- #end</td>
 						<td>#if($corrida.HoraChegada.Time) $sdf.format($corrida.HoraChegada.Time) #else -- #end</td>
 						<td>$corrida.Linha.NomeLinha</td>
-						<td>$corrida.Onibus.OnibusID</td>
+						<td>$corrida.Validador.ValidadorID</td>
 						<td>$corrida.Saida</td>
 						<td>$corrida.Encerrado</td>
 						<td>$corrida.Arrecadacao</td>

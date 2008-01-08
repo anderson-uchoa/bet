@@ -82,7 +82,8 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
     }
 
     public TipoPassageiro buscarTipoPassagPorCartao(int cartaoID) {
-        return tipoPassageiroDAO.buscarTipoPassagPorCartao(cartaoID);
+        Cartao cartao = cartaoDAO.buscarCartao(cartaoID);
+    	return tipoPassageiroDAO.buscarTipoPassagPorCartao(cartao);
     }
 
     public float buscarSaldo(int cartaoID) {

@@ -37,7 +37,7 @@
                 <prop key="/gerenciaFuncionario.html">GerenciaFuncionario</prop>
                 <prop key="/gerenciaCargo.html">GerenciaCargo</prop>
                 <prop key="/gerenciaLinha.html">GerenciaLinha</prop>
-                <prop key="/gerenciaOnibus.html">GerenciaOnibus</prop>
+                <prop key="/gerenciaValidador.html">GerenciaValidador</prop>
                 <prop key="/gerenciaCorrida.html">GerenciaCorrida</prop>
                 <prop key="/gerenciaTarifa.html">GerenciaTarifa</prop>
                 <prop key="/gerenciaEmprViaria.html">GerenciaEmpresaViaria</prop>
@@ -185,7 +185,7 @@
         </property>
     </bean>
 
-    <bean id="GerenciaOnibus" class="lps.bet.basico.web.controlGerencia.linha.GerenciaOnibus">
+    <bean id="GerenciaValidador" class="lps.bet.basico.web.controlGerencia.linha.GerenciaValidador">
         <property name="interfaceLinhaMgt">
             <ref bean="LinhaMgr"/>
         </property>
@@ -313,8 +313,8 @@
         <property name="corridaDAO">
             <ref bean="CorridaDAO"/>
         </property>
-        <property name="onibusDAO">
-            <ref bean="OnibusDAO"/>
+        <property name="validadorDAO">
+            <ref bean="ValidadorDAO"/>
         </property>
     </bean>
 
@@ -423,12 +423,12 @@
         <property name="hqlBuscarCorridasPrevistas">
             <value>${config.hql.BuscarCorridasPrevistas}</value>
         </property>
-        <property name="hqlBuscarCorridaAtualOnibus">
-            <value>${config.hql.BuscarCorridaAtualOnibus}</value>
+        <property name="hqlBuscarCorridaAtualValidador">
+            <value>${config.hql.BuscarCorridaAtualValidador}</value>
         </property>
     </bean>
 
-    <bean id="OnibusDAO" class="lps.bet.basico.linhaMgr.OnibusDAO">
+    <bean id="ValidadorDAO" class="lps.bet.basico.linhaMgr.ValidadorDAO">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
         </property>
@@ -450,12 +450,9 @@
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
         </property>
-        <!-- Alex: ativar variabilidade 'Combinação de cartões'
-          <property name="combinarCartoes">
-              <value type="java.lang.Boolean">false</value>
-          </property>
-          -->
-
+		<property name="hqlBuscarTipoPassagPorCartao">
+            <value>${config.hql.BuscarTipoPassagPorCartao}</value>
+        </property>
     </bean>
 
     <bean id="PagamentoDAO" class="lps.bet.basico.cartaoMgr.PagamentoDAO">

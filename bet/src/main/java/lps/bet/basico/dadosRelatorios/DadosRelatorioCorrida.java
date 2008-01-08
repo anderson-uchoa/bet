@@ -3,12 +3,12 @@ package lps.bet.basico.dadosRelatorios;
 import java.util.Calendar;
 
 import lps.bet.basico.tiposDados.Linha;
-import lps.bet.basico.tiposDados.Onibus;
+import lps.bet.basico.tiposDados.Validador;
 
 public class DadosRelatorioCorrida {
 
 	private int corridaID;	
-	private Onibus onibus;	
+	private Validador validador;	
 	private Linha linha;
 	private boolean saida;
 	private boolean encerrado;
@@ -30,11 +30,11 @@ public class DadosRelatorioCorrida {
 	
 
 		
-	public Onibus getOnibus() {
-		return onibus;
+	public Validador getValidador() {
+		return validador;
 	}
-	public void setOnibus(Onibus onibus) {
-		this.onibus = onibus;
+	public void setValidador(Validador validador) {
+		this.validador = validador;
 	}
 	public Linha getLinha() {
 		return linha;

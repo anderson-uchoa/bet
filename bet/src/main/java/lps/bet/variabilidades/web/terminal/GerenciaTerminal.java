@@ -69,6 +69,7 @@ public class GerenciaTerminal extends ControladorBet{
 		}
 		
 		terminal.setNomeTerminal(request.getParameter("nomeTerminal").trim());
+		terminal.setQtdValidadores(Integer.parseInt(request.getParameter("qtdValidadores")));
 		
 		return terminal;
 	}
