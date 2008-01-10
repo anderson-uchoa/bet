@@ -30,6 +30,7 @@
 						<td>$terminal.TerminalID</td>
 						<td>$terminal.NomeTerminal</td>
 						<td><a href="formTerminal.html?terminalID=$terminal.terminalID">Alterar</a></td>
+						<td><a href="formTerminalValidador.html?terminalID=$terminal.TerminalID">Adicionar Validador</a></td>
 					</tr>
 					#end
 				</tbody>

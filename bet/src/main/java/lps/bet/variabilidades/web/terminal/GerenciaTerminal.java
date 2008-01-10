@@ -1,40 +1,43 @@
 package lps.bet.variabilidades.web.terminal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lps.bet.basico.linhaMgr.ILinhaMgt;
+import lps.bet.basico.tiposDados.Validador;
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.variabilidades.terminalMgr.ITerminalMgr;
+import lps.bet.variabilidades.terminalMgr.ITerminalMgt;
 import lps.bet.variabilidades.tiposDados.Terminal;
 
 import org.springframework.web.servlet.ModelAndView;
 
 public class GerenciaTerminal extends ControladorBet{
 
-	ITerminalMgr interfaceTerminalMgr;
+	ITerminalMgt interfaceTerminalMgt;
+	ILinhaMgt interfaceLinhaMgt;
 		
 	public GerenciaTerminal(){
 		
 	}
 
 	protected void criarTerminal(Terminal terminal){
-		interfaceTerminalMgr.criarTerminal(terminal);
+		interfaceTerminalMgt.criarTerminal(terminal);
 	}
 
 	protected ModelAndView buscarTerminal(){
-		List terminais = interfaceTerminalMgr.buscarTerminal();
+		List terminais = interfaceTerminalMgt.buscarTerminal();
 		
-		ModelAndView mav = new ModelAndView("gerenciaTerminal");
-		
+		ModelAndView mav = new ModelAndView("gerenciaTerminal");		
 		mav.addObject("terminais", terminais);
 		return mav;
 	}
 	
 	protected ModelAndView buscarTerminal(int terminalID){
-		Terminal terminal = interfaceTerminalMgr.buscarTerminal(terminalID);
+		Terminal terminal = interfaceTerminalMgt.buscarTerminal(terminalID);
 		ModelAndView mav = new ModelAndView("gerenciaTerminal");
 
 		if (terminal==null){
@@ -52,9 +55,17 @@ public class GerenciaTerminal extends ControladorBet{
 	}
 	
 	protected void alterarTerminal(Terminal terminal){
-		interfaceTerminalMgr.alterarTerminal(terminal);
+		interfaceTerminalMgt.alterarTerminal(terminal);
 	}
 
+	protected void associarValidadorAoTerminal(HttpServletRequest request){
+		Terminal terminal = interfaceTerminalMgt.buscarTerminal(Integer.parseInt(request.getParameter("terminalID")));
+		Validador validador = interfaceLinhaMgt.buscarValidador(Integer.parseInt(request.getParameter("validadorID")));
+		interfaceTerminalMgt.atribuirValidadorAoTerminal(terminal, validador);
+		validador.setEmUso(true);
+		interfaceLinhaMgt.alterarValidador(validador);
+	}
+	
 	protected Terminal montarTerminal(HttpServletRequest request){
 		String operacao = request.getParameter("operacao");
 		Terminal terminal;
@@ -65,7 +76,7 @@ public class GerenciaTerminal extends ControladorBet{
 		}
 		//Senão precisa buscar
 		else {
-			terminal = interfaceTerminalMgr.buscarTerminal(Integer.parseInt(request.getParameter("terminalID")));
+			terminal = interfaceTerminalMgt.buscarTerminal(Integer.parseInt(request.getParameter("terminalID")));
 		}
 		
 		terminal.setNomeTerminal(request.getParameter("nomeTerminal").trim());
@@ -73,6 +84,20 @@ public class GerenciaTerminal extends ControladorBet{
 		return terminal;
 	}
 	
+	protected ModelAndView mostrarFormTerminalValidador(String terminalID){
+
+		ModelAndView mav = new ModelAndView("formTerminalValidador");
+		mav.addObject("terminalID",terminalID);
+				
+		Terminal terminal = interfaceTerminalMgt.buscarTerminal(Integer.parseInt(terminalID));				
+		mav.addObject("terminal",terminal);		
+		
+		Collection<Validador> validadores = interfaceLinhaMgt.buscarValidadoresNaoEmUso();
+		mav.addObject("validadores", validadores);
+		
+		return mav;		
+	}
+
 	protected ModelAndView mostrarForm(String terminalID){
 
 		ModelAndView mav = new ModelAndView("formTerminal");
@@ -88,13 +113,13 @@ public class GerenciaTerminal extends ControladorBet{
 		else {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
-			terminal = interfaceTerminalMgr.buscarTerminal(Integer.parseInt(terminalID));
+			terminal = interfaceTerminalMgt.buscarTerminal(Integer.parseInt(terminalID));
 			
 		}
 		mav.addObject("terminal",terminal);		
 		return mav;		
 	}
-
+	
 	protected ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
@@ -110,7 +135,10 @@ public class GerenciaTerminal extends ControladorBet{
 			else if (operacao.equals("alterar")|| operacao.equals("Alterar")){
 				alterarTerminal(montarTerminal(request));
 			}
-
+			else if (operacao.equals("associar")|| operacao.equals("Associar")){
+				associarValidadorAoTerminal(request);
+			}
+			
 			if (operacao.equals("remover") || operacao.equals("Remover")){
 				String[] terminaisIDs = request.getParameterValues("chkTerminalID");
 				
@@ -118,7 +146,7 @@ public class GerenciaTerminal extends ControladorBet{
 					int terminalID = Integer.parseInt(terminaisIDs[i]);
 					Terminal term = new Terminal();
 					term.setTerminalID(terminalID);
-					interfaceTerminalMgr.removerTerminal(term);
+					interfaceTerminalMgt.removerTerminal(term);
 				}
 			}
 
@@ -133,18 +161,28 @@ public class GerenciaTerminal extends ControladorBet{
 				return buscarTerminal();
 			}		
 		}
+		else if (request.getServletPath().contains("/formTerminalValidador.html")){
+			return mostrarFormTerminalValidador(request.getParameter("terminalID"));
+		}
 		else{
 			return mostrarForm(request.getParameter("terminalID"));
 		}
 	}
-
-	public ITerminalMgr getInterfaceTerminalMgr() {
-		return interfaceTerminalMgr;
+	
+	public ITerminalMgt getInterfaceTerminalMgt() {
+		return interfaceTerminalMgt;
 	}
 
-	public void setInterfaceTerminalMgr(ITerminalMgr interfaceTerminalMgr) {
-		this.interfaceTerminalMgr = interfaceTerminalMgr;
+	public void setInterfaceTerminalMgt(ITerminalMgt interfaceTerminalMgt) {
+		this.interfaceTerminalMgt = interfaceTerminalMgt;
 	}
 
+	public ILinhaMgt getInterfaceLinhaMgt() {
+		return interfaceLinhaMgt;
+	}
+
+	public void setInterfaceLinhaMgt(ILinhaMgt interfaceLinhaMgt) {
+		this.interfaceLinhaMgt = interfaceLinhaMgt;
+	}
 		
 }

@@ -2,6 +2,7 @@ package lps.bet.variabilidades.tiposDados;
 
 import java.util.Collection;
 
+import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.Validador;
 
 public class Terminal {
@@ -30,5 +31,13 @@ public class Terminal {
 	public void setValidadores(Collection<Validador> validadores) {
 		this.validadores = validadores;
 	}	
+	
+	public void adicionarValidador(Validador validador){
+		validadores.add(validador);
+	}
+	
+	public void removerValidador(Validador validador){
+		validadores.remove(validador);
+	}
 	
 }

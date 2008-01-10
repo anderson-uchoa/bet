@@ -2,7 +2,6 @@ package lps.bet.variabilidades.terminalMgr;
 
 import java.util.List;
 
-import lps.bet.variabilidades.tiposDados.SistViarioUrbanoTempo;
 import lps.bet.variabilidades.tiposDados.Terminal;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -11,11 +10,9 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class TerminalDAO extends HibernateDaoSupport{
 	
-	public List getTerminal(){
-		
+	public List getTerminal(){		
 		List terminais = getHibernateTemplate().loadAll(Terminal.class);
-		return terminais;
-		
+		return terminais;		
 	}
 	
 	public Terminal getTerminal(String nomeTerminal){
@@ -26,22 +23,15 @@ public class TerminalDAO extends HibernateDaoSupport{
 		if(terminais.size()==0){
 			return null;
 		}
-		return (Terminal)terminais.get(0);
-		
-						
+		return (Terminal)terminais.get(0);						
 	}
 	
-public Terminal getTerminal(int terminalID){
-		
-		return (Terminal) getHibernateTemplate().get(Terminal.class, terminalID);
-		
-						
+	public Terminal getTerminal(int terminalID){		
+		return (Terminal) getHibernateTemplate().get(Terminal.class, terminalID);						
 	}
 	
-	public void salvarTerminal(Terminal terminal){
-		
-		getHibernateTemplate().saveOrUpdate(terminal);
-		
+	public void salvarTerminal(Terminal terminal){		
+		getHibernateTemplate().saveOrUpdate(terminal);		
 	}
 	
 	public void inserirTerminal(Terminal terminal){
@@ -55,16 +45,13 @@ public Terminal getTerminal(int terminalID){
 		
 	}
 	
-	public void atualizarTerminal(Terminal terminal){
-		
+	public void atualizarTerminal(Terminal terminal){		
 		Terminal terminalA = getTerminal(terminal.getTerminalID());
 		terminalA.setNomeTerminal(terminal.getNomeTerminal());
-		salvarTerminal(terminalA);	
-		
+		salvarTerminal(terminalA);			
 	}
 	
-	public void apagarTerminal(Terminal terminal){
-		
+	public void apagarTerminal(Terminal terminal){		
 		getHibernateTemplate().delete(terminal);
 	}
 

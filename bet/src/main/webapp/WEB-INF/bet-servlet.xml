@@ -93,6 +93,7 @@
 				<!--Terminal-->
 				<prop key="/gerenciaTerminal.html">GerenciaTerminal</prop>
 				<prop key="/formTerminal.html">GerenciaTerminal</prop>
+				<prop key="/formTerminalValidador.html">GerenciaTerminal</prop>
 				<!--Fim da parte web de Terminal-->
 				
             </props>
@@ -944,8 +945,11 @@
 	
 	<!--Terminal-->
 	<bean id="GerenciaTerminal" class="lps.bet.variabilidades.web.terminal.GerenciaTerminal">
-		<property name="interfaceTerminalMgr">
+		<property name="interfaceTerminalMgt">
 			<ref bean="TerminalMgr"/>
+		</property>
+		<property name="interfaceLinhaMgt">
+			<ref bean="LinhaMgr"/>
 		</property>
 	</bean>
 

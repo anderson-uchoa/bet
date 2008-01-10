@@ -1,5 +1,6 @@
 package lps.bet.basico.linhaMgr;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -81,12 +82,15 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
 	
 	public Collection<Validador> buscarValidadoresNaoEmUso(){
 		Collection<Validador> validadores = buscarValidadores();
-		Collection<Onibus> onibus = onibusDAO.buscarTodosOnibus();
-		for (Iterator i = onibus.iterator(); i.hasNext();) {
-			Onibus bus = (Onibus) i.next();
-			validadores.remove(bus.getValidador());
-		}
-		return validadores;
+		Collection<Validador> validadoresNaoEmUso = new ArrayList<Validador>();
+		
+		for (Iterator iterator = validadores.iterator(); iterator.hasNext();) {
+			Validador validador = (Validador) iterator.next();
+			if (!validador.isEmUso()){
+				validadoresNaoEmUso.add(validador);
+			}
+		}		
+		return validadoresNaoEmUso;
 	}
 	
     public void criarValidador(Validador validador) {

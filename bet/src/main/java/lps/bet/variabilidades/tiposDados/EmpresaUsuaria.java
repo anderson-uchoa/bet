@@ -17,8 +17,6 @@ public class EmpresaUsuaria extends Usuario{
 	private String email;
 	private Collection<Passageiro> passageiros;
 
-	
-	
 	public EmpresaUsuaria() {
 		
 	}
