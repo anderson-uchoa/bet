@@ -19,7 +19,7 @@
 			<div class="left_box">
 				<form id="formValidador">
 					<input type="hidden" name="operacao" value="criar"/>
-					<input type="submit" class="submit" value="Criar"/>
+					<input type="submit" class="submit" value="Criar"/><br/><br/>
 				</form>
 			</div>
 
@@ -29,7 +29,7 @@
 			<form id="formListaValidador">
 			<table id="tabelaListaValidador">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Em Corrida</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Em Corrida</th><th>Em Uso</th></tr>
 				</thead>
 				<tbody>
 					#foreach($validador in $validadores)
@@ -37,6 +37,7 @@
 						<td><input type="checkbox" name="chkValidadorID" value="$validador.ValidadorID"/></td>
 						<td>$validador.ValidadorID</td>
 						<td>$validador.EmCorrida</td>
+						<td>$validador.EmUso</td>
 					</tr>
 					#end
 				</tbody>

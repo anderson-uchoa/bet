@@ -12,6 +12,7 @@
 		</id>
 
 		<property name="emCorrida" type="boolean" update="true" insert="true" column="emCorrida" />
+		<property name="emUso" type="boolean" update="true" insert="true" column="emUso" />
 
 		<set name="corridas" lazy="false" cascade="none" sort="unsorted">
 			<key column="onibus_fk"></key>

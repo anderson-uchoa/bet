@@ -5,17 +5,14 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="lps.bet.basico.tiposDados">
-	<class name="Onibus" table="onibus">
+    <class name="Onibus" table="onibus">
 
-		<id name="onibusID" column="onibusId" type="int">
-			<generator class="increment" />
-		</id>
+        <id name="busID" column="busID" type="int">
+            <generator class="increment"> </generator>
+        </id>
+		
+		<many-to-one name="validador" column="validador_fk" unique="true"/>		
+		
+    </class>
 
-		<property name="emCorrida" type="boolean" update="true" insert="true" column="emCorrida" />
-
-		<set name="corridas" lazy="false" cascade="none" sort="unsorted">
-			<key column="onibus_fk"></key>
-			<one-to-many class="Corrida" />
-		</set>
-	</class>
 </hibernate-mapping>

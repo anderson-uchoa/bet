@@ -21,7 +21,7 @@
 			<form id="formListaTerminais">
 			<table id="tabelaListaTerminais">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th><th>Qtd de Validadores</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th></tr>
 				</thead>
 				<tbody>
 					#foreach($terminal in $terminais)
@@ -29,7 +29,6 @@
 						<td><input type="checkbox" name="chkTerminalID" value="$terminal.terminalID"/></td>
 						<td>$terminal.TerminalID</td>
 						<td>$terminal.NomeTerminal</td>
-						<td>$terminal.QtdValidadores</td>
 						<td><a href="formTerminal.html?terminalID=$terminal.terminalID">Alterar</a></td>
 					</tr>
 					#end

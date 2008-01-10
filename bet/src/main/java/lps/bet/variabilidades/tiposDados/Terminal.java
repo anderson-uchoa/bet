@@ -1,10 +1,14 @@
 package lps.bet.variabilidades.tiposDados;
 
+import java.util.Collection;
+
+import lps.bet.basico.tiposDados.Validador;
+
 public class Terminal {
 
 	private String nomeTerminal;
 	private int terminalID;
-	private int qtdValidadores;
+	private Collection<Validador> validadores;
 	
 	public String getNomeTerminal() {
 		return nomeTerminal;
@@ -20,12 +24,11 @@ public class Terminal {
 		this.terminalID = terminalID;
 	}
 	
-	public int getQtdValidadores() {
-		return qtdValidadores;
+	public Collection<Validador> getValidadores() {
+		return validadores;
 	}
-	public void setQtdValidadores(int qtdValidadores) {
-		this.qtdValidadores = qtdValidadores;
-	}
-	
+	public void setValidadores(Collection<Validador> validadores) {
+		this.validadores = validadores;
+	}	
 	
 }

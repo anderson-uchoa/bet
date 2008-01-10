@@ -1,10 +1,13 @@
 package lps.bet.basico.linhaMgr;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
+import lps.bet.basico.tiposDados.Onibus;
 import lps.bet.basico.tiposDados.Validador;
 
 public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecadacao{
@@ -12,6 +15,7 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
     LinhaDAO linhaDAO;
     CorridaDAO corridaDAO;
     ValidadorDAO validadorDAO;
+    OnibusDAO onibusDAO;
         
     public LinhaMgr() {         
     }
@@ -73,7 +77,18 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
 	}
 	public List buscarValidadores() {
 		return validadorDAO.buscarValidadores();
-	} 
+	}
+	
+	public Collection<Validador> buscarValidadoresNaoEmUso(){
+		Collection<Validador> validadores = buscarValidadores();
+		Collection<Onibus> onibus = onibusDAO.buscarTodosOnibus();
+		for (Iterator i = onibus.iterator(); i.hasNext();) {
+			Onibus bus = (Onibus) i.next();
+			validadores.remove(bus.getValidador());
+		}
+		return validadores;
+	}
+	
     public void criarValidador(Validador validador) {
     	validadorDAO.criarValidador(validador);
     }
@@ -113,6 +128,26 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
            
     public void registrarCredito(int validadorID, float valor) {
 		corridaDAO.registrarCredito(validadorID, valor);		
+	}    
+    
+	public void alterarOnibus(Onibus onibus) {
+		onibusDAO.alterarOnibus(onibus);		
+	}
+
+	public Onibus buscarOnibus(int busID) {
+		return onibusDAO.buscarOnibus(busID);
+	}
+
+	public List buscarTodosOnibus() {
+		return onibusDAO.buscarTodosOnibus();
+	}
+
+	public void criarOnibus(Onibus onibus) {
+		onibusDAO.criarOnibus(onibus);
+	}
+
+	public void removerOnibus(int busID) {
+		onibusDAO.removerOnibus(busID);
 	}
 
 	//Getters e Setters    
@@ -133,6 +168,14 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
 	}
 	public void setValidadorDAO(ValidadorDAO validadorDAO) {
 		this.validadorDAO = validadorDAO;
+	}
+
+	public OnibusDAO getOnibusDAO() {
+		return onibusDAO;
+	}
+
+	public void setOnibusDAO(OnibusDAO onibusDAO) {
+		this.onibusDAO = onibusDAO;
 	}
     
 }

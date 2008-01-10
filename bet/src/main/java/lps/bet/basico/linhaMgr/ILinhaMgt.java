@@ -1,10 +1,12 @@
 package lps.bet.basico.linhaMgr;
 
+import java.util.Collection;
 import java.util.List;
 
 import lps.bet.basico.dadosRelatorios.DadosRelatorioCorrida;
 import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
+import lps.bet.basico.tiposDados.Onibus;
 import lps.bet.basico.tiposDados.Validador;
 
 public interface ILinhaMgt {
@@ -26,8 +28,15 @@ public interface ILinhaMgt {
 	public boolean verificarPermissaoViagem(int validadorID);
 
 	public List buscarValidadores();
-	public Validador buscarValidador(int validadorID);
+	public Collection<Validador> buscarValidadoresNaoEmUso();
+	public Validador buscarValidador(int validadorID);	
 	public void criarValidador(Validador validador);
 	public void alterarValidador(Validador validador);	 
 	public void removerValidador(int validadorID);
+	
+	public List buscarTodosOnibus();
+	public Onibus buscarOnibus(int busID);
+	public void criarOnibus(Onibus onibus);
+	public void alterarOnibus(Onibus onibus);	 
+	public void removerOnibus(int busID);
 }

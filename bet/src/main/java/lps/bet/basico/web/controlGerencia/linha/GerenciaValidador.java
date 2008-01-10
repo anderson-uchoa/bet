@@ -52,14 +52,14 @@ public class GerenciaValidador extends ControladorBet{
 		
 		//Operação de Criação
 		if (request.getParameter("validadorID") == null){
-			validador = new Validador();			
+			validador = new Validador();
+			validador.setEmCorrida(false);
+			validador.setEmUso(false);
 		}
 		//Senão precisa buscar
 		else {
 			validador = interfaceLinhaMgt.buscarValidador(Integer.parseInt(request.getParameter("validadorID")));
-		}
-
-		validador.setEmCorrida(false);
+		}	
 					
 		return validador;
 	}

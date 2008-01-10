@@ -38,6 +38,7 @@
                 <prop key="/gerenciaCargo.html">GerenciaCargo</prop>
                 <prop key="/gerenciaLinha.html">GerenciaLinha</prop>
                 <prop key="/gerenciaValidador.html">GerenciaValidador</prop>
+				<prop key="/gerenciaOnibus.html">GerenciaOnibus</prop>
                 <prop key="/gerenciaCorrida.html">GerenciaCorrida</prop>
                 <prop key="/gerenciaTarifa.html">GerenciaTarifa</prop>
                 <prop key="/gerenciaEmprViaria.html">GerenciaEmpresaViaria</prop>
@@ -190,6 +191,12 @@
             <ref bean="LinhaMgr"/>
         </property>
     </bean>
+	
+	<bean id="GerenciaOnibus" class="lps.bet.basico.web.controlGerencia.linha.GerenciaOnibus">
+        <property name="interfaceLinhaMgt">
+            <ref bean="LinhaMgr"/>
+        </property>
+    </bean>
 
     <bean id="GerenciaCorrida" class="lps.bet.basico.web.controlGerencia.linha.GerenciaCorrida">
         <property name="interfaceLinhaMgt">
@@ -316,6 +323,9 @@
         <property name="validadorDAO">
             <ref bean="ValidadorDAO"/>
         </property>
+		 <property name="onibusDAO">
+            <ref bean="OnibusDAO"/>
+        </property>
     </bean>
 
     <!-- Como PassageiroMgr eh implementado pelo DAO, ele ja foi colocado diretamente na parte dos DAOs-->
@@ -434,6 +444,12 @@
         </property>
     </bean>
 
+	<bean id="OnibusDAO" class="lps.bet.basico.linhaMgr.OnibusDAO">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+	
     <bean id="ViagemDAO" class="lps.bet.basico.cartaoMgr.ViagemDAO">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>

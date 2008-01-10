@@ -12,7 +12,11 @@
         </id>
 
         <property name="nomeTerminal" type="java.lang.String" update="true" insert="true" column="nomeTerminal"/>
-		<property name="qtdValidadores" type="int" update="true" insert="true" column="qtdValidadores"/>
+		
+		<set name="validadores" lazy="false" cascade="none" sort="unsorted">
+			<key column="terminal_fk"></key>
+			<one-to-many class="lps.bet.basico.tiposDados.Validador" />
+		</set>
        			
     </class>
 

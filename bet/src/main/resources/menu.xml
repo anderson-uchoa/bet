@@ -32,6 +32,7 @@
 						<li nivel="5"><a href="gerenciaLinha.html">Linha</a></li>
 						<li nivel="5"><a href="gerenciaCorrida.html">Corrida</a></li>
 						<li nivel="5"><a href="gerenciaValidador.html">Validador</a></li>
+						<li nivel="5"><a href="gerenciaOnibus.html">Ônibus</a></li>
 					</ul> 
 				</li>
 				<li nivel="0" class="logout"><a href="logout.html?operacao=logout">Sair</a></li>
