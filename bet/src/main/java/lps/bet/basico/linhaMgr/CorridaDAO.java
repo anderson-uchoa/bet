@@ -91,6 +91,17 @@ public class CorridaDAO extends HibernateDaoSupport{
 		return getHibernateTemplate().findByCriteria(criteriosCorridas);
     }
     
+//    public Collection<Corrida> buscarCorridasDoDia(){
+//    	DetachedCriteria criteriosCorridas = DetachedCriteria.forClass(Corrida.class);
+//    	criteriosCorridas.add(Restrictions.eq("saida", dados.isSaida()));
+//		criteriosCorridas.add(Restrictions.eq("encerrado", dados.isEncerrado()));
+//		if ((dados.getMinCredito() != 0) || (dados.getMaxCredito() != 0)) {
+//			criteriosCorridas.add(Restrictions.between("credito", new Float(
+//					dados.getMinCredito()), new Float(dados.getMaxCredito())));
+//		}
+//		return getHibernateTemplate().findByCriteria(criteriosCorridas);
+//    }
+    
     public List buscarCorridasPrevistas(int validadorID) {
     	return getHibernateTemplate().find(hqlBuscarCorridasPrevistas, new Integer(validadorID));     	
     }

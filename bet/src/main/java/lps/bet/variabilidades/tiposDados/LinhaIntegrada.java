@@ -1,10 +1,12 @@
 package lps.bet.variabilidades.tiposDados;
 
+import lps.bet.basico.tiposDados.Linha;
+
 public class LinhaIntegrada {
 
 	private int integracaoID;
-	private int linhaIntegradaID;
-	private int linhaOriginalID;
+	private Linha linhaIntegrada;
+	private Linha linhaOriginal;
 		
 	public int getIntegracaoID() {
 		return integracaoID;
@@ -14,19 +16,19 @@ public class LinhaIntegrada {
 		this.integracaoID = integracaoID;
 	}
 
-	public int getLinhaIntegradaID() {
-		return linhaIntegradaID;
+	public Linha getLinhaIntegrada() {
+		return linhaIntegrada;
 	}
 
-	public void setLinhaIntegradaID(int linhaIntegradaID) {
-		this.linhaIntegradaID = linhaIntegradaID;
+	public void setLinhaIntegrada(Linha linhaIntegrada) {
+		this.linhaIntegrada = linhaIntegrada;
 	}
 
-	public int getLinhaOriginalID() {
-		return linhaOriginalID;
+	public Linha getLinhaOriginal() {
+		return linhaOriginal;
 	}
 
-	public void setLinhaOriginalID(int linhaOriginalID) {
-		this.linhaOriginalID = linhaOriginalID;
-	}	
+	public void setLinhaOriginal(Linha linhaOriginal) {
+		this.linhaOriginal = linhaOriginal;
+	}		
 }

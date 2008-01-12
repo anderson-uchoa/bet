@@ -2,6 +2,7 @@ package lps.bet.variabilidades.viagemLinhaIntegradaCtrl;
 
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
+import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
@@ -35,18 +36,17 @@ public class ViagemLinhaIntegradaCtrl implements IProcessarViagem {
 
         System.out.println("Componente Validar Linha Integrada");
 
-        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID).getLinhaID();
-        System.out.println("LinhaID: " + linhaViagemID);
+        Linha linhaViagem = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID);
 
         Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);
 
         //Viagem dentro do tempo de integração
         if (viagem != null) {
 
-            int linhaOriginalID = viagem.getLinha().getLinhaID();
-            System.out.println("LinhaOriginalID: " + linhaOriginalID);
+            Linha linhaOriginal = viagem.getLinha();
+
             //Integração
-            if (interfaceLinhaIntegradaMgt.verificarLinhaIntegrada(linhaViagemID, linhaOriginalID)) {
+            if (interfaceLinhaIntegradaMgt.verificarLinhaIntegrada(linhaViagem, linhaOriginal)) {
                 estado = processarIntegracao(onibusID, viagem);
             }
         }

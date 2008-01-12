@@ -55,6 +55,10 @@ public class LinhaMgr implements IAtualizarCorrida, ILinhaMgt, IRegistrarArrecad
 		return corridaDAO.buscarCorridas(dadosRelatorioCorrida);
 	}
 
+//    public Collection<Corrida> buscarCorridasDoDia(){
+//    	return corridaDAO.buscarCorridasDoDia();
+//    }
+    
 	public Corrida buscarCorrida(int corridaID) {
     	return corridaDAO.buscarCorrida(corridaID);
     }

@@ -10,9 +10,14 @@
 		<id name="integracaoID" type="int" column="integracaoId">
 			<generator class="increment" />
 		</id>
+		
+		<many-to-one name="linhaIntegrada" class="lps.bet.basico.tiposDados.Linha" cascade="none" outer-join="auto" update="true" insert="true"
+			not-null="true" lazy="false" column="linhaintegrada_fk"
+		/>
+		
+		<many-to-one name="linhaOriginal" class="lps.bet.basico.tiposDados.Linha" cascade="none" outer-join="auto" update="true" insert="true"
+			not-null="true" lazy="false" column="linhaoriginal_fk"
+		/>
 
-		<property name="linhaIntegradaID" type="int" update="true" insert="true" column="linhaIntegradaId" />
-
-		<property name="linhaOriginalID" type="int" update="true" insert="true" column="linhaOriginalId" />
 	</class>
 </hibernate-mapping>

@@ -31,18 +31,18 @@
 					
 				</label>
 			
-				<label>&nbsp; Número do Ônibus:
-					<select name="onibusID">
+				<label>&nbsp; Número do Validador:
+					<select name="validadorID">
 						#if ($corridaID)
-							#foreach ($onibus in $todosOnibus)
-								#if ($onibus.OnibusID==$corrida.Onibus.OnibusID)
-									<option value="$onibus.OnibusID" selected="selected">$onibus.OnibusID</option>
-								#else <option value="$onibus.OnibusID">$onibus.OnibusID</option>
+							#foreach ($validador in $validadores)
+								#if ($validador.ValidadorID==$corrida.Validador.ValidadorID)
+									<option value="$validador.ValidadorID" selected="selected">$validador.ValidadorID</option>
+								#else <option value="$validador.ValidadorID">$validador.ValidadorID</option>
 								#end
 							#end
 						#else	
-							#foreach ($onibus in $todosOnibus)
-								<option value="$onibus.OnibusID">$onibus.OnibusID</option>
+							#foreach ($validador in $validadores)
+								<option value="$validador.ValidadorID">$validador.ValidadorID</option>
 							#end
 						#end
 					</select>

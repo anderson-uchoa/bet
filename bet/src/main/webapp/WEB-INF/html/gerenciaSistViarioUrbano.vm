@@ -14,13 +14,15 @@
 			<form id="formListaSistema">
 			<table id="tabelaSistema">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th</tr>
+					<tr><th>ID</th><th>Nome</th><th>Número Viagens Integração</th><th>Tempo Maximo Integração</th></tr>
 				</thead>
 				<tbody>
 					#if ($sistema)
 					<tr id="linha$sistema.ViacaoID">
 						<td>$sistema.ViacaoID</td>
 						<td>$sistema.nomeCidade</td>
+						<td>$numViagens</td>
+						<td>$tempoMaxIntegracao segundos</td>
 						<td><a onclick="toggleElementVisibility('formSistema')">Alterar</a></td>
 					</tr>
 					#end
@@ -33,6 +35,8 @@
 				<div class="left_box">
 					<form id="formNovoSistema">
 						<label>Cidade: <input type="text" name="nomeCidade" class="search"/></label><br/>
+						<label>Número Viagens Integração: <input type="text" name="numViagens" class="search_tiny"/></label><br/>
+						<label>Tempo Máximo Integração: <input type="text" name="tempoMaxIntegracao" class="search_small"/></label><br/>
 						<input type="hidden" name="operacao" #if (!$sistema) value="criar" #else value="alterar" #end/>
 						#if ($sistema) <input type="hidden" name="viacaoID" value="$sistema.viacaoID"/> #end
 						<input type="submit" class="submit" value="Salvar"/>

@@ -1,14 +1,15 @@
 package lps.bet.variabilidades.viagemTempoLinhaIntegradaCtrl;
 
+import java.util.Calendar;
+
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
+import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
 import lps.bet.variabilidades.linhaIntegradaMgr.ILinhaIntegradaMgt;
 import lps.bet.variabilidades.tempoMgr.ITempoMgt;
-
-import java.util.Calendar;
 
 public class ViagemTempoLinhaIntegradaCtrl implements IProcessarViagem {
 
@@ -43,8 +44,7 @@ public class ViagemTempoLinhaIntegradaCtrl implements IProcessarViagem {
         //De início considera-se que não haverá integração, então o tempo passou do que poderia ser:
         long tempoDecorrido = tempoMaxIntegracao + 1;
 
-        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID).getLinhaID();
-        System.out.println("LinhaID: " + linhaViagemID);
+        Linha linhaViagem = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID);
 
         Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);
 
@@ -53,11 +53,10 @@ public class ViagemTempoLinhaIntegradaCtrl implements IProcessarViagem {
             Calendar horaUltimaViagem = viagem.getHora();
             tempoDecorrido = Calendar.getInstance().getTimeInMillis() - horaUltimaViagem.getTimeInMillis();
 
-            int linhaOriginalID = viagem.getLinha().getLinhaID();
-            System.out.println("LinhaOriginalID: " + linhaOriginalID);
+            Linha linhaOriginal = viagem.getLinha();
 
             //Integração
-            if ((tempoDecorrido <= tempoMaxIntegracao * 1000) && (interfaceLinhaIntegradaMgt.verificarLinhaIntegrada(linhaViagemID, linhaOriginalID))) {
+            if ((tempoDecorrido <= tempoMaxIntegracao * 1000) && (interfaceLinhaIntegradaMgt.verificarLinhaIntegrada(linhaViagem, linhaOriginal))) {
                 estado = processarIntegracao(onibusID, viagem);
             }
         }

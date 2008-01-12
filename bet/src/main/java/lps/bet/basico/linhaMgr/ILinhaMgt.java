@@ -21,6 +21,7 @@ public interface ILinhaMgt {
 
 	public List buscarCorridas();
 	public List buscarCorridas(DadosRelatorioCorrida dadosRelatorioCorrida);
+//	public Collection<Corrida> buscarCorridasDoDia();
 	public Corrida buscarCorrida(int corridaID);
 	public void criarCorrida(Corrida corrida);
 	public void alterarCorrida(Corrida corrida);

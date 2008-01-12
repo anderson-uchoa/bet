@@ -62,4 +62,19 @@ public class Linha {
 		this.sistViarioUrbano = sistViarioUrbano;
 	}
 
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		if((obj == null) || (obj.getClass() != this.getClass()))
+			return false;
+		
+		Linha linha = (Linha) obj;
+		return (this.linhaID == linha.linhaID);		
+	}	
+
+	public int hashCode() {
+		return linhaID;
+	}
+	
 }

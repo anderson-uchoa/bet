@@ -2,6 +2,7 @@ package lps.bet.variabilidades.viagemNumViagensLinhaIntegradaCtrl;
 
 import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.basico.linhaMgr.IRegistrarArrecadacao;
+import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
@@ -39,8 +40,7 @@ public class ViagemNumViagensLinhaIntegradaCtrl implements IProcessarViagem {
         int numMaxViagens = interfaceNumViagensMgt.buscarMaxNumViagens();
         int numViagem = 0;
 
-        int linhaViagemID = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID).getLinhaID();
-        System.out.println("LinhaID: " + linhaViagemID);
+        Linha linhaViagem = interfaceLinhaMgt.buscarLinhaAtualValidador(onibusID);
 
         Viagem viagem = interfaceCartaoMgt.buscarUltimaViagem(cartaoID);
 
@@ -48,11 +48,10 @@ public class ViagemNumViagensLinhaIntegradaCtrl implements IProcessarViagem {
         if (viagem != null) {
             numViagem = viagem.getNumViagens();
 
-            int linhaOriginalID = viagem.getLinha().getLinhaID();
-            System.out.println("LinhaOriginalID: " + linhaOriginalID);
+            Linha linhaOriginal = viagem.getLinha();
 
             //Integração
-            if ((numViagem < numMaxViagens) && (interfaceLinhaIntegradaMgt.verificarLinhaIntegrada(linhaViagemID, linhaOriginalID))) {
+            if ((numViagem < numMaxViagens) && (interfaceLinhaIntegradaMgt.verificarLinhaIntegrada(linhaViagem, linhaOriginal))) {
                 estado = processarIntegracao(onibusID, viagem);
             }
         }

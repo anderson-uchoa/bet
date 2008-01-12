@@ -21,18 +21,17 @@
 			<form id="formListaPagamentos">
 			<table id="tabelaListaPagamentos">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Data do Pagamento</th><th>Valor do Pagamento</th><th>Número do Cartão</th><th>Tipo de Pagamento</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Data do Pagamento</th><th>Valor do Pagamento</th><th>Número do Cartão</th></tr>
 				</thead>
 				<tbody>
-					#foreach($pagto in $pagtosCartoes)
+					#foreach($pagamento in $pagamentos)
 					<tr id="linha$pagamento.PgtoID">
 						<td><input type="checkbox" name="chkPgtoID" value="$pagamento.PgtoID"/></td>
-						<td>$pagto.Pagamento.PgtoID</td>
-						<td>$sdf.format($pagto.Pagamento.DtPgto.Time)</td>
-						<td>$pagto.Pagamento.ValorPgto</td>
-						<td>$pagto.Pagamento.Cartao.CartaoID</td>
-						<td>$pagto.TipoPagto</td>
-						<td><a href="formPagamento.html?pgtoID=$pagto.Pagamento.PgtoID">Alterar</a></td>
+						<td>$pagamento.PgtoID</td>
+						<td>$sdf.format($pagamento.DtPgto.Time)</td>
+						<td>$pagamento.ValorPgto</td>
+						<td>$pagamento.Cartao.CartaoID</td>
+						<td><a href="formPagamento.html?pgtoID=$pagamento.PgtoID">Alterar</a></td>
 					</tr>
 					#end
 				</tbody>
