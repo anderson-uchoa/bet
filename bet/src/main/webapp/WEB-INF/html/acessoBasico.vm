@@ -9,7 +9,7 @@
 						
 	<div class="left">
 	
-	<h3>Acesso Básico Sistema BET</h3>
+	<h3>Consulta - Sistema BET</h3>
 			<div class="left_box">
 			<form id="formAcesso">
 				<label>CPF do Passageiro: <input type="text" name="cpf" class="search_small"/></label><br/>
@@ -61,6 +61,7 @@
 						<td>$sdf.format($cartao.DtAquisicao.Time)</td>
 						<td>$sdf.format($cartao.DtValidade.Time)</td>
 						<td>$cartao.Saldo</td>
+						<td><a href="acessoAdicional.html?cartaoID=$cartao.CartaoID">Consultar Viagens</a></td>
 					</tr>
 					#end
 				</tbody>

@@ -7,15 +7,6 @@
 	<link rel="stylesheet" href="images/menu.css" type="text/css" />
 	<script type="text/javascript" src="js/bet.js"></script>
 	<script type="text/javascript" src="js/data.js"></script>
-	<title>Gestão BET - Bilhetes Eletrônicos de Transporte municipal</title>
-</head>
-<body>
-	<div class="content">
-		<div class="header">
-			<div class="top_info"></div>
-			<div class="logo">				
-				<h1><a href="#" title="Centralized Internet Services"><span class="dark">BET</span>Gestão</a></h1>
-			</div>
-		</div>
+
 		
 		$!menu.obterMenuPersonalizado()

@@ -50,9 +50,9 @@ public class ViagemDAO extends HibernateDaoSupport {
 
     }
 
-    public List buscarViagensPorCartao(int cartaoID) {
+    public List buscarViagensPorCartao(Cartao cartao) {
         DetachedCriteria viagensPorCartao = DetachedCriteria.forClass(Viagem.class);
-        viagensPorCartao.add(Restrictions.eq("cartaoID", cartaoID));
+        viagensPorCartao.add(Restrictions.eq("cartao", cartao));
         return getHibernateTemplate().findByCriteria(viagensPorCartao);
     }
 

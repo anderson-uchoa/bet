@@ -67,6 +67,11 @@ public class PassageiroDAO extends HibernateDaoSupport implements IPassageiroMgt
 		return passageiro.getCartoes();
 	}
 
+	public int buscarQtdCartoesPorPassageiro(int passageiroID){
+		Passageiro passageiro = buscarPassageiroPorID(passageiroID);
+		return passageiro.getCartoes().size();
+	}
+	
 	public List buscarPassageiros() {
 		return getHibernateTemplate().loadAll(Passageiro.class);
 	}	

@@ -9,13 +9,18 @@
 
 package lps.bet.basico.cartaoMgr;
 
-import lps.bet.basico.passageiroMgr.IPassageiroMgt;
-import lps.bet.basico.tiposDados.*;
-import lps.bet.interfaces.ICartaoMgt;
-import lps.bet.interfaces.IRegistrarViagem;
-
 import java.util.Collection;
 import java.util.List;
+
+import lps.bet.basico.passageiroMgr.IPassageiroMgt;
+import lps.bet.basico.tiposDados.Cartao;
+import lps.bet.basico.tiposDados.Linha;
+import lps.bet.basico.tiposDados.Pagamento;
+import lps.bet.basico.tiposDados.Passageiro;
+import lps.bet.basico.tiposDados.TipoPassageiro;
+import lps.bet.basico.tiposDados.Viagem;
+import lps.bet.interfaces.ICartaoMgt;
+import lps.bet.interfaces.IRegistrarViagem;
 
 public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
 
@@ -215,7 +220,8 @@ public class CartaoMgr implements IRegistrarViagem, ICartaoMgt {
     }
 
     public List buscarViagensPorCartao(int cartaoID) {
-        return viagemDAO.buscarViagensPorCartao(cartaoID);
+    	Cartao cartao = buscarCartao(cartaoID);
+        return viagemDAO.buscarViagensPorCartao(cartao);
     }
 
     public Viagem buscarUltimaViagem(int cartaoID) {

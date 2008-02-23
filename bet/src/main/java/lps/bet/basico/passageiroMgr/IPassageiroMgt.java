@@ -19,9 +19,10 @@ public interface IPassageiroMgt {
 	public void removerPassageiroPorID(int passageiroID);
 	
 	public Collection buscarCartoesPorPassageiro(long cpf);
+	public int buscarQtdCartoesPorPassageiro(int passageiroID);
 	
 	public void criarPassageiro(Passageiro passageiro);
 	
-	public void alterarPassageiro(Passageiro passageiro);
-
+	public void alterarPassageiro(Passageiro passageiro);	
+	
 }

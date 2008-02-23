@@ -6,9 +6,9 @@
 		</div>
 
 <div class="left">
+	#if (!$mensagem)
 	<h3>$nomeOperacao Cartao</h3>
-		<div class="left_box">
-		#if (!$mensagem)
+		<div class="left_box">		
 			<form id="formCartao" action="gerenciaCartao.html">
 				#if ($cartaoID)<label>Identificador do Cartão: <input type="text" name="cartaoID" value="$cartaoID" readonly="readonly" class="search_tiny"/></label><br/>#end 
 				<label>Tipo de Passageiro: 
@@ -30,18 +30,19 @@
 				<label>Passageiro: <input id="nomePassageiro" type="text" name="nomePassageiro" class="search" #if ($cartao.Passageiro.NomePassageiro) value="$cartao.Passageiro.NomePassageiro" #else value="$passageiro.NomePassageiro" #end/></label><br/>
 				<label>Data de Aquisição: <input id="dtAquisicao" type="text" name="dtAquisicao" class="search_small" #if ($cartao.DtAquisicao) value="$sdf.format($cartao.DtAquisicao.Time)" #else value="$sdf.format($dtAquisicao.Time)" #end readonly="readonly"/></label><br/>
 				<label>Data de Validade: <input id="dtValidade" type="text" name="dtValidade" class="search_small" #if ($cartao.DtValidade) value="$sdf.format($cartao.DtValidade.Time)" #else value="$sdf.format($dtValidade.Time)" #end/></label><br/>
-				<label>Saldo: <input type="text" name="saldo" #if ($cartao.Saldo) value="$cartao.Saldo" #end class="search_small"/></label><br/>
+				<label>Saldo: <input type="text" name="saldo" #if ($cartao.Saldo) value="$cartao.Saldo" #end class="search_small"/></label><br/><br/>
 
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="submit" class="submit" value="$nomeOperacao"/>
 				<input type="button" class="submit" value="Cancelar" #if ($cartaoID) onclick="redireciona('gerenciaCartao.html')" #else onclick="redireciona('gerenciaPassageiro.html')" #end/>
-			</form>
-		#else
-			<label>$mensagem</label>
+			</form>		
 			<br />
-			<input type="button" class="submit" value="Retornar" #if ($cartaoID) onclick="redireciona('gerenciaCartao.html')" #else onclick="redireciona('gerenciaPassageiro.html')" #end/>
-		#end
+			
 		</div>
+		#else
+			<label>$mensagem</label><br/><br/>
+			<input type="button" class="submit" value="Voltar" onclick="redireciona('gerenciaPassageiro.html')" 
+		#end		
 	</div>
 	
 #parse("rodape.vm")

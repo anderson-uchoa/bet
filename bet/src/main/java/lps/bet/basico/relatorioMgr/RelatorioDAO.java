@@ -11,7 +11,7 @@ public class RelatorioDAO extends HibernateDaoSupport implements IRelatorioMgt {
 	String hqlRelatorioTrafegoData;
 	
 	public RelatorioTrafego construirRelatorioTrafego(Calendar dataRelatorio) {
-		getHibernateTemplate().find(hqlRelatorioTrafegoData, new Integer(validadorID));
+		//getHibernateTemplate().find(hqlRelatorioTrafegoData, new Integer(validadorID));
 		return null;
 	}
 

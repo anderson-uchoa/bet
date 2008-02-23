@@ -69,5 +69,4 @@ public interface ICartaoMgt {
 
     public void removerTipoPassageiro(int tipoID);
 
-
 }
