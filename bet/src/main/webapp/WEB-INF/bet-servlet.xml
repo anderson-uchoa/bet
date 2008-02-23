@@ -74,12 +74,12 @@
 				<!--prop key="/relatorioUsuario.html">RelatorioUsuario</prop-->
 								
 				<!--Pagamento de Cartao-->
-				<prop key="/gerenciaTipoPassageiro.html">GerenciaTipoPassageiroPgtoCartao</prop>
-				<!--prop key="/gerenciaCartao.html">GerenciaCartaoPgtoCartao</prop-->
+				<!--prop key="/gerenciaTipoPassageiro.html">GerenciaTipoPassageiroPgtoCartao</prop>
+				<prop key="/gerenciaCartao.html">GerenciaCartaoPgtoCartao</prop>
 				<prop key="/gerenciaPagamento.html">GerenciaPagamentoPgtoCartao</prop>
 				<prop key="/formTipoPassageiro.html">GerenciaTipoPassageiroPgtoCartao</prop>
 				<prop key="/formPagamento.html">GerenciaPagamentoPgtoCartao</prop>
-				<!--prop key="/formCartao.html">GerenciaCartaoPgtoCartao</prop-->
+				<prop key="/formCartao.html">GerenciaCartaoPgtoCartao</prop-->
 				<!--Fim da parte web do Pagamento de Cartao -->
 				
 				<!--Empresa Usuária-->
@@ -116,7 +116,12 @@
 				<!--Acesso Adicional-->
 				<prop key="/acessoAdicional.html">AcessoAdicional</prop>
 				<!--Fim da parte de Acesso Adicional-->
-				
+			
+				<!--Limite de Passagens por Mês-->
+				<prop key="/gerenciaTipoPassageiro.html">GerenciaTipoPassageiroLimPassagens</prop>
+				<prop key="/formTipoPassageiro.html">GerenciaTipoPassageiroLimPassagens</prop>			
+				<!--Fim da parte de Limite de Passagens por Mês-->
+			
             </props>
         </property>
     </bean>
@@ -239,11 +244,6 @@
         <property name="interfaceCartaoMgt">
             <ref bean="CartaoMgr"/>
         </property>
-        <!-- Alex: ativar variabilidade 'Combinação de cartões'
-          <property name="combinarCartoes">
-              <value type="java.lang.Boolean">false</value>
-          </property>
-          -->
     </bean>
 
     <bean id="GerenciaCartao" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaCartao">
@@ -1060,4 +1060,22 @@
         </property>
     </bean>
 	<!--Fim de Acesso Adicional-->
+	
+	<!--Limite de Passagens por Mês-->
+	<bean id="GerenciaTipoPassageiroLimPassagens" class="lps.bet.variabilidades.web.limitePassagens.GerenciaTipoPassageiroLimPassagens">
+        <property name="interfaceCartaoMgt">
+            <ref bean="CartaoMgr"/>
+        </property>
+		<property name="interfaceLimitePassagensMgt">
+            <ref bean="LimitePassagensMgr"/>
+        </property>
+    </bean>
+	
+	<bean id="LimitePassagensMgr" class="lps.bet.variabilidades.limitePassagensMgr.TipoPassagLimPassagensDAO">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+	<!--Fim de Limite de Passagens por Mês-->
+	
 </beans>

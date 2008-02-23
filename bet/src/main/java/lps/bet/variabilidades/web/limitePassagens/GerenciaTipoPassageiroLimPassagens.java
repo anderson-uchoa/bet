@@ -1,25 +1,25 @@
-package lps.bet.variabilidades.web.pagamentoCartao;
+package lps.bet.variabilidades.web.limitePassagens;
 
-import lps.bet.interfaces.ICartaoMgt;
-import lps.bet.basico.tiposDados.TipoPassageiro;
-import lps.bet.basico.web.ControladorBet;
-import lps.bet.variabilidades.pagamentoCartaoMgr.IPagtoCartaoMgt;
-import lps.bet.variabilidades.tiposDados.TipoPassagPagtoCartao;
-import org.springframework.web.servlet.ModelAndView;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 
-//import sun.text.CompactShortArray.Iterator;
+import lps.bet.basico.tiposDados.TipoPassageiro;
+import lps.bet.basico.web.ControladorBet;
+import lps.bet.interfaces.ICartaoMgt;
+import lps.bet.variabilidades.limitePassagensMgr.ILimitePassagensMgt;
+import lps.bet.variabilidades.tiposDados.TipoPassagLimPassagens;
 
-public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
+import org.springframework.web.servlet.ModelAndView;
+
+
+public class GerenciaTipoPassageiroLimPassagens extends ControladorBet {
 
 	protected ICartaoMgt interfaceCartaoMgt;
-	protected IPagtoCartaoMgt interfacePagtoCartaoMgt;
+	protected ILimitePassagensMgt interfaceLimitePassagensMgt;
 
 	protected void criarTipoPassageiro(TipoPassageiro tipo) {
 		interfaceCartaoMgt.criarTipoPassageiro(tipo);
@@ -27,11 +27,11 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 
 	protected ModelAndView buscarTiposPassageiros() {
 		List tipos = interfaceCartaoMgt.buscarTiposPassageiros();
-		Collection<TipoPassagPagtoCartao> tiposPagamentos = interfacePagtoCartaoMgt.buscarTodosTipos();
+		Collection<TipoPassagLimPassagens> tiposLimPassagens = interfaceLimitePassagensMgt.buscarTodosTipos();
 		
 		ModelAndView mav = new ModelAndView("gerenciaTipoPassageiro");
 		mav.addObject("tipos", tipos);
-		mav.addObject("tiposPagamentos", tiposPagamentos);
+		mav.addObject("tiposLimPassagens", tiposLimPassagens);
 		
 		return mav;
 	}
@@ -55,7 +55,7 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		mav.addObject("tipoID", tipoID);
 
 		TipoPassageiro tipo = null;
-		TipoPassagPagtoCartao tipoPagamento = null;
+		TipoPassagLimPassagens limPassagens = null;
 		
 		if (tipoID == null) {
 			mav.addObject("operacao", "criar");
@@ -64,13 +64,12 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 			mav.addObject("operacao", "alterar");
 			mav.addObject("nomeOperacao", "Alterar");
 			tipo = interfaceCartaoMgt.buscarTipoPassageiro(Integer.parseInt(tipoID));
-			tipoPagamento = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(Integer.parseInt(tipoID));
+			limPassagens = interfaceLimitePassagensMgt.buscarTipoPassagLimPassagens(Integer.parseInt(tipoID));
 		}
 
 		mav.addObject("tipo", tipo);		
-		mav.addObject("tipoPagamento", tipoPagamento);
+		mav.addObject("limPassagens", limPassagens);
 	
-
 		return mav;
 	}
 
@@ -78,26 +77,24 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		interfaceCartaoMgt.alterarTipoPassageiro(tipo);
 	}
 
-	protected TipoPassagPagtoCartao montarTipoPassagPagtoCartao(HttpServletRequest request, TipoPassageiro tipoPassageiro){
+	protected TipoPassagLimPassagens montarTipoPassagLimPassagens(HttpServletRequest request, TipoPassageiro tipoPassageiro){
 		String operacao = request.getParameter("operacao");
 
-		TipoPassagPagtoCartao tipoPagamento;
+		TipoPassagLimPassagens limPassagens;
 		
 		// Operação de Criação
 		if (request.getParameter("tipoID") == null) {
-			tipoPagamento = new TipoPassagPagtoCartao();
+			limPassagens = new TipoPassagLimPassagens();
 		}
 		// Senão precisa buscar
 		else {
-			tipoPagamento = interfacePagtoCartaoMgt.buscarTipoPassagPagtoCartao(Integer.parseInt(request.getParameter("tipoID")));
+			limPassagens = interfaceLimitePassagensMgt.buscarTipoPassagLimPassagens(Integer.parseInt(request.getParameter("tipoID")));
 		}
 		
-		tipoPagamento.setPagtoAquisicaoCartao(Boolean.parseBoolean(request.getParameter("pagtoAquisicaoCartao")));
+		limPassagens.setLimitePassagens(Integer.parseInt(request.getParameter("limitePassagens")));
+		limPassagens.setTipoPassageiro(tipoPassageiro);
 
-		tipoPagamento.setValorAquisicao(Float.parseFloat(request.getParameter("valorAquisicao")));
-		tipoPagamento.setTipoPassageiro(tipoPassageiro);
-
-		return tipoPagamento;
+		return limPassagens;
 	}
 	
 	protected TipoPassageiro montarTipoPassageiro(HttpServletRequest request) {
@@ -117,8 +114,7 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		tipo.setNomeTipo(request.getParameter("nomeTipo").trim());
 		tipo.setDescricaoTipo(request.getParameter("descricaoTipo").trim());
 		tipo.setFormaPgtoPassagem(request.getParameter("formaPgtoPassagem"));
-		tipo.setDesconto(Integer.parseInt(request.getParameter("desconto")
-				.trim()));
+		tipo.setDesconto(Integer.parseInt(request.getParameter("desconto").trim()));
 
 		return tipo;
 	}
@@ -135,8 +131,8 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 
 			if (operacao.equals("criar") || operacao.equals("alterar")) {
 				//criarTipoPassageiro(montarTipoPassageiro(request));
-				TipoPassagPagtoCartao tipoPagamento = montarTipoPassagPagtoCartao(request, montarTipoPassageiro(request));
-				interfacePagtoCartaoMgt.registrarTipoPassagPagtoCartao(tipoPagamento);				
+				TipoPassagLimPassagens limPassagens = montarTipoPassagLimPassagens(request, montarTipoPassageiro(request));
+				interfaceLimitePassagensMgt.salvarTipoPassagLimPassagens(limPassagens);				
 			}
 			
 			if (operacao.equals("remover")) {
@@ -168,11 +164,13 @@ public class GerenciaTipoPassageiroPgtoCartao extends ControladorBet {
 		this.interfaceCartaoMgt = interfaceCartaoMgt;
 	}
 
-	public IPagtoCartaoMgt getInterfacePagtoCartaoMgt() {
-		return interfacePagtoCartaoMgt;
+	public ILimitePassagensMgt getInterfaceLimitePassagensMgt() {
+		return interfaceLimitePassagensMgt;
 	}
 
-	public void setInterfacePagtoCartaoMgt(IPagtoCartaoMgt interfacePagtoCartaoMgt) {
-		this.interfacePagtoCartaoMgt = interfacePagtoCartaoMgt;
+	public void setInterfaceLimitePassagensMgt(
+			ILimitePassagensMgt interfaceLimitePassagensMgt) {
+		this.interfaceLimitePassagensMgt = interfaceLimitePassagensMgt;
 	}
+	
 }

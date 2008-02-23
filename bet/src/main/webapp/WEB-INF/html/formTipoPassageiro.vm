@@ -21,6 +21,7 @@
 					</select>
 				</label><br/>	
 				<label>Desconto(%): <input type="text" name="desconto" #if ($tipo.Desconto) value="$tipo.Desconto" #end class="search"/></label><br/>
+				<label>Limite de Passagens por Mês: <input type="text" name="limitePassagens" #if ($limPassagens) value="$limPassagens.limitePassagens" #end class="search_small"/></label><br/>
 				<br />
 				<input type="hidden" name="operacao" value="$operacao"/>
 				<input type="submit" class="submit" value="$nomeOperacao"/>

@@ -21,18 +21,19 @@
 			<form id="formListaTipos">
 			<table id="tabelaListaTipos">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Tipo de Passageiro</th><th>Descrição</th><th>Pgto Passagem</th><th>Desconto(%)</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Tipo de Passageiro</th><th>Descrição</th><th>Pgto Passagem</th><th>Desconto(%)</th><th>Limite de Passagens/Mês</th></tr>
 				</thead>
 				<tbody>
-					#foreach($tipo in $tipos)
-					<tr id="linha$tipo.TipoID">
-						<td><input type="checkbox" name="chkTipoID" value="$tipo.TipoID"/></td>
-						<td>$tipo.TipoID</td>
-						<td>$tipo.NomeTipo</td>
-						<td>$tipo.DescricaoTipo</td>
-						<td>$tipo.FormaPgtoPassagem</td>
-						<td>$tipo.Desconto</td>
-						<td><a href="formTipoPassageiro.html?tipoID=$tipo.TipoID">Alterar</a></td>
+					#foreach($tipoLimPassagens in $tiposLimPassagens)
+					<tr id="linha$tipoLimPassagens.TipoID">
+						<td><input type="checkbox" name="chkTipoID" value="$tipoLimPassagens.TipoID"/></td>
+						<td>$tipoLimPassagens.TipoID</td>
+						<td>$tipoLimPassagens.TipoPassageiro.NomeTipo</td>
+						<td>$tipoLimPassagens.TipoPassageiro.DescricaoTipo</td>
+						<td>$tipoLimPassagens.TipoPassageiro.FormaPgtoPassagem</td>
+						<td>$tipoLimPassagens.TipoPassageiro.Desconto</td>
+						<td>$tipoLimPassagens.LimitePassagens</td>
+						<td><a href="formTipoPassageiro.html?tipoID=$tipoLimPassagens.TipoPassageiro.TipoID">Alterar</a></td>
 					</tr>
 					#end
 				</tbody>
