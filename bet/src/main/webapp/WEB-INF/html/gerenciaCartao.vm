@@ -21,10 +21,10 @@
 			<form id="formListaCartoes">
 			<table id="tabelaListaCartoes">
 				<thead>
-					<tr><th>&nbsp;</th><th>ID</th><th>Nome do Passageiro</th><th>Tipo</th><th>Data de Aquisição</th><th>Data de Validade</th><th>Saldo</th></tr>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome do Passageiro</th><th>Tipo</th><th>Data de Aquisição</th><th>Data de Validade</th><th>Saldo</th><th>Qtd de Passagens</th><th>Início Mês</th></tr>
 				</thead>
 				<tbody>
-					#foreach($cartao in $cartoes)
+					#foreach($cartao in $cartoesSemLimite)
 					<tr id="linha$cartao.CartaoID">
 						<td><input type="checkbox" name="chkCartaoID" value="$cartao.CartaoID"/></td>
 						<td>$cartao.CartaoID</td>
@@ -33,7 +33,23 @@
 						<td>$sdf.format($cartao.DtAquisicao.Time)</td>
 						<td>$sdf.format($cartao.DtValidade.Time)</td>
 						<td>$cartao.Saldo</td>
+						<td>-</td>
+						<td>-</td>
 						<td><a href="formCartao.html?cartaoID=$cartao.CartaoID">Alterar</a></td>
+					</tr>
+					#end
+					#foreach($cartaoLimite in $cartoesLimPassagens)
+					<tr id="linha$cartaoLimite.Cartao.CartaoID">
+					<td><input type="checkbox" name="chkCartaoID" value="$cartaoLimite.Cartao.CartaoID"/></td>
+						<td>$cartaoLimite.Cartao.CartaoID</td>
+						<td>$cartaoLimite.Cartao.Passageiro.NomePassageiro</td>
+						<td>$cartaoLimite.Cartao.TipoPassageiro.NomeTipo</td>
+						<td>$sdf.format($cartaoLimite.Cartao.DtAquisicao.Time)</td>
+						<td>$sdf.format($cartaoLimite.Cartao.DtValidade.Time)</td>
+						<td>$cartaoLimite.Cartao.Saldo</td>
+						<td>$cartaoLimite.QtdPassagensMes</td>
+						<td>$sdf.format($cartaoLimite.DtInicioContagem.Time)</td>
+						<td><a href="formCartao.html?cartaoID=$cartaoLimite.Cartao.CartaoID">Alterar</a></td>
 					</tr>
 					#end
 				</tbody>

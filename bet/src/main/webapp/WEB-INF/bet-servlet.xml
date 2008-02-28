@@ -85,10 +85,10 @@
 				<!--Empresa Usuária-->
 				<prop key="/gerenciaEmprUsuaria.html">GerenciaEmpresaUsuaria</prop>
 				<prop key="/formEmprUsuaria.html">GerenciaEmpresaUsuaria</prop>
-				<prop key="/cargaCartao.html">CargaCartaoEmpresaUsuaria</prop>
+				<!--prop key="/cargaCartao.html">CargaCartaoEmpresaUsuaria</prop-->
 				<prop key="/gerenciaPassageiro.html">GerenciaPassageiroEmpresaUsuaria</prop>
 				<prop key="/formPassageiro.html">GerenciaPassageiroEmpresaUsuaria</prop>
-				<prop key="/acessoBasico.html">AcessoBasicoEmpresaUsuaria</prop>
+				<!--prop key="/acessoBasico.html">AcessoBasicoEmpresaUsuaria</prop-->
 				<prop key="/formCartoesEmpresaUsuaria.html">AcessoBasicoEmpresaUsuaria</prop>
 				<!--Fim da parte web de Empresa Usuária-->
 				
@@ -109,8 +109,8 @@
 				
 				<!-- Numero de Cartoes, Tempo e Numero de Viagens-->
 				<prop key="/gerenciaSistViarioUrbano.html">GerenciaSistViarioNumCartoesTempoNumViagens</prop>
-				<prop key="/gerenciaCartao.html">GerenciaCartaoNumCartoes</prop>				
-				<prop key="/formCartao.html">GerenciaCartaoNumCartoes</prop>
+				<!--prop key="/gerenciaCartao.html">GerenciaCartaoNumCartoes</prop-->				
+				<!--prop key="/formCartao.html">GerenciaCartaoNumCartoes</prop-->
 				<!-- Fim da parte de NumCartoes, Tempo e Numero de Viagens-->
 				
 				<!--Acesso Adicional-->
@@ -120,6 +120,10 @@
 				<!--Limite de Passagens por Mês-->
 				<prop key="/gerenciaTipoPassageiro.html">GerenciaTipoPassageiroLimPassagens</prop>
 				<prop key="/formTipoPassageiro.html">GerenciaTipoPassageiroLimPassagens</prop>			
+				<prop key="/cargaCartao.html">CargaCartaoLimPassagens</prop>
+				<prop key="/acessoBasico.html">AcessoBasicoLimPassagens</prop>
+				<prop key="/gerenciaCartao.html">GerenciaCartaoLimPassagens</prop>				
+				<prop key="/formCartao.html">GerenciaCartaoLimPassagens</prop>
 				<!--Fim da parte de Limite de Passagens por Mês-->
 			
             </props>
@@ -1071,9 +1075,72 @@
         </property>
     </bean>
 	
-	<bean id="LimitePassagensMgr" class="lps.bet.variabilidades.limitePassagensMgr.TipoPassagLimPassagensDAO">
+	<bean id="LimitePassagensMgr" class="lps.bet.variabilidades.limitePassagensMgr.LimitePassagensMgr">
+        <property name="tipoPassagLimPassagensDAO">
+            <ref bean="TipoPassagLimPassagensDAO"/>
+        </property>
+		<property name="cartaoLimPassagensDAO">
+            <ref bean="CartaoLimPassagensDAO"/>
+        </property>
+		<property name="interfaceViacaoMgt">
+            <ref bean="ViacaoMgr"/>
+        </property>
+		<property name="interfaceCartaoMgt">
+            <ref bean="CartaoMgr"/>
+        </property>
+    </bean>
+
+	<bean id="CartaoLimPassagensDAO" class="lps.bet.variabilidades.limitePassagensMgr.CartaoLimPassagensDAO">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+	
+	<bean id="TipoPassagLimPassagensDAO" class="lps.bet.variabilidades.limitePassagensMgr.TipoPassagLimPassagensDAO">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+	
+	<bean id="CargaCartaoLimPassagens" class="lps.bet.variabilidades.web.limitePassagens.CargaCartaoLimPassagens">
+        <property name="interfaceCartaoMgt">
+            <ref bean="CartaoMgr"/>
+        </property>
+		<property name="interfaceLimitePassagensMgt">
+            <ref bean="LimitePassagensMgr"/>
+        </property>		    
+        <property name="nivelMinimoAcesso">
+            <value>${config.nivel.CargaCartao}</value>
+        </property>
+    </bean>
+	
+	<bean id="AcessoBasicoLimPassagens" class="lps.bet.variabilidades.web.limitePassagens.AcessoBasicoLimPassagens">
+        <property name="interfaceCartaoMgt">
+            <ref bean="CartaoPgtoCartaoCtrl"/>
+        </property>
+        <property name="interfacePassageiroMgt">
+            <ref bean="PassageiroMgr"/>
+        </property>
+		<property name="interfaceLimitePassagensMgt">
+            <ref bean="LimitePassagensMgr"/>
+        </property>	
+        <property name="nivelMinimoAcesso">
+            <value>${config.nivel.AcessoBasico}</value>
+        </property>
+    </bean>
+	
+	<bean id="GerenciaCartaoLimPassagens" class="lps.bet.variabilidades.web.limitePassagens.GerenciaCartaoLimPassagens">
+        <property name="interfaceCartaoMgt">
+            <ref bean="CartaoMgr"/>
+        </property>
+        <property name="interfacePassageiroMgt">
+            <ref bean="PassageiroMgr"/>
+        </property>
+		<property name="interfaceLimitePassagensMgt">
+            <ref bean="LimitePassagensMgr"/>
+        </property>
+        <property name="nivelMinimoAcesso">
+            <value>${config.nivel.GerenciaCartao}</value>
         </property>
     </bean>
 	<!--Fim de Limite de Passagens por Mês-->

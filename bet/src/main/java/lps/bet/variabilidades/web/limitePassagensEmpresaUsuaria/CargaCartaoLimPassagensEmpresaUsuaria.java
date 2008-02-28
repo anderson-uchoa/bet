@@ -1,8 +1,10 @@
-package lps.bet.basico.web.cargaCartao;
+package lps.bet.variabilidades.web.limitePassagensEmpresaUsuaria;
 
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.web.ControladorBet;
 import lps.bet.interfaces.ICartaoMgt;
+import lps.bet.variabilidades.limitePassagensMgr.ILimitePassagensMgt;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,18 +14,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class CargaCartao extends ControladorBet implements ISolicitarCarga {
+
+//Precisando pegar coisas específicas de Empresa Usuária 
+//do CargaCartaoEmpresaUsuaria e juntar
+
+public class CargaCartaoLimPassagensEmpresaUsuaria extends ControladorBet{
 
     ICartaoMgt interfaceCartaoMgt;
+    ILimitePassagensMgt interfaceLimitePassagensMgt;
 
     SimpleDateFormat sdf;
 
-    public CargaCartao() {
+    public CargaCartaoLimPassagensEmpresaUsuaria() {
     	sdf = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     public void solicitarCarga(int cartaoID, float valor) {
-        interfaceCartaoMgt.carregarCartao(cartaoID, valor);
+        //if (interfaceLimitePassagensMgt.verificarPossibilidadeCarga(cartaoID, valor)){
+        	interfaceCartaoMgt.carregarCartao(cartaoID, valor);	
+        //}
+        //else {}
+    	
     }
 
     protected ModelAndView buscarCartoes() {
@@ -70,10 +81,14 @@ public class CargaCartao extends ControladorBet implements ISolicitarCarga {
             String strValor = request.getParameter("valor");
             float valor = strValor.trim().matches("[0-9]*\\.?[0-9]+") ? Float.parseFloat(strValor) : 0;
 
-            solicitarCarga(cartaoID, valor);
-
-            //ModelAndView mav = new ModelAndView("cargaCartao");
-            //return mav;
+            if (interfaceLimitePassagensMgt.verificarPossibilidadeCarga(cartaoID, valor)){
+            	solicitarCarga(cartaoID, valor);
+            }
+            else {
+            	ModelAndView mav = new ModelAndView("cargaCartao");
+            	mav.addObject("mensagem", "Carga ultrapassa limite mensal permitido.");
+                return mav; 	
+            }           
         }
 
         //Mostrando um cartão ou todos, dependendo da operacao requisitada
@@ -91,5 +106,14 @@ public class CargaCartao extends ControladorBet implements ISolicitarCarga {
     public void setInterfaceCartaoMgt(ICartaoMgt interfaceCartaoMgt) {
         this.interfaceCartaoMgt = interfaceCartaoMgt;
     }
+
+	public ILimitePassagensMgt getInterfaceLimitePassagensMgt() {
+		return interfaceLimitePassagensMgt;
+	}
+
+	public void setInterfaceLimitePassagensMgt(
+			ILimitePassagensMgt interfaceLimitePassagensMgt) {
+		this.interfaceLimitePassagensMgt = interfaceLimitePassagensMgt;
+	}    
 
 }

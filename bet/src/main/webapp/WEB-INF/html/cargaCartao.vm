@@ -18,29 +18,8 @@
 		<h3>Carregar Cartão</h3>
 		<div class="left_box">
 			<form id="formCargaCartao">
-				<fieldset>
-					<legend>Por Cartão</legend>
-						<label>Número do Cartão: <input type="text" name="cartaoID" class="search_tiny"/></label><br/>
-						<label>Valor da Carga: <input type="text" name="valor" class="search_small"/></label><br/>		
-				</fieldset>
-				<fieldset>
-					<legend>Por Empresa Usuária</legend>
-						<label>Nome da Empresa: 		
-							<select name="nomeFantasia" id="nomeFantasia">					
-								#foreach ($empresaUsuaria in $empresasUsuarias)
-									<option value="$empresaUsuaria.NomeFantasia">$empresaUsuaria.NomeFantasia</option>
-								#end					
-							</select>
-						</label><br/>
-						<label>Tipo de Cartão: 		
-							<select name="nomeTipo" id="nomeTipo">					
-								#foreach ($tipo in $tipos)
-									<option value="$tipo.NomeTipo">$tipo.NomeTipo</option>
-								#end					
-							</select>
-						</label><br/>
-						<label>Valor da Carga: <input type="text" name="valorEmpresa" class="search_small"/></label><br/>							
-				</fieldset>
+				<label>Número do Cartão: <input type="text" name="cartaoID" class="search_tiny"/></label><br/>
+				<label>Valor da Carga: <input type="text" name="valor" class="search_small"/></label><br/>		
 				
 				<input type="submit" class="submit" value="Carregar"/>
 				<input type="hidden" name="operacao" value="carregar"/>

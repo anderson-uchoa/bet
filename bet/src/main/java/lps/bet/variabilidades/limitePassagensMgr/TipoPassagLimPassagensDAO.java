@@ -3,16 +3,16 @@ package lps.bet.variabilidades.limitePassagensMgr;
 import java.util.Collection;
 import java.util.List;
 
+import lps.bet.basico.tiposDados.TipoPassageiro;
+import lps.bet.variabilidades.tiposDados.TipoPassagLimPassagens;
+
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import lps.bet.basico.tiposDados.TipoPassageiro;
-import lps.bet.variabilidades.tiposDados.TipoPassagLimPassagens;
-import lps.bet.variabilidades.tiposDados.TipoPassagPagtoCartao;
 
-
-public class TipoPassagLimPassagensDAO extends HibernateDaoSupport implements ILimitePassagensMgt{
+public class TipoPassagLimPassagensDAO extends HibernateDaoSupport {
 	
 	   public void salvarTipoPassagLimPassagens(TipoPassagLimPassagens limPassagens) {
 	        getHibernateTemplate().saveOrUpdate(limPassagens);
@@ -28,7 +28,8 @@ public class TipoPassagLimPassagensDAO extends HibernateDaoSupport implements IL
 	    
 	    public TipoPassagLimPassagens buscarLimPassagensPorTipo(TipoPassageiro tipoPassageiro){
 	    	DetachedCriteria criteria = DetachedCriteria.forClass(TipoPassagLimPassagens.class);
-			criteria.add(Restrictions.eq("tipoPassageiro", tipoPassageiro));
+	    	Criterion passageiroIgual = Restrictions.eq("tipoPassageiro.tipoID", tipoPassageiro.getTipoID());
+			criteria.add(passageiroIgual);
 			List limPassagens = getHibernateTemplate().findByCriteria(criteria);
 	    	return (TipoPassagLimPassagens) limPassagens.get(0);
 	    }

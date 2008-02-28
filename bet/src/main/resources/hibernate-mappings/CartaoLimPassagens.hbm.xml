@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="lps.bet.variabilidades.tiposDados"
+>
+    <class name="CartaoLimPassagens" table="var_lim_passagens_cartao">
+
+        <id name="cartaoID" column="cartaoid" type="int">
+            <generator class="assigned"></generator>
+        </id>
+
+        <property name="qtdPassagensMes" type="int" update="true" insert="true" column="qtdPassagensMes"/>
+		
+		<property name="dtInicioContagem" type="java.util.Calendar" update="true" insert="true" column="dtInicioContagem" />
+		
+		<one-to-one name="cartao" class="lps.bet.basico.tiposDados.Cartao" lazy="false" cascade="save-update" constrained="true"/>
+		
+    </class>
+
+</hibernate-mapping>
