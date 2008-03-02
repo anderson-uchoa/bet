@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import lps.bet.basico.tiposDados.SistViarioUrbano;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.variabilidades.numViagensMgr.INumViagensMgt;
 import lps.bet.variabilidades.tempoMgr.ITempoMgt;
 
 import org.springframework.web.servlet.ModelAndView;
