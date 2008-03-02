@@ -7,6 +7,10 @@
 	<link rel="stylesheet" href="images/menu.css" type="text/css" />
 	<script type="text/javascript" src="js/bet.js"></script>
 	<script type="text/javascript" src="js/data.js"></script>
-
+	
+	<title>Gestão BET - Bilhetes Eletrônicos de Transporte municipal</title>
+	</head>
+	<body>
+	<div class="content">
 		
 		$!menu.obterMenuPersonalizado()

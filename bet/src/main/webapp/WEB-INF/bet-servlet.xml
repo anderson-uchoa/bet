@@ -108,7 +108,7 @@
 				<!-- Fim da parte de Integração por Tempo e Número de Viagens-->				
 				
 				<!-- Numero de Cartoes, Tempo e Numero de Viagens-->
-				<prop key="/gerenciaSistViarioUrbano.html">GerenciaSistViarioNumCartoesTempoNumViagens</prop>
+				<!--prop key="/gerenciaSistViarioUrbano.html">GerenciaSistViarioNumCartoesTempoNumViagens</prop-->
 				<!--prop key="/gerenciaCartao.html">GerenciaCartaoNumCartoes</prop-->				
 				<!--prop key="/formCartao.html">GerenciaCartaoNumCartoes</prop-->
 				<!-- Fim da parte de NumCartoes, Tempo e Numero de Viagens-->
@@ -125,6 +125,10 @@
 				<prop key="/gerenciaCartao.html">GerenciaCartaoLimPassagens</prop>				
 				<prop key="/formCartao.html">GerenciaCartaoLimPassagens</prop>
 				<!--Fim da parte de Limite de Passagens por Mês-->
+			
+				<!--Integracao por Tempo-->
+				<prop key="/gerenciaSistViarioUrbano.html">GerenciaSistViarioTempo</prop>
+				<!--Fim da parte de Integracao por Tempo-->
 			
             </props>
         </property>
@@ -1145,4 +1149,14 @@
     </bean>
 	<!--Fim de Limite de Passagens por Mês-->
 	
+	<!--Tempo - parte web-->
+	<bean id="GerenciaSistViarioTempo" class="lps.bet.variabilidades.web.tempo.GerenciaSistViarioTempo">
+		<property name="interfaceViacaoMgt">
+			<ref bean="ViacaoMgr"/>
+		</property>
+		<property name="interfaceTempoMgt">
+			<ref bean="TempoMgr"/>
+		</property>
+	</bean>
+	<!--Fim da parte de Tempo para web-->
 </beans>
