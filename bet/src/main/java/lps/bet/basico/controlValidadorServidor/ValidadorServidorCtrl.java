@@ -5,14 +5,14 @@ import lps.bet.basico.linhaMgr.ILinhaMgt;
 import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
 
-public class ControlValidadorServidor implements IProcessarTransacao {
+public class ValidadorServidorCtrl implements IProcessarTransacao {
 
     IRegistrarCorrida interfaceRegistrarCorrida;
     IProcessarViagem interfaceProcessarViagem;
     ICartaoMgt interfaceCartaoMgt;
     ILinhaMgt interfaceLinhaMgt;
 
-    public ControlValidadorServidor() {
+    public ValidadorServidorCtrl() {
     }
 
     public String processarTransacao(int cod, int cartaoID, int validadorID) {

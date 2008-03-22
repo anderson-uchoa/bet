@@ -15,7 +15,7 @@ import lps.bet.basico.linhaMgr.IAtualizarCorrida;
  *
  * @author Paula
  */
-public class ControlarCorrida implements IRegistrarCorrida {
+public class CorridaCtrl implements IRegistrarCorrida {
     
     IAtualizarCorrida interfaceAtualizarCorrida;
     
@@ -29,7 +29,7 @@ public class ControlarCorrida implements IRegistrarCorrida {
 	}
 
 	/** Creates a new instance of ControlarCorrida */
-    public ControlarCorrida() {
+    public CorridaCtrl() {
     }
     
     public String registrarCorrida(int onibusID){

@@ -10,7 +10,7 @@ import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.interfaces.IProcessarViagem;
 import lps.bet.interfaces.IRegistrarViagem;
 
-public class ControlarViagem implements IProcessarViagem {
+public class ViagemCtrl implements IProcessarViagem {
 
     IRegistrarViagem interfaceRegistrarViagem;
     IRegistrarArrecadacao interfaceRegistrarArrecadacao;
@@ -18,7 +18,7 @@ public class ControlarViagem implements IProcessarViagem {
     IViacaoMgt interfaceViacaoMgt;
     ICartaoMgt interfaceCartaoMgt;
 
-    public ControlarViagem() {
+    public ViagemCtrl() {
     }
 
     public String processarViagem(int cartaoID, int onibusID) {
