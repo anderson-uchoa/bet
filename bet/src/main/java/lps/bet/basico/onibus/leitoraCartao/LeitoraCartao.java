@@ -1,6 +1,6 @@
 package lps.bet.basico.onibus.leitoraCartao;
 
-import lps.bet.basico.onibus.controlValidadorOnibus.ITratarCartao;
+import lps.bet.basico.onibus.validadorOnibusCtrl.ITratarCartao;
 
 public class LeitoraCartao implements ILeitora{
 	
