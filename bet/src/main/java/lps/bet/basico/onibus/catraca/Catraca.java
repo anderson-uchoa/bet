@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import lps.bet.basico.onibus.controlValidadorOnibus.IPermitirLeitura;
+import lps.bet.basico.onibus.validadorOnibusCtrl.IPermitirLeitura;
 
 
 public class Catraca implements IGirarCatraca, ILiberarCatraca{
