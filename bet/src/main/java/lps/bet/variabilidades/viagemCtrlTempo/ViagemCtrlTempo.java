@@ -92,7 +92,7 @@ public class ViagemCtrlTempo implements IProcessarViagem {
 
             if (estado.matches("\\w+-OK")) {
                 //Registrar Viagem:
-                int numViagem = 0; //Viagem inicial
+                //int numViagem = 0; //Viagem inicial
                 interfaceRegistrarViagem.registrarViagem(cartaoID, linha);
             }
         }

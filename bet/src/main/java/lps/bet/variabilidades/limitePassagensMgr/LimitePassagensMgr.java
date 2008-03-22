@@ -3,16 +3,15 @@ package lps.bet.variabilidades.limitePassagensMgr;
 import java.util.Calendar;
 import java.util.Collection;
 
-import org.joda.time.DateTime;
-import org.joda.time.Months;
-import org.joda.time.Period;
-
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.variabilidades.tiposDados.CartaoLimPassagens;
 import lps.bet.variabilidades.tiposDados.TipoPassagLimPassagens;
+
+import org.joda.time.DateTime;
+import org.joda.time.Months;
 
 public class LimitePassagensMgr implements ILimitePassagensMgt{
 

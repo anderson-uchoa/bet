@@ -5,7 +5,6 @@ import java.util.List;
 
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.variabilidades.tiposDados.CartaoLimPassagens;
-import lps.bet.variabilidades.tiposDados.TipoPassagLimPassagens;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
