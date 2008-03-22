@@ -5,7 +5,7 @@ import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Viagem;
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.basico.web.controlGerencia.UtilsGerencia;
+import lps.bet.basico.web.gerenciaCtrl.UtilsGerencia;
 import lps.bet.interfaces.ICartaoMgt;
 import org.springframework.web.servlet.ModelAndView;
 

@@ -3,7 +3,7 @@ package lps.bet.basico.web.controlGerencia.linha.projecao;
 import java.util.Calendar;
 import java.util.Iterator;
 
-import lps.bet.basico.web.controlGerencia.UtilsGerencia;
+import lps.bet.basico.web.gerenciaCtrl.UtilsGerencia;
 
 public abstract class IteradorProjecao implements Iterator{
 	
