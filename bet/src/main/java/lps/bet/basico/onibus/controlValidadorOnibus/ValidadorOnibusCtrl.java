@@ -1,13 +1,13 @@
 package lps.bet.basico.onibus.controlValidadorOnibus;
 
-import lps.bet.basico.controlValidadorServidor.IProcessarTransacao;
 import lps.bet.basico.onibus.catraca.ILiberarCatraca;
 import lps.bet.basico.onibus.leitoraCartao.ILeitora;
 import lps.bet.basico.onibus.validadorMgr.IValidadorMgt;
 import lps.bet.basico.onibus.visor.IVisor;
+import lps.bet.basico.validadorServidorCtrl.IProcessarTransacao;
 
 
-public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
+public class ValidadorOnibusCtrl implements IPermitirLeitura, ITratarCartao{
 	
 	boolean leituraPermitida = true;
 	IValidadorMgt interfaceValidadorMgt;
@@ -16,7 +16,7 @@ public class ControlValidadorOnibus implements IPermitirLeitura, ITratarCartao{
 	ILeitora interfaceLeitora;
 	IProcessarTransacao interfaceProcessarTransacao;
 	
-	public ControlValidadorOnibus(){
+	public ValidadorOnibusCtrl(){
 	}
 
 /*	public static void main(String[] args) {
