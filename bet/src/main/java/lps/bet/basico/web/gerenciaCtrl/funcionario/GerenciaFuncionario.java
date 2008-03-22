@@ -14,7 +14,7 @@ import lps.bet.basico.tiposDados.EmpresaViaria;
 import lps.bet.basico.tiposDados.Funcionario;
 import lps.bet.basico.viacaoMgr.IViacaoMgt;
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.basico.web.gerenciaCtrl2.UtilsGerencia;
+import lps.bet.basico.web.gerenciaCtrl.UtilsGerencia;
 
 import org.springframework.web.servlet.ModelAndView;
 

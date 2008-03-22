@@ -14,12 +14,12 @@ import lps.bet.basico.tiposDados.Corrida;
 import lps.bet.basico.tiposDados.Linha;
 import lps.bet.basico.tiposDados.Validador;
 import lps.bet.basico.web.ControladorBet;
+import lps.bet.basico.web.gerenciaCtrl.UtilsGerencia;
 import lps.bet.basico.web.gerenciaCtrl.linha.projecao.IteradorProjecao;
 import lps.bet.basico.web.gerenciaCtrl.linha.projecao.IteradorProjecaoDiaria;
 import lps.bet.basico.web.gerenciaCtrl.linha.projecao.IteradorProjecaoDiasUteis;
 import lps.bet.basico.web.gerenciaCtrl.linha.projecao.IteradorProjecaoFDS;
 import lps.bet.basico.web.gerenciaCtrl.linha.projecao.IteradorProjecaoSemanal;
-import lps.bet.basico.web.gerenciaCtrl2.UtilsGerencia;
 
 import org.springframework.web.servlet.ModelAndView;
 
