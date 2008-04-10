@@ -12,7 +12,7 @@ import lps.bet.variabilidades.tiposDados.TipoPassageiroCombinacaoRestrita;
 import org.springframework.web.servlet.ModelAndView;
 
 public class GerenciaTipoPassageiroCombinarCartoes extends
-		lps.bet.basico.web.controlGerencia.cartao.GerenciaTipoPassageiro {
+		lps.bet.basico.web.gerenciaCtrl.cartao.GerenciaTipoPassageiro {
 
 	private ICartaoMgt interfaceCartaoMgt;
 

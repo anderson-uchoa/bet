@@ -7,10 +7,10 @@
     <!-- Exposicao da interface do servidor para invocacao remota -->
     <bean name="TratarCartao" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <property name="service">
-            <ref bean="ControlValidadorServidor"/>
+            <ref bean="ValidadorServidorCtrl"/>
         </property>
         <property name="serviceInterface">
-            <value>lps.bet.basico.controlValidadorServidor.IProcessarTransacao</value>
+            <value>lps.bet.basico.validadorServidorCtrl.IProcessarTransacao</value>
         </property>
     </bean>
 
@@ -33,7 +33,7 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-                <prop key="/controlGerencia.html">ControlGerencia</prop>
+                <prop key="/gerenciaCtrl.html">GerenciaCtrl</prop>
                 <prop key="/gerenciaFuncionario.html">GerenciaFuncionario</prop>
                 <prop key="/gerenciaCargo.html">GerenciaCargo</prop>
                 <prop key="/gerenciaLinha.html">GerenciaLinha</prop>
@@ -135,7 +135,7 @@
     </bean>
 
     <!--Parte do Acesso WEB-->
-    <bean id="ControlGerencia" class="lps.bet.basico.web.controlGerencia.ControlGerencia"/>
+    <bean id="GerenciaCtrl" class="lps.bet.basico.web.gerenciaCtrl.GerenciaCtrl"/>
 
     <!--bean id="ControladorBET" class="lps.bet.basico.web.ControladorBet">
          <property name="nivelMinimoAcesso">
@@ -179,25 +179,25 @@
         </property>
     </bean>
 
-    <bean id="GerenciaTarifa" class="lps.bet.basico.web.controlGerencia.viacao.GerenciaTarifa">
+    <bean id="GerenciaTarifa" class="lps.bet.basico.web.gerenciaCtrl.viacao.GerenciaTarifa">
         <property name="interfaceViacaoMgt">
             <ref bean="ViacaoMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaEmpresaViaria" class="lps.bet.basico.web.controlGerencia.viacao.GerenciaEmpresaViaria">
+    <bean id="GerenciaEmpresaViaria" class="lps.bet.basico.web.gerenciaCtrl.viacao.GerenciaEmpresaViaria">
         <property name="interfaceViacaoMgt">
             <ref bean="ViacaoMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaSistViarioUrbano" class="lps.bet.basico.web.controlGerencia.viacao.GerenciaSistViarioUrbano">
+    <bean id="GerenciaSistViarioUrbano" class="lps.bet.basico.web.gerenciaCtrl.viacao.GerenciaSistViarioUrbano">
         <property name="interfaceViacaoMgt">
             <ref bean="ViacaoMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaFuncionario" class="lps.bet.basico.web.controlGerencia.funcionario.GerenciaFuncionario">
+    <bean id="GerenciaFuncionario" class="lps.bet.basico.web.gerenciaCtrl.funcionario.GerenciaFuncionario">
         <property name="interfaceFuncionarioMgt">
             <ref bean="FuncionarioMgr"/>
         </property>
@@ -206,13 +206,13 @@
         </property>
     </bean>
 
-    <bean id="GerenciaCargo" class="lps.bet.basico.web.controlGerencia.funcionario.GerenciaCargo">
+    <bean id="GerenciaCargo" class="lps.bet.basico.web.gerenciaCtrl.funcionario.GerenciaCargo">
         <property name="interfaceFuncionarioMgt">
             <ref bean="FuncionarioMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaLinha" class="lps.bet.basico.web.controlGerencia.linha.GerenciaLinha">
+    <bean id="GerenciaLinha" class="lps.bet.basico.web.gerenciaCtrl.linha.GerenciaLinha">
         <property name="interfaceLinhaMgt">
             <ref bean="LinhaMgr"/>
         </property>
@@ -221,25 +221,25 @@
         </property>
     </bean>
 
-    <bean id="GerenciaValidador" class="lps.bet.basico.web.controlGerencia.linha.GerenciaValidador">
+    <bean id="GerenciaValidador" class="lps.bet.basico.web.gerenciaCtrl.linha.GerenciaValidador">
         <property name="interfaceLinhaMgt">
             <ref bean="LinhaMgr"/>
         </property>
     </bean>
 	
-	<bean id="GerenciaOnibus" class="lps.bet.basico.web.controlGerencia.linha.GerenciaOnibus">
+	<bean id="GerenciaOnibus" class="lps.bet.basico.web.gerenciaCtrl.linha.GerenciaOnibus">
         <property name="interfaceLinhaMgt">
             <ref bean="LinhaMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaCorrida" class="lps.bet.basico.web.controlGerencia.linha.GerenciaCorrida">
+    <bean id="GerenciaCorrida" class="lps.bet.basico.web.gerenciaCtrl.linha.GerenciaCorrida">
         <property name="interfaceLinhaMgt">
             <ref bean="LinhaMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaPassageiro" class="lps.bet.basico.web.controlGerencia.passageiro.GerenciaPassageiro">
+    <bean id="GerenciaPassageiro" class="lps.bet.basico.web.gerenciaCtrl.passageiro.GerenciaPassageiro">
         <property name="interfacePassageiroMgt">
             <ref bean="PassageiroMgr"/>
         </property>
@@ -248,13 +248,13 @@
         </property>
     </bean>
 
-    <bean id="GerenciaTipoPassageiro" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaTipoPassageiro">
+    <bean id="GerenciaTipoPassageiro" class="lps.bet.basico.web.gerenciaCtrl.cartao.GerenciaTipoPassageiro">
         <property name="interfaceCartaoMgt">
             <ref bean="CartaoMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaCartao" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaCartao">
+    <bean id="GerenciaCartao" class="lps.bet.basico.web.gerenciaCtrl.cartao.GerenciaCartao">
         <property name="interfaceCartaoMgt">
             <ref bean="CartaoMgr"/>
         </property>
@@ -266,13 +266,13 @@
         </property>
     </bean>
 
-    <bean id="GerenciaPagamento" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaPagamento">
+    <bean id="GerenciaPagamento" class="lps.bet.basico.web.gerenciaCtrl.cartao.GerenciaPagamento">
         <property name="interfaceCartaoMgt">
             <ref bean="CartaoMgr"/>
         </property>
     </bean>
 
-    <bean id="GerenciaViagem" class="lps.bet.basico.web.controlGerencia.cartao.GerenciaViagem">
+    <bean id="GerenciaViagem" class="lps.bet.basico.web.gerenciaCtrl.cartao.GerenciaViagem">
         <property name="interfaceCartaoMgt">
             <ref bean="CartaoMgr"/>
         </property>
@@ -282,12 +282,12 @@
     </bean>
 
 
-    <bean id="ControlValidadorServidor" class="lps.bet.basico.controlValidadorServidor.ControlValidadorServidor">
+    <bean id="ValidadorServidorCtrl" class="lps.bet.basico.validadorServidorCtrl.ValidadorServidorCtrl">
         <property name="interfaceRegistrarCorrida">
-            <ref bean="ControlarCorrida"/>
+            <ref bean="CorridaCtrl"/>
         </property>
         <property name="interfaceProcessarViagem">
-            <ref bean="ControlarViagem"/>
+            <ref bean="ViagemCtrl"/>
         </property>
         <property name="interfaceCartaoMgt">
             <ref bean="CartaoPgtoCartaoCtrl"/>
@@ -297,13 +297,13 @@
         </property>
     </bean>
 
-    <bean id="ControlarCorrida" class="lps.bet.basico.controlarCorrida.ControlarCorrida">
+    <bean id="CorridaCtrl" class="lps.bet.basico.corridaCtrl.CorridaCtrl">
         <property name="interfaceAtualizarCorrida">
             <ref bean="LinhaMgr"/>
         </property>
     </bean>
 
-    <bean id="ControlarViagem" class="lps.bet.basico.controlarViagem.ControlarViagem">
+    <bean id="ViagemCtrl" class="lps.bet.basico.viagemCtrl.ViagemCtrl">
         <property name="interfaceRegistrarViagem">
             <ref bean="CartaoMgr"/>
         </property>
@@ -632,7 +632,7 @@
 			<ref bean="LinhaMgr"/>
 		</property>
 		<property name="interfaceProcessarViagem">
-			<ref bean="ControlarViagem"/>
+			<ref bean="ViagemCtrl"/>
 		</property>
 	</bean>
 
@@ -679,7 +679,7 @@
 			<ref bean="LinhaMgr"/>
 		</property>
 		<property name="interfaceProcessarViagem">
-			<ref bean="ControlarViagem"/>
+			<ref bean="ViagemCtrl"/>
 		</property>
 	</bean>
 	
@@ -698,7 +698,7 @@
 			<ref bean="LinhaMgr"/>
 		</property>
 		<property name="interfaceProcessarViagem">
-			<ref bean="ControlarViagem"/>
+			<ref bean="ViagemCtrl"/>
 		</property>
 	</bean>
 		
@@ -720,7 +720,7 @@
 			<ref bean="LinhaMgr"/>
 		</property>
 		<property name="interfaceProcessarViagem">
-			<ref bean="ControlarViagem"/>
+			<ref bean="ViagemCtrl"/>
 		</property>
 	</bean>
 		
@@ -745,7 +745,7 @@
 			<ref bean="LinhaMgr"/>
 		</property>
 		<property name="interfaceProcessarViagem">
-			<ref bean="ControlarViagem"/>
+			<ref bean="ViagemCtrl"/>
 		</property>
 	</bean>
 	
@@ -893,7 +893,7 @@
             <ref bean="LinhaMgr"/>
         </property>
         <property name="interfaceProcessarViagem">
-            <ref bean="ControlarViagem"/>
+            <ref bean="ViagemCtrl"/>
         </property>
     </bean>
 	

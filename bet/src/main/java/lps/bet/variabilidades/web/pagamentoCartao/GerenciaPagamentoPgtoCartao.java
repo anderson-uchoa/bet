@@ -4,7 +4,7 @@ import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Pagamento;
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.basico.web.controlGerencia.UtilsGerencia;
+import lps.bet.basico.web.gerenciaCtrl.UtilsGerencia;
 import lps.bet.variabilidades.pagamentoCartaoMgr.IPagtoCartaoMgt;
 import lps.bet.variabilidades.tiposDados.PagamentoPagtoCartao;
 import lps.bet.variabilidades.tiposDados.TipoPassagPagtoCartao;
