@@ -1,0 +1,80 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+			
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+						
+	<div class="left">
+	
+	<h3>Consulta - Sistema BET</h3>
+			<div class="left_box">
+			<form id="formAcesso">
+				<label>CPF do Passageiro: <input type="text" name="cpf" class="search_small"/></label><br/>				
+				<input type="submit" class="submit" value="Buscar"/>
+				<input type="hidden" name="operacao" value="acessarPassageiro"/><br/><br/><br/>
+			</form>
+		</div>
+	#if ($acessarPassageiro)			
+	<h3>$acessarPassageiro</h3>
+		<div class="left_box">
+			<form id="formAcessoPassageiro">
+			#if ($passageiro)
+				<label>Identificador do Passageiro: $passageiro.UsuarioID</label><br/>
+				<label>Nome: $passageiro.NomePassageiro</label><br/>
+				<label>CPF: $passageiro.Cpf</label><br/><br/><br/>
+				<input type="hidden" name="cpf" value="$passageiro.Cpf"/>			
+			#else <label>$mensagem</label/><br/><br/><br/>
+			#end
+			</form>
+		</div>
+	#end
+		
+	#if ($passageiro)
+		<h3>Lista de Cartões</h3>
+		<div class="left_box">	
+			<form id="formListaCartoes">
+			<table id="tabelaListaCartoes">
+				<thead>
+					<tr><th>ID</th><th>Nome do Passageiro</th><th>Tipo</th><th>Data de Aquisição</th><th>Data de Validade</th><th>Saldo</th><th>Qtd de Passagens</th><th>Início Mês</th></tr>
+				</thead>
+				<tbody>
+					#foreach($cartaoSimples in $cartoesSemLimite)
+					<tr id="linha$cartaoSimples.CartaoID">
+						<td>$cartaoSimples.CartaoID</td>
+						<td>$cartaoSimples.Passageiro.NomePassageiro</td>
+						<td>$cartaoSimples.TipoPassageiro.NomeTipo</td>
+						<td>$sdf.format($cartaoSimples.DtAquisicao.Time)</td>
+						<td>$sdf.format($cartaoSimples.DtValidade.Time)</td>
+						<td>$cartaoSimples.Saldo</td>
+						<td>-</td>
+						<td>-</td>
+						<td><a href="acessoAdicional.html?cartaoID=$cartaoSimples.CartaoID">Consultar Viagens</a></td>
+					</tr>
+					#end
+					#foreach($cartaoLimite in $cartoesLimPassagens)
+					<tr id="linha$cartaoLimite.Cartao.CartaoID">
+						<td>$cartaoLimite.Cartao.CartaoID</td>
+						<td>$cartaoLimite.Cartao.Passageiro.NomePassageiro</td>
+						<td>$cartaoLimite.Cartao.TipoPassageiro.NomeTipo</td>
+						<td>$sdf.format($cartaoLimite.Cartao.DtAquisicao.Time)</td>
+						<td>$sdf.format($cartaoLimite.Cartao.DtValidade.Time)</td>
+						<td>$cartaoLimite.Cartao.Saldo</td>
+						<td>$cartaoLimite.QtdPassagensMes</td>
+						<td>$sdf.format($cartaoLimite.DtInicioContagem.Time)</td>
+						<td><a href="acessoAdicional.html?cartaoID=$cartaoLimite.Cartao.CartaoID">Consultar Viagens</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			<label>$!mensagemSemCartao</label/><br/><br/>
+			</form>
+		</div>
+	#end
+	
+	<div class="right">
+	</div>	
+
+#parse("rodape.vm")

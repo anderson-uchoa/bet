@@ -1,0 +1,59 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+			<form method="post">
+				<div class="search_form">
+				<p>Busca Por ID: <input type="text" name="corridaID" class="search_tiny" /> 
+				<input type="hidden" name="operacao" value="buscar"/>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="buscaAvancadaCorrida.html">Avançada</a></p>
+				</div>
+			</form>	
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+	
+	
+	<div class="left">
+	<h3>Lista de Corridas</h3>
+	
+		<div class="left_box">	
+			<a href="formCorrida.html">Inserir Nova(s) Corrida(s)</a>
+			<form id="formListaCorridas">
+			<table id="tabelaListaCorridas">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Hora Prevista Saída</th><th>Hora Prevista Chegada</th><th>Hora Saída</th><th>Hora Chegada</th><th>Nome Linha</th><th>Validador</th><th>Saída</th><th>Encerrado</th><th>Arrecadação</th><th>Crédito</th><th>Qtd. Passageiros</th></tr>
+				</thead>
+				<tbody>
+					#foreach($corrida in $corridas)
+					<tr id="linha$corrida.CorridaID">
+						<td><input type="checkbox" name="chkCorridaID" value="$corrida.CorridaID"/></td>
+						<td>$corrida.CorridaID</td>
+						<td>$sdf.format($corrida.HoraSaidaPrevista.Time)</td>
+						<td>$sdf.format($corrida.HoraChegadaPrevista.Time)</td>
+						<td>#if($corrida.HoraSaida.Time) $sdf.format($corrida.HoraSaida.Time) #else -- #end</td>
+						<td>#if($corrida.HoraChegada.Time) $sdf.format($corrida.HoraChegada.Time) #else -- #end</td>
+						<td>$corrida.Linha.NomeLinha</td>
+						<td>$corrida.Validador.ValidadorID</td>
+						<td>$corrida.Saida</td>
+						<td>$corrida.Encerrado</td>
+						<td>$corrida.Arrecadacao</td>
+						<td>$corrida.Credito</td>
+						<td>$corrida.QtdPassageiros</td>
+						<td><a href="formCorrida.html?corridaID=$corrida.CorridaID">Alterar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			#if ($mensagem) <label>$mensagem</label/><br/><br/>#end
+			<input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaListaCorridas', 'formListaCorridas')"/>
+			</form>
+			<a href="formCorrida.html">Inserir Nova(s) Corrida(s)</a>
+		</div>
+	</div>
+	
+	<div class="right">
+	</div>	
+
+		
+#parse("rodape.vm")

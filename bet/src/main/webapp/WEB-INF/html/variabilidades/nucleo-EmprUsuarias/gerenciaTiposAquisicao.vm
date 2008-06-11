@@ -1,0 +1,45 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+		
+		<div class="left">
+			
+			<h3>Aquisição Cartão: Tipos de passageiros permitidos</h3>
+			<div class="left_box">	
+			<form id="formListaTiposPermitidos">
+			<table id="tabelaListaTarifas">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th><th>Valor</th><th>Data</th></tr>
+				</thead>
+				<tbody>
+					#foreach($tipoPermitido in $tiposPermitidos)
+					<tr id="linha$tipoPermitido.TipoID">
+						<td><input type="checkbox" name="chkTipoID" value="$tarifa.TarifaID"/></td>
+						<td>$tipoPermitido.TipoID</td>
+						<td>$tipoPermitido.NomeTipo</td>
+						<td>$tipoPermitido.DescricaoTipo</td>
+						<td>$tipoPermitido.FormaPgtoPassagem</td>
+						<td>$tipoPermitido.Desconto</td>
+						<td><a href="formCartao.html?tipoID=$tipoPermitido.TipoID">Selecionar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			<!--input type="button" class="submit" value="Alterar" onclick="verificaAlterar('listaTarifas', 'tarifaSubmit')"/-->
+			<!--input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaListaTarifas', 'formListaTarifas')"/-->
+			</form>
+			<!--a href="formTarifa.html">Inserir Nova Tarifa</a-->
+		</div>
+	</div>
+	
+	
+	
+	<div class="right">
+	
+	</div>	
+		
+#parse("rodape.vm")

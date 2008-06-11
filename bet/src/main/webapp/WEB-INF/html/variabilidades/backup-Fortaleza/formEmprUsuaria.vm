@@ -1,0 +1,48 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+
+	<h3>$nomeOperacao EmpresaUsuaria</h3>
+		<div class="left_box">
+			<form id="formEmprUsuaria" action="gerenciaEmprUsuaria.html">
+				#if ($empresaID)
+					<label>ID da Empresa Usuária: 
+						<input type="text" name="empresaID" value="$empresaID" readonly="readonly" class="search_tiny"/>
+					</label><br/>
+				#end 
+				<label>Contato: 
+					<input type="text" name="contato" #if ($empresa.Contato) value="$empresa.Contato" #end class="search"/>
+				</label><br/>
+				<label>Nome Fantasia: 
+					<input type="text" name="nomeFantasia" #if ($empresa.NomeFantasia) value="$empresa.NomeFantasia" #end class="search_small"/>
+				</label><br/>
+				<label>Razao Social: 
+					<input type="text" name="razaoSocial" #if ($empresa.RazaoSocial) value="$empresa.RazaoSocial" #end class="search_small"/>
+				</label><br/>
+				<label>CNPJ: 
+					<input type="text" name="cnpj" #if ($empresa.Cnpj) value="$empresa.Cnpj" #end class="search_small"/>
+				</label><br/>
+				<label>Endereco: 
+					<input type="text" name="endereco" #if ($empresa.Endereco) value="$empresa.Endereco" #end class="search_small"/>
+				</label><br/>
+				<label>Telefone: 
+					<input type="text" name="telefone" #if ($empresa.Telefone) value="$empresa.Telefone" #end class="search_small"/>
+				</label><br/>
+				<label>E-Mail: 
+					<input type="text" name="email" #if ($empresa.Email) value="$empresa.Email" #end class="search_small"/>
+				</label><br/>
+				<label>Login: <input type="text" name="login" #if ($empresa.Login) value="$empresa.Login" #end class="search_small"/></label><br/>
+				<label>Senha: <input type="text" name="senha" #if ($empresa.Senha) value="$empresa.Senha" #end class="search_small"/></label><br/>
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaEmprUsuaria.html')"/>
+			</form>
+		</div>
+</div>
+	
+#parse("rodape.vm")

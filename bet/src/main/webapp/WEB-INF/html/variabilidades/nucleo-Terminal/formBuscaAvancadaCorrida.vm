@@ -1,0 +1,68 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+		
+<div class="left">
+	<h3>Busca Avançada de Corridas</h3>
+		<div class="left_box">
+			<form id="formCorridaAvancada" name="formCorridaAvancada" action="gerenciaCorrida.html">
+				<label>Identificador da Corrida: <input type="text" name="corridaID" class="search_tiny"/></label>
+			
+				<label>&nbsp; Número do Ônibus:
+					<select name="onibusID">
+							#foreach ($onibus in $todosOnibus)
+								<option value="$onibus.OnibusID">$onibus.OnibusID</option>
+							#end
+					</select>
+				</label>
+				
+				<label>&nbsp; Saída: <input id="saida" type="checkbox" name="saida" /></label><br/>
+				
+				<label>Nome da Linha: 
+					<select name="nomeLinha">
+						#foreach ($linha in $linhas)
+							<option value="$linha.NomeLinha">$linha.NomeLinha</option>
+						#end
+					</select>					
+				</label>
+				
+				<label>&nbsp; Encerrado: <input id="encerrado" type="checkbox" name="encerrado" /></label><br/><br/>
+				
+				<fieldset>
+					<legend>Data da Corrida</legend>
+					<input type="text" name="inicioDtCorrida" id="inicioDtCorrida" class="data search_small"/>		
+					<label>a <input type="text" name="fimDtCorrida" id="fimDtCorrida" class="data search_small"/></label>		
+				</fieldset>	<br/>
+
+				<fieldset>
+					<legend>Quantidade de Passageiros</legend>
+					<input type="text" name="minPassageiros" id="minPassageiros" class="search_small"/>
+					<label>a <input type="text" name="maxPassageiros" id="maxPassageiros" class="search_small"/></label>						
+				</fieldset><br/>	
+
+				<fieldset>
+					<legend>Caixa da Corrida</legend>
+					<fieldset>
+						<legend>Arrecadação em Dinheiro</legend>
+						<input type="text" name="minArrecadacao" id="minArrecadacao" class="search_small"/>
+						<label>a <input type="text" name="maxArrecadacao" id="maxArrecadacao" class="search_small"/></label>						
+					</fieldset>	
+
+					<fieldset>
+						<legend>Valor de Crédito</legend>
+						<input type="text" name="minCredito" id="minCredito" class="search_small"/>
+						<label>a <input type="text" name="maxCredito" id="maxCredito" class="search_small"/></label>						
+					</fieldset>	
+				</fieldset><br/>
+				
+				<input type="hidden" name="operacao" value="buscaAvancada"/>
+				<input type="submit" class="submit" value="Buscar" onclick="criaBoolean('formCorridaAvancada')"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaCorrida.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")

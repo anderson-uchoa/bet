@@ -1,0 +1,23 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+	<h3>$nomeOperacao Linha</h3>
+		<div class="left_box">
+			<form id="formLinha" action="gerenciaLinha.html">
+				#if ($linhaID)<label>Identificador da Linha: <input type="text" name="linhaID" value="$linhaID" readonly="readonly" class="search_tiny"/></label><br/>#end 
+				<label>Nome: <input type="text" name="nomeLinha" #if ($linha.NomeLinha) value="$linha.NomeLinha" #end class="search"/></label><br/>
+				<label>Ponto de Saída: <input type="text" name="pontoSaida" #if ($linha.PontoSaida) value="$linha.PontoSaida" #end class="search"/></label><br/>
+				<label>Ponto de Chegada: <input type="text" name="pontoChegada" #if ($linha.PontoChegada) value="$linha.PontoChegada" #end class="search"/></label><br/>
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaLinha.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")

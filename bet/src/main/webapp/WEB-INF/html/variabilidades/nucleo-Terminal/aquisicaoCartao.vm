@@ -1,0 +1,14 @@
+#parse("cabecalho.vm")
+
+<div class="left">
+	<h3>Aquisição de Cartão</h3>
+		<div class="left_box">
+			<form id="formAquisicao" action="aquisicaoCartao.html">
+				<label>CPF do Cliente: </label><br/>
+				<input type="text" name="cpf" class="search"/><br/>
+				<input type="submit" class="submit" value="Buscar"/>
+			</form>
+		</div>
+</div>
+	
+#parse("rodape.vm")

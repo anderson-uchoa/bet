@@ -5,7 +5,7 @@ import lps.bet.basico.tiposDados.Cartao;
 import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.TipoPassageiro;
 import lps.bet.basico.web.ControladorBet;
-import lps.bet.basico.web.gerenciaCtrl.UtilsGerencia;
+import lps.bet.basico.web.controlGerencia.UtilsGerencia;
 import lps.bet.interfaces.ICartaoMgt;
 import lps.bet.variabilidades.limitePassagensMgr.ILimitePassagensMgt;
 import lps.bet.variabilidades.tiposDados.CartaoLimPassagens;

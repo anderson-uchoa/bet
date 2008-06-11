@@ -1,0 +1,52 @@
+#parse("cabecalho.vm")
+
+
+		<div class="search_field">
+			<form method="post">
+				<div class="search_form">
+				<p>Busca Por ID: <input type="text" name="empresaID" class="search_tiny" /> 
+				<input type="hidden" name="operacao" value="buscar"/>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="#">Avançada</a></p>
+				</div>
+			</form>	
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+		
+		<div class="left">
+		
+		<h3>Empresa Usuaria</h3>
+	
+		<div class="left_box">	
+			<form id="formListaEmprUsuaria">
+			<table id="tabelaEmprUsuaria">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome Fantasia</th><th>Razão Social</th><th>CNPJ</th><th>Contato</th><th>Login</th></tr>
+				</thead>
+				<tbody>
+					#foreach($empresa in $empresaUsuaria)
+					<tr id="linha$empresa.UsuarioID">
+						<td><input type="checkbox" name="chkUsuarioID" value="$empresa.UsuarioID"/></td>
+						<td>$empresa.UsuarioID</td>
+						<td>$empresa.NomeFantasia</td>
+						<td>$empresa.RazaoSocial</td>
+						<td>$empresa.Cnpj</td>
+						<td>$empresa.Contato</td>
+						<td>$empresa.Login</td>
+						<td><a href="formEmprUsuaria.html?usuarioID=$empresa.UsuarioID">Alterar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			#if ($mensagem) <label>$mensagem</label/><br/><br/>#end
+			<input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaEmprUsuaria', 'formListaEmprUsuaria')"/>
+			</form>
+			<a href="formEmprUsuaria.html">Inserir Nova Empresa Usuária</a>
+		</div>	
+	</div>
+	
+	<div class="right">
+	</div>	
+
+#parse("rodape.vm")

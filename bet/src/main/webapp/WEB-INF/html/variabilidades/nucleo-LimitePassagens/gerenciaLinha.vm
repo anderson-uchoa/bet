@@ -1,0 +1,51 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+			<form method="post">
+				<div class="search_form">
+				<p>Busca Por ID: <input type="text" name="linhaID" class="search_tiny" /> 
+				<input type="hidden" name="operacao" value="buscar"/>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="#">Avançada</a></p>
+				</div>
+			</form>	
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+		
+	<div class="left">
+	<h3>Lista de Linhas</h3>
+	
+		<div class="left_box">	
+			<form id="formListaLinhas">
+			<table id="tabelaListaLinhas">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Nome</th><th>Ponto de Saída</th><th>Ponto de Chegada</th></tr>
+				</thead>
+				<tbody>
+					#foreach($linha in $linhas)
+					<tr id="linha$linha.LinhaID">
+						<td><input type="checkbox" name="chkLinhaID" value="$linha.LinhaID"/></td>
+						<td>$linha.LinhaID</td>
+						<td>$linha.NomeLinha</td>
+						<td>$linha.PontoSaida</td>
+						<td>$linha.PontoChegada</td>
+						<td><a href="formLinha.html?linhaID=$linha.LinhaID">Alterar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			#if ($mensagem) <label>$mensagem</label/><br/><br/>#end
+			<input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaListaLinhas', 'formListaLinhas')"/>
+			</form>
+			<a href="formLinha.html">Inserir Nova Linha</a>
+		</div>
+	</div>
+	</div>
+	
+	
+	
+	<div class="right">
+	</div>	
+
+#parse("rodape.vm")

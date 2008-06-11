@@ -1,0 +1,51 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+			<form method="post">
+				<div class="search_form">
+				<p>Busca por Número Cartão: <input type="text" name="cartaoID" class="search_tiny" /> 
+				<input type="hidden" name="operacao" value="buscar"/>
+				<input type="submit" value="Buscar" class="submit" /> <a class="grey" href="#">Avançada</a></p>
+				</div>
+			</form>	
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+	
+	
+	<div class="left">
+	<h3>Lista de Viagens</h3>
+	
+		<div class="left_box">	
+			<a href="formViagem.html">Inserir Nova Viagem</a>
+			<form id="formListaViagens">
+			<table id="tabelaListaViagens">
+				<thead>
+					<tr><th>&nbsp;</th><th>ID</th><th>Número do Cartão</th><th>Hora Viagem</th><th>Nome Linha</th></tr>
+				</thead>
+				<tbody>
+					#foreach($viagem in $viagens)
+					<tr id="linha$viagem.ViagemID" class="selectable">
+						<td><input type="checkbox" name="chkViagemID" value="$viagem.ViagemID"/></td>
+						<td>$viagem.ViagemID</td>
+						<td>$viagem.Cartao.CartaoID</td>
+						<td>$sdf.format($viagem.Hora.Time)</td>
+						<td>$viagem.Linha.NomeLinha</td>
+						<td><a href="formViagem.html?viagemID=$viagem.ViagemID">Alterar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			#if ($mensagem) <label>$mensagem</label/><br/><br/>#end
+			<input type="button" class="submit" value="Remover" onclick="verificaRemover('tabelaListaViagens', 'formListaViagens')"/>
+			</form>
+			<a href="formViagem.html">Inserir Nova Viagem</a>
+		</div>
+	</div>
+	
+	<div class="right">
+	</div>	
+
+		
+#parse("rodape.vm")

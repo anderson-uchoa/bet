@@ -1,0 +1,32 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+<div class="left">
+	<h3>$nomeOperacao Cargo</h3>
+		<div class="left_box">
+			<form id="formCargo" action="gerenciaCargo.html">
+				<label>ID: <input type="text" name="cargoID" value="$!cargoID" readonly="readonly" class="search_tiny"/></label><br/>
+				<label>Nome de Cargo: <input type="text" name="nomeCargo" value="$!cargo.NomeCargo" class="search"/></label><br/>
+				<label>Nivel de Acesso: 
+				<select name="nivelAcessoDefault">
+					#foreach ($nivel in $niveisPermitidos)
+						<option value="$nivel" 
+							#if ($cargo.nivelAcessoDefault == $nivel)
+								selected="selected"
+							#end
+						>$nivel</option>
+					#end
+				</select>
+				</label><br/>
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaCargo.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")

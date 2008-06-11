@@ -1,0 +1,48 @@
+#parse("cabecalho.vm")
+
+
+		<div class="search_field">			
+			<p>&nbsp;</p>
+		</div>
+		
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>		
+		
+		<div class="left">
+		
+		<h3>Empresa Viária</h3>
+	
+		<div class="left_box">	
+			<form id="formListaEmprViaria">
+			<table id="tabelaEmprViaria">
+				<thead>
+					<tr><th>ID</th><th>Nome</th</tr>
+				</thead>
+				<tbody>
+					#if ($empresa)
+					<tr id="linha$empresa.EmpresaID">
+						<td>$empresa.EmpresaID</td>
+						<td>$empresa.NomeFantasia</td>
+						<td><a onclick="toggleElementVisibility('formEmprViaria')">Alterar</a></td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			</form>
+		</div>
+		<div id="formEmprViaria">
+			<h3>Dados da Empresa Viária</h3>
+			<div class="left_box">
+				<form id="formNovaEmprViaria">
+					<label>Nome Fantasia: <input type="text" name="nomeFantasia" class="search"/></label><br/>
+					<input type="hidden" name="operacao" #if (!$empresa) value="criar" #else value="alterar" #end/>
+					#if ($empresa) <input type="hidden" name="empresaID" value="$empresa.EmpresaID"/> #end
+					<input type="submit" class="submit" value="Salvar"/>
+				</form>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="right">
+	</div>	
+
+#parse("rodape.vm")

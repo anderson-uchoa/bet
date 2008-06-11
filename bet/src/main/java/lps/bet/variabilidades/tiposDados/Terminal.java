@@ -2,6 +2,7 @@ package lps.bet.variabilidades.tiposDados;
 
 import java.util.Collection;
 
+import lps.bet.basico.tiposDados.Passageiro;
 import lps.bet.basico.tiposDados.Validador;
 
 public class Terminal {

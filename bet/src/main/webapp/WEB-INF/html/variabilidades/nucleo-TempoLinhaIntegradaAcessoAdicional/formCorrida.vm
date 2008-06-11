@@ -1,0 +1,90 @@
+#parse("cabecalho.vm")
+
+		<div class="search_field">
+
+			<p>&nbsp;</p>
+		</div>
+
+		
+
+		
+<div class="left">
+	<h3>$nomeOperacao Corrida</h3>
+		<div class="left_box">
+			<form id="formCorrida" action="gerenciaCorrida.html">
+				#if ($corridaID)<label>Identificador da Corrida: <input type="text" name="corridaID" value="$corridaID" readonly="readonly" class="search_tiny"/></label><br/>#end 				
+				<label>Nome da Linha: 
+					<select name="nomeLinha">
+					#if ($corridaID)
+						#foreach ($linha in $linhas)
+							#if ($linha.NomeLinha==$corrida.Linha.NomeLinha)
+								<option value="$linha.NomeLinha" selected="selected">$linha.NomeLinha</option>
+							#else <option value="$linha.NomeLinha">$linha.NomeLinha</option>
+							#end
+						#end
+					#else	
+						#foreach ($linha in $linhas)
+							<option value="$linha.NomeLinha">$linha.NomeLinha</option>
+						#end
+					#end
+					</select>
+					
+				</label>
+			
+				<label>&nbsp; Número do Validador:
+					<select name="validadorID">
+						#if ($corridaID)
+							#foreach ($validador in $validadores)
+								#if ($validador.ValidadorID==$corrida.Validador.ValidadorID)
+									<option value="$validador.ValidadorID" selected="selected">$validador.ValidadorID</option>
+								#else <option value="$validador.ValidadorID">$validador.ValidadorID</option>
+								#end
+							#end
+						#else	
+							#foreach ($validador in $validadores)
+								<option value="$validador.ValidadorID">$validador.ValidadorID</option>
+							#end
+						#end
+					</select>
+				</label><br/>	
+				#if ($corridaID)				
+					<label>Data da Corrida: <input type="text" name="dtCorrida" id="dtCorrida" value="$sdfData.format($corrida.HoraSaidaPrevista.Time)" class="data search_small"/></label>		
+					<input type="hidden" name="repeticaoCorrida" value="unica"/>
+				#end
+				<fieldset>
+					<legend>Horários</legend>
+					<label>Saída: <input type="text" name="horaSaidaPrevista" id="horaSaidaPrevista" #if ($corridaID) value="$sdfHora.format($corrida.HoraSaidaPrevista.Time)" #end class="hora search_small"/></label>
+					<label>Chegada: <input type="text" name="horaChegadaPrevista" id="horaChegadaPrevista" #if ($corridaID) value="$sdfHora.format($corrida.HoraChegadaPrevista.Time)" #end class="hora search_small"/></label>						
+				</fieldset>				
+				#if (!$corridaID)
+				<fieldset>
+					<legend>Datas</legend>
+					<input type="radio" name="repeticaoCorrida" value="unica" checked="checked" onclick="controlaCamposData('unica')"/>
+					<label>Único dia <input type="text" name="dtCorrida" id="dtCorrida" class="search_small"/></label><br/>
+					
+					<input type="radio" name="repeticaoCorrida" value="multipla" onclick="controlaCamposData('multipla')"/>
+					<label>Intervalo
+						<fieldset>
+							<label>De <input type="text" name="dtInicio" id="dtInicio" class="search_small"/></label>
+							<label>a <input type="text" name="dtFim" id="dtFim" class="search_small"/></label><br/>
+							<label>Periodicidade 
+								<select name="periodicidade" id="periodicidade">
+									<option value="diaria">Diária</option>
+									<option value="semanal">Semanal</option>
+									<option value="uteis">Dias úteis</option>
+									<option value="fds">Fins de semana</option>
+								</select>
+							</label>
+						</fieldset>
+					</label>
+					<script>controlaCamposData("unica");</script>
+				</fieldset>
+				#end
+				<input type="hidden" name="operacao" value="$operacao"/>
+				<input type="submit" class="submit" value="$nomeOperacao" onclick="validaDataHora('formCorrida')"/>
+				<input type="button" class="submit" value="Cancelar" onclick="redireciona('gerenciaCorrida.html')"/>
+			</form>
+		</div>
+	</div>
+	
+#parse("rodape.vm")

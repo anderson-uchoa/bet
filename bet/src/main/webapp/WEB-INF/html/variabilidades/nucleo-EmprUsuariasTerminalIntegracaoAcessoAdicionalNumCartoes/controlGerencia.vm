@@ -1,0 +1,10 @@
+#parse("cabecalho.vm")
+		
+		<div class="search_field">
+			
+			<p>&nbsp;</p>
+		</div>
+		
+		
+#parse("rodape.vm")
+		
