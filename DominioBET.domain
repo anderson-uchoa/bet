@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<forms>
+
+      <name>DominioBET</name>
+
+      <form isRoot="true">
+            <id>1.1</id>
+
+            <enabled>true</enabled>
+
+            <name>Variabilidades</name>
+
+            <variant>Variabilidades</variant>
+
+            <nextForms>
+                  <nextForm>                        <id>2.*</id>                        <minChilds>1</minChilds>                        <maxChilds>1</maxChilds>                  </nextForm>
+                  <nextForm>                        <id>3.*</id>                        <minChilds>1</minChilds>                        <maxChilds>1</maxChilds>                  </nextForm>
+                  <nextForm>                        <id>4.*</id>                        <minChilds>1</minChilds>                        <maxChilds>1</maxChilds>                  </nextForm>
+                  <nextForm>                        <id>5.*</id>                        <minChilds>1</minChilds>                        <maxChilds>1</maxChilds>                  </nextForm>
+                  <nextForm>                        <id>6.*</id>                        <minChilds>1</minChilds>                        <maxChilds>1</maxChilds>                  </nextForm>
+            </nextForms>
+
+            <help/>
+
+            <formComponents><formComponent><fullname>captor.windowsystem.formcomponent.std.textpanel.TextPanel</fullname><parameters><parameter><name>id</name><value>1</value></parameter><parameter><name>label</name><value>Nome da Aplicacao</value></parameter><parameter><name>default_value</name><value>Aplicacao Fortaleza</value></parameter></parameters></formComponent></formComponents>
+      </form>
+
+      <form>
+            <id>2.1</id>
+
+            <enabled>true</enabled>
+
+            <name>Acesso a Informacoes</name>
+
+            <variant>Acesso a Informacoes</variant>
+
+            <nextForms>
+            </nextForms>
+
+            <help/>
+
+            <formComponents><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>acessoAdicional</value></parameter><parameter><name>elements</name><value>inexistente:existente</value></parameter><parameter><name>label</name><value>Acesso Adicional</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent></formComponents>
+      </form>
+
+      <form>
+            <id>3.1</id>
+
+            <enabled>true</enabled>
+
+            <name>Formas de Integracao</name>
+
+            <variant>Formas de Integracao</variant>
+
+            <nextForms>
+            </nextForms>
+
+            <help/>
+
+            <formComponents><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>terminal</value></parameter><parameter><name>elements</name><value>inexistente:existente</value></parameter><parameter><name>label</name><value>Terminal</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>integracao</value></parameter><parameter><name>elements</name><value>inexistente:tempo:numero de viagens:linha integrada:tempo, numero de viagens:tempo, linha integrada:numero de viagens, linha integrada:tempo, numero de viagens, linha integrada</value></parameter><parameter><name>label</name><value>Integracao</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>solucaoIntegracao</value></parameter><parameter><name>elements</name><value>com componentes:com aspectos</value></parameter><parameter><name>default_value</name><value>com componentes</value></parameter><parameter><name>label</name><value>Solucao de Integracao</value></parameter></parameters></formComponent></formComponents>
+      </form>
+
+      <form>
+            <id>4.1</id>
+
+            <enabled>true</enabled>
+
+            <name>Aquisicao de Cartao</name>
+
+            <variant>Aquisicao de Cartao</variant>
+
+            <nextForms>
+            </nextForms>
+
+            <help/>
+
+            <formComponents><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>pgtoCartao</value></parameter><parameter><name>elements</name><value>inexistente:existente</value></parameter><parameter><name>label</name><value>Pagamento de Cartao</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>restricaoCartoes</value></parameter><parameter><name>elements</name><value>inexistente:numero de cartoes:combinacao de cartoes</value></parameter><parameter><name>label</name><value>Restrição de Cartoes</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent></formComponents>
+      </form>
+
+      <form>
+            <id>5.1</id>
+
+            <enabled>true</enabled>
+
+            <name>Carga de Cartao</name>
+
+            <variant>Carga de Cartao</variant>
+
+            <nextForms>
+            </nextForms>
+
+            <help/>
+
+            <formComponents><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>limitePassagens</value></parameter><parameter><name>elements</name><value>inexistente:existente</value></parameter><parameter><name>label</name><value>Limite de Passagens</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent></formComponents>
+      </form>
+
+      <form>
+            <id>6.1</id>
+
+            <enabled>true</enabled>
+
+            <name>Responsaveis por Cartoes</name>
+
+            <variant>Responsaveis por Cartoes</variant>
+
+            <nextForms>
+            </nextForms>
+
+            <help/>
+
+            <formComponents><formComponent><fullname>captor.windowsystem.formcomponent.std.comboboxpanel.ComboBoxPanel</fullname><parameters><parameter><name>id</name><value>empresasUsuarias</value></parameter><parameter><name>elements</name><value>inexistente:existente</value></parameter><parameter><name>label</name><value>Empresas Usuarias</value></parameter><parameter><name>default_value</name><value>inexistente</value></parameter></parameters></formComponent></formComponents>
+      </form>
+
+</forms>

@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?>
+
+<project name="Blank" default="exec" basedir="../">
+
+	<!--______________________________________________________________________-->
+
+<!--PROJECT_GENERATED_DATA - DO_NOT_EDIT-->
+<property name="project_path" location="C:\Mestrado-ICMC\Seminarios-ES\Captor\captor-1.0\projects\CombinacaoAleatoria\"/>
+<property name="project_output_path" location="C:\Mestrado-ICMC\Seminarios-ES\Captor\captor-1.0\projects\"/>
+<property name="install_path" location="C:\Mestrado-ICMC\Seminarios-ES\Captor\captor-1.0\"/>
+<property name="project_name" value="CombinacaoAleatoria"/>
+<property name="interaction_0" value="0"/>
+<!--PROJECT_GENERATED_DATA - DO_NOT_EDIT-->
+
+	<!--______________________________________________________________________-->
+
+	<target name="exec">
+		<!-- Do something -->
+		
+		<!--Copiar o arquivo com a implementacao-->
+		<!--copy todir="${project_output_path}/interaction_0/src/bet">
+			<fileset dir="${install_path}/domains/DominioBET/resources">
+				<include name="**/*.java" />
+			</fileset>
+		</copy-->
+		
+	</target>
+	
+	<!--______________________________________________________________________-->
+	
+</project>	
+	
+	

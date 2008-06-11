@@ -1,0 +1,31 @@
+<composer name="FIT">
+
+	<!--______________________________________________________________________-->
+
+	<main>
+
+		<callTask id="betServlet"/>
+		<callTask id="menu"/>
+		
+	</main>
+
+	<!--______________________________________________________________________-->
+
+	<tasks>
+		<task id="betServlet">
+			<compose>
+				<template>bet-servlet.xml.xsl</template>
+				<newFilename>bet-servlet.xml</newFilename>
+			</compose>
+		</task>
+		<task id="menu">
+			<compose>
+				<template>menu.xml.xsl</template>
+				<newFilename>menu.xml</newFilename>
+			</compose>
+		</task>
+	</tasks>
+	
+	<!--______________________________________________________________________-->
+
+</composer>
