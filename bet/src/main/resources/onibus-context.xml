@@ -7,7 +7,7 @@
 		<value>http://localhost:8080/bet/tratarCartao.html</value>
 	  </property> 
 	  <property name="serviceInterface">
-		<value>lps.bet.basico.controlValidadorServidor.IProcessarTransacao</value>
+		<value>lps.bet.basico.validadorServidorCtrl.IProcessarTransacao</value>
 	  </property> 
 	</bean>
 	
@@ -17,7 +17,7 @@
 		</property> 
 	</bean>
 
-	<bean id="ControlValidadorOnibus" class="lps.bet.basico.onibus.controlValidadorOnibus.ControlValidadorOnibus">
+	<bean id="ControlValidadorOnibus" class="lps.bet.basico.onibus.validadorOnibusCtrl.ValidadorOnibusCtrl">
 		<property name="interfaceProcessarTransacao">
 			<ref bean="ControlValidadorServidor"/>
 		</property> 
